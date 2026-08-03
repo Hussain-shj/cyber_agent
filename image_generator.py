@@ -49,7 +49,7 @@ def _ar(text: str) -> str:
     reshaper لها تحديداً (لأنها متطابقة بصرياً مع الشكل الأساسي)؛ في هذه الحالة
     نستبدلها تلقائياً بالحرف الأساسي غير المُشكَّل بدل أن تظهر كمربع فارغ."""
     reshaped = arabic_reshaper.reshape(text)
-    displayed = get_display(reshaped)
+    displayed = get_display(reshaped, base_dir="R")
     result = []
     for ch in displayed:
         if ch.isspace() or ord(ch) in _AR_CMAP or ord(ch) in _LATIN_CMAP:
@@ -436,16 +436,17 @@ def design_awareness(title: str, subtitle: str, items: list[dict], summary: str)
     wrapped_sub = _wrap_arabic(draw, subtitle, 34, WIDTH - 140)
     y = _draw_multiline_centered(draw, wrapped_sub, 34, COLORS["cyan"], WIDTH / 2, y + 10, 46)
 
-    # 3 أيقونات تحذيرية بعناوينها القصيرة
+    # 3 أيقونات تحذيرية بعناوينها القصيرة — نرتّبها من اليمين لليسار (RTL):
+    # أول عنصر منطقي في القائمة يظهر في أقصى اليمين، كما يقرأ القارئ العربي.
     icon_fns = {
         "battery": _battery_icon,
         "heat": _heat_icon,
         "eye": _eye_data_icon,
     }
-    col_centers = [WIDTH * 0.20, WIDTH * 0.5, WIDTH * 0.80]
+    col_centers_rtl = [WIDTH * 0.80, WIDTH * 0.5, WIDTH * 0.20]
     icon_y = y + 90
     label_font_size = 28
-    for (item, col_x) in zip(items[:3], col_centers):
+    for (item, col_x) in zip(items[:3], col_centers_rtl):
         icon_color = COLORS["red_alert"] if item.get("severity", "high") == "high" else COLORS["cyan"]
         fn = icon_fns.get(item.get("icon", "eye"), _eye_data_icon)
         fn(draw, col_x, icon_y, 42, icon_color, width=6)
