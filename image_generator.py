@@ -9,6 +9,7 @@ import math
 import os
 import random
 import unicodedata
+from datetime import datetime, timezone
 
 import arabic_reshaper
 from bidi.algorithm import get_display
@@ -155,6 +156,59 @@ def _draw_multiline_centered(draw, lines, size, fill, center_x, start_y, line_he
         _draw_mixed_line(draw, rendered, size, fill, center_x - w / 2, y)
         y += line_height
     return y
+
+
+_ARABIC_MONTHS = [
+    "يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو",
+    "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر",
+]
+
+
+def _arabic_date(dt: datetime | None = None) -> str:
+    """ينسّق التاريخ بالعربية بأرقام غربية (مدعومة بالكامل في الخط)، مثل: 3 أغسطس 2026."""
+    dt = dt or datetime.now(timezone.utc)
+    return f"{dt.day} {_ARABIC_MONTHS[dt.month - 1]} {dt.year}"
+
+
+def _details_panel(img: Image.Image, details: str, box_top: float,
+                    text_color=(225, 230, 236), max_lines: int = 2):
+    """يرسم صندوق 'المختصر' (سطرين تفاصيل) بخلفية داكنة شفافة فوق أي خلفية،
+    ويعيد (img, draw, box_bottom) الجديدين لمتابعة الرسم بعده."""
+    draw = ImageDraw.Draw(img)
+    lines = _cap_lines(_wrap_arabic(draw, details, 28, WIDTH - 160), max_lines)
+    box_h = 30 + 36 * len(lines)
+    panel = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    pd = ImageDraw.Draw(panel)
+    pd.rounded_rectangle([60, box_top, WIDTH - 60, box_top + box_h], radius=16, fill=(8, 11, 18, 165))
+    img = Image.alpha_composite(img.convert("RGBA"), panel).convert("RGB")
+    draw = ImageDraw.Draw(img)
+    _draw_multiline_centered(draw, lines, 28, text_color, WIDTH / 2, box_top + 16, 36)
+    return img, draw, box_top + box_h
+
+
+def _tag_badge_with_date(draw, tag: str, urgent: bool, center_y: float, date_str: str = ""):
+    """يرسم وسم التصنيف (Tag) في منتصف عمودي محدد، مع تاريخ الخبر أسفله مباشرة."""
+    tag_color = COLORS["red_alert"] if urgent else COLORS["cyan"]
+    tag_font = _font(FONT_BOLD, 34)
+    tag_text = _ar(tag)
+    tw = draw.textlength(tag_text, font=tag_font)
+    pad = 30
+    badge_top = center_y - 32
+    draw.rounded_rectangle(
+        [WIDTH / 2 - tw / 2 - pad, badge_top, WIDTH / 2 + tw / 2 + pad, badge_top + 64],
+        radius=32, fill=tag_color,
+    )
+    draw.text((WIDTH / 2 - tw / 2, badge_top + 16), tag_text, font=tag_font, fill=COLORS["black"])
+
+    if date_str:
+        date_font = _font(FONT_REGULAR, 26)
+        date_text = _ar(date_str)
+        dw = draw.textlength(date_text, font=date_font)
+        dx = WIDTH / 2 - dw / 2
+        dy = badge_top + 78
+        draw.rounded_rectangle([dx - 14, dy - 6, dx + dw + 14, dy + 32], radius=10, fill=(6, 9, 14))
+        draw.text((dx, dy), date_text, font=date_font, fill=(200, 208, 218))
+    return badge_top + 64 + (44 if date_str else 0)
 
 
 def _grid_background(draw, base_color, line_color, spacing=54, alpha=26):
@@ -462,26 +516,21 @@ def _darken_overlay(img: Image.Image, top_alpha=140, bottom_alpha=195) -> Image.
 
 
 def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = False,
-                          details: str = "") -> Image.Image:
-    """يضع عناصر الهوية (وسم التصنيف + العنوان العربي + سطرا تفاصيل + التذييل)
-    فوق خلفية فنية مولّدة بالذكاء الاصطناعي (بدون نص داخلها أصلاً)، بنفس محرك
-    الخطوط الموثوق."""
+                          details: str = "", date_str: str = "") -> Image.Image:
+    """يضع عناصر الهوية (وسم التصنيف في منتصف الخلفية + تاريخ الخبر + العنوان
+    العربي + سطرا تفاصيل + التذييل) فوق خلفية فنية مولّدة بالذكاء الاصطناعي
+    (بدون نص داخلها أصلاً)، بنفس محرك الخطوط الموثوق."""
     img = _fit_background_to_canvas(bg)
     img = _darken_overlay(img)
     draw = ImageDraw.Draw(img)
 
     tag_color = COLORS["red_alert"] if urgent else COLORS["cyan"]
-    tag_font = _font(FONT_BOLD, 34)
-    tag_text = _ar(tag)
-    tw = draw.textlength(tag_text, font=tag_font)
-    pad = 30
-    draw.rounded_rectangle(
-        [WIDTH / 2 - tw / 2 - pad, 70, WIDTH / 2 + tw / 2 + pad, 70 + 64],
-        radius=32, fill=tag_color,
-    )
-    draw.text((WIDTH / 2 - tw / 2, 86), tag_text, font=tag_font, fill=COLORS["black"])
-
     title_y = HEIGHT - 430
+
+    # وسم التصنيف + التاريخ في منتصف مساحة الخلفية الفنية (الفراغ بين الأعلى والعنوان)
+    center_y = title_y * 0.42
+    _tag_badge_with_date(draw, tag, urgent, center_y, date_str)
+
     wrapped = _wrap_arabic(draw, title, 62, WIDTH - 140)
     y_after_title = _draw_multiline_centered(
         draw, wrapped, 62, COLORS["white"], WIDTH / 2, title_y, 80,
@@ -490,29 +539,15 @@ def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = F
         [WIDTH / 2 - 90, title_y - 30, WIDTH / 2 + 90, title_y - 26], fill=tag_color,
     )
 
-    # سطرا التفاصيل: خلفية داكنة شفافة خلف النص لضمان وضوحه فوق أي صورة خلفية،
-    # مهما كانت درجة سطوعها أو تعقيدها بصرياً.
     if details:
-        detail_lines = _cap_lines(_wrap_arabic(draw, details, 30, WIDTH - 180), max_lines=2)
-        box_top = y_after_title + 14
-        box_h = 30 + 40 * len(detail_lines)
-        panel = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-        pd = ImageDraw.Draw(panel)
-        pd.rounded_rectangle(
-            [60, box_top, WIDTH - 60, box_top + box_h],
-            radius=16, fill=(8, 11, 18, 165),
-        )
-        img = Image.alpha_composite(img.convert("RGBA"), panel).convert("RGB")
-        draw = ImageDraw.Draw(img)
-        _draw_multiline_centered(
-            draw, detail_lines, 30, (225, 230, 236), WIDTH / 2, box_top + 18, 40,
-        )
+        img, draw, _ = _details_panel(img, details, y_after_title + 14)
 
     _footer_brand(draw)
     return img
 
 
-def design_standard(title: str, tag: str, urgent: bool = False) -> Image.Image:
+def design_standard(title: str, tag: str, urgent: bool = False,
+                     details: str = "", date_str: str = "") -> Image.Image:
     """تصميم 1: خلفية متدرجة + شبكة رقمية + درع مركزي + عنوان علوي."""
     top = COLORS["black"]
     bottom = COLORS["dark_blue"]
@@ -528,34 +563,28 @@ def design_standard(title: str, tag: str, urgent: bool = False) -> Image.Image:
     img = Image.alpha_composite(img.convert("RGBA"), lines_layer).convert("RGB")
     draw = ImageDraw.Draw(img)
 
-    # شريط الوسم العلوي (Tag)
-    tag_color = COLORS["red_alert"] if urgent else COLORS["cyan"]
-    tag_font = _font(FONT_BOLD, 34)
-    tag_text = _ar(tag)
-    tw = draw.textlength(tag_text, font=tag_font)
-    pad = 30
-    draw.rounded_rectangle(
-        [WIDTH / 2 - tw / 2 - pad, 90, WIDTH / 2 + tw / 2 + pad, 90 + 64],
-        radius=32, fill=tag_color,
-    )
-    draw.text((WIDTH / 2 - tw / 2, 106), tag_text, font=tag_font, fill=COLORS["black"])
+    # شريط الوسم العلوي (Tag) + التاريخ
+    _tag_badge_with_date(draw, tag, urgent, 122, date_str)
 
     # الدرع المركزي
     _shield_icon(draw, WIDTH / 2, 480, 140, COLORS["cyan"], width=8)
 
     # العنوان
     wrapped = _wrap_arabic(draw, title, 66, WIDTH - 160)
-    _draw_multiline_centered(draw, wrapped, 66, COLORS["white"], WIDTH / 2, 720, 84)
+    y_after = _draw_multiline_centered(draw, wrapped, 66, COLORS["white"], WIDTH / 2, 720, 84)
 
     # خط فاصل فيروزي
     draw.rectangle([WIDTH / 2 - 90, 660, WIDTH / 2 + 90, 664], fill=COLORS["cyan"])
+
+    if details:
+        img, draw, y_after = _details_panel(img, details, y_after + 14)
 
     _network_nodes(draw, COLORS["cyan"], count=10, seed=3)
     _footer_brand(draw)
     return img
 
 
-def design_alert(title: str, tag: str) -> Image.Image:
+def design_alert(title: str, tag: str, details: str = "", date_str: str = "") -> Image.Image:
     """تصميم 2: نمط تحذير عاجل (أحمر/أسود) لثغرات نشطة الاستغلال."""
     top = COLORS["black"]
     bottom = (30, 10, 10)
@@ -576,26 +605,23 @@ def design_alert(title: str, tag: str) -> Image.Image:
     excl_font = _font(FONT_BOLD, 130)
     draw.text((cx - 18, cy - 55), "!", font=excl_font, fill=COLORS["red_alert"])
 
-    tag_font = _font(FONT_BOLD, 34)
-    tag_text = _ar(tag)
-    tw = draw.textlength(tag_text, font=tag_font)
-    draw.rounded_rectangle(
-        [WIDTH / 2 - tw / 2 - 30, 90, WIDTH / 2 + tw / 2 + 30, 154],
-        radius=32, fill=COLORS["red_alert"],
-    )
-    draw.text((WIDTH / 2 - tw / 2, 106), tag_text, font=tag_font, fill=COLORS["white"])
+    _tag_badge_with_date(draw, tag, True, 122, date_str)
 
     wrapped = _wrap_arabic(draw, title, 68, WIDTH - 140)
-    _draw_multiline_centered(draw, wrapped, 68, COLORS["white"], WIDTH / 2, 700, 86)
+    y_after = _draw_multiline_centered(draw, wrapped, 68, COLORS["white"], WIDTH / 2, 700, 86)
 
     draw.rectangle([WIDTH / 2 - 90, 660, WIDTH / 2 + 90, 664], fill=COLORS["red_alert"])
+
+    if details:
+        img, draw, y_after = _details_panel(img, details, y_after + 14)
 
     _network_nodes(draw, COLORS["red_alert"], count=8, seed=4)
     _footer_brand(draw, "Cyber Watch | تحذير عاجل")
     return img
 
 
-def design_minimal_dark(title: str, tag: str, urgent: bool = False) -> Image.Image:
+def design_minimal_dark(title: str, tag: str, urgent: bool = False,
+                         details: str = "", date_str: str = "") -> Image.Image:
     """تصميم 3: بساطة أكبر - خلفية رمادية داكنة + قفل جانبي + خط شبكي رفيع أسفل."""
     top = COLORS["dark_gray"]
     bottom = COLORS["black"]
@@ -615,12 +641,21 @@ def design_minimal_dark(title: str, tag: str, urgent: bool = False) -> Image.Ima
     tw = draw.textlength(tag_text, font=tag_font)
     draw.text((WIDTH - tw - 60, 90), tag_text, font=tag_font, fill=accent)
 
+    if date_str:
+        date_font = _font(FONT_REGULAR, 24)
+        date_text = _ar(date_str)
+        dw = draw.textlength(date_text, font=date_font)
+        draw.text((WIDTH - dw - 60, 138), date_text, font=date_font, fill=(190, 196, 204))
+
     _lock_icon(draw, WIDTH - 140, 320, 120, accent, width=8)
 
     wrapped = _wrap_arabic(draw, title, 70, WIDTH - 200)
-    _draw_multiline_centered(draw, wrapped, 70, COLORS["white"], WIDTH / 2, 620, 88)
+    y_after = _draw_multiline_centered(draw, wrapped, 70, COLORS["white"], WIDTH / 2, 620, 88)
 
     draw.rectangle([WIDTH / 2 - 100, HEIGHT - 470, WIDTH / 2 + 100, HEIGHT - 466], fill=accent)
+
+    if details:
+        img, draw, y_after = _details_panel(img, details, y_after + 14)
 
     _network_nodes(draw, accent, count=9, seed=6, region=(60, HEIGHT - 300, WIDTH - 60, HEIGHT - 100))
     _footer_brand(draw)
@@ -642,18 +677,24 @@ def generate_designs(content: dict, out_dir: str, ai_background=None) -> list[st
     title = content["image_title"]
     tag = content["classification"]
     urgent = content.get("urgency") == "عاجل"
+    details_text = content.get("summary", "")
+    date_str = _arabic_date()
 
     paths = []
     if ai_background is not None:
-        details_text = content.get("summary", "")
-        design_1 = ("design_1_ai", design_ai_background(ai_background, title, tag, urgent, details=details_text))
+        design_1 = ("design_1_ai", design_ai_background(
+            ai_background, title, tag, urgent, details=details_text, date_str=date_str,
+        ))
     else:
-        design_1 = ("design_1_standard", design_standard(title, tag, urgent))
+        design_1 = ("design_1_standard", design_standard(
+            title, tag, urgent, details=details_text, date_str=date_str,
+        ))
 
     designs = [
         design_1,
         ("design_2_alert" if urgent else "design_2_minimal", (
-            design_alert(title, tag) if urgent else design_minimal_dark(title, tag, urgent)
+            design_alert(title, tag, details=details_text, date_str=date_str) if urgent
+            else design_minimal_dark(title, tag, urgent, details=details_text, date_str=date_str)
         )),
     ]
 
@@ -667,7 +708,9 @@ def generate_designs(content: dict, out_dir: str, ai_background=None) -> list[st
             design_awareness(title, subtitle, items, summary),
         ))
     else:
-        designs.append(("design_3_minimal", design_minimal_dark(title, tag, urgent)))
+        designs.append(("design_3_minimal", design_minimal_dark(
+            title, tag, urgent, details=details_text, date_str=date_str,
+        )))
 
     for name, img in designs:
         path = os.path.join(out_dir, f"{name}.png")
