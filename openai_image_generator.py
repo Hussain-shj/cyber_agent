@@ -1,66 +1,68 @@
 """
-openai_image_generator.py
-يولّد خلفية فنية (بدون أي نص مكتوب داخلها) عبر OpenAI Images API، لاستخدامها
-كخلفية يوضع فوقها لاحقاً نص عربي دقيق عبر Pillow (image_generator.py).
+instagram_publisher.py
+ينشر صورة + تعليق على حساب Instagram Business/Creator عبر Meta Graph API.
 
-السبب في فصل الخلفية عن النص: نماذج توليد الصور الحالية لا تزال ترتكب أخطاء
-إملائية متكررة عند كتابة نصوص عربية داخل الصورة، بينما النص المرسوم عبر Pillow
-هنا مضمون الصحة 100% (تم التحقق من تغطية الحروف برمجياً).
+المتطلبات المسبقة (تُجهَّز مرة واحدة من Meta Developers):
+  - صفحة فيسبوك مرتبطة بحساب Instagram احترافي (Business/Creator).
+  - تطبيق Meta App فيه صلاحيات: instagram_basic, instagram_content_publish,
+    pages_show_list, pages_read_engagement.
+  - Access Token طويل الأمد (Long-Lived Page/User Token) بصلاحية الحساب أعلاه.
+  - معرف حساب Instagram Business (IG_BUSINESS_ACCOUNT_ID) — يُستخرج مرة واحدة
+    عبر: GET /{page-id}?fields=instagram_business_account
 """
 
-import base64
-import os
-from io import BytesIO
+import time
 
-from openai import OpenAI
-from PIL import Image
+import requests
 
-# أقرب مقاس مدعوم من OpenAI لنسبة 1080x1350 (4:5) هو الوضع الرأسي 1024x1536
-GEN_SIZE = "1024x1536"
+GRAPH_API = "https://graph.facebook.com/v20.0"
 
 
-def _build_prompt(classification: str, urgent: bool, keywords: str = "") -> str:
-    """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بهوية سيبرانية داكنة،
-    يمنع صراحة أي كتابة أو أشخاص حقيقيين في الصورة."""
-    mood = "dramatic red and dark tones, alarming urgent atmosphere" if urgent else \
-           "cyan and deep blue tones, professional and calm atmosphere"
-
-    base = (
-        "A modern minimalist cybersecurity-themed digital background illustration, "
-        f"{mood}, dark navy and black gradient background, glowing neon accent lines, "
-        "abstract digital network nodes, circuit patterns, subtle particle sparkles, "
-        "high-end tech magazine style, cinematic lighting, 4k quality. "
-    )
-    if keywords:
-        base += f"Visual motif related to: {keywords}. "
-    base += (
-        "IMPORTANT: absolutely no text, no letters, no numbers, no words, no logos, "
-        "no watermarks anywhere in the image. No real human faces or people. "
-        "Pure abstract/illustrative background only."
-    )
-    return base
+class InstagramPublishError(RuntimeError):
+    pass
 
 
-def generate_background(classification: str, urgent: bool, keywords: str = "",
-                         api_key: str | None = None, quality: str = "medium") -> Image.Image:
-    """يولّد صورة خلفية (PIL Image) عبر OpenAI Images API. يرمي استثناءً عند الفشل
-    ليتمكن المستدعي من الرجوع لخلفية Pillow المحلية كحل احتياطي (fallback)."""
-    client = OpenAI(api_key=api_key or os.environ["OPENAI_API_KEY"])
-    prompt = _build_prompt(classification, urgent, keywords)
-
-    result = client.images.generate(
-        model="gpt-image-1",
-        prompt=prompt,
-        size=GEN_SIZE,
-        quality=quality,  # low | medium | high — نستخدم medium افتراضياً لتوازن التكلفة/الجودة
-        n=1,
-    )
-    image_b64 = result.data[0].b64_json
-    image_bytes = base64.b64decode(image_b64)
-    return Image.open(BytesIO(image_bytes)).convert("RGB")
+def _check(resp: requests.Response):
+    if resp.status_code >= 400:
+        raise InstagramPublishError(f"{resp.status_code}: {resp.text}")
+    return resp.json()
 
 
-if __name__ == "__main__":
-    img = generate_background("تحذير عاجل", urgent=True, keywords="data breach, hacking")
-    img.save("/tmp/ai_bg_test.png")
-    print("saved /tmp/ai_bg_test.png", img.size)
+def create_media_container(ig_user_id: str, image_url: str, caption: str, access_token: str) -> str:
+    url = f"{GRAPH_API}/{ig_user_id}/media"
+    payload = {
+        "image_url": image_url,
+        "caption": caption,
+        "access_token": access_token,
+    }
+    data = _check(requests.post(url, data=payload, timeout=30))
+    return data["id"]
+
+
+def wait_until_ready(container_id: str, access_token: str, timeout_s: int = 60) -> None:
+    url = f"{GRAPH_API}/{container_id}"
+    waited = 0
+    while waited < timeout_s:
+        data = _check(requests.get(url, params={"fields": "status_code", "access_token": access_token}, timeout=30))
+        status = data.get("status_code")
+        if status == "FINISHED":
+            return
+        if status == "ERROR":
+            raise InstagramPublishError(f"فشل تجهيز الحاوية: {data}")
+        time.sleep(3)
+        waited += 3
+    raise InstagramPublishError("انتهت مهلة انتظار تجهيز الوسائط.")
+
+
+def publish_container(ig_user_id: str, container_id: str, access_token: str) -> str:
+    url = f"{GRAPH_API}/{ig_user_id}/media_publish"
+    payload = {"creation_id": container_id, "access_token": access_token}
+    data = _check(requests.post(url, data=payload, timeout=30))
+    return data["id"]
+
+
+def publish_post(ig_user_id: str, image_url: str, caption: str, access_token: str) -> str:
+    """تسلسل النشر الكامل: إنشاء حاوية -> انتظار الجاهزية -> نشر. يعيد معرّف المنشور."""
+    container_id = create_media_container(ig_user_id, image_url, caption, access_token)
+    wait_until_ready(container_id, access_token)
+    return publish_container(ig_user_id, container_id, access_token)

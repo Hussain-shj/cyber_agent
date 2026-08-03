@@ -1,8 +1,1 @@
-[build]
-builder = "NIXPACKS"
-
-[deploy]
-startCommand = "python agent_runner.py"
-# صيغة Cron (UTC): هذا المثال = 6:00 صباحاً بتوقيت الإمارات (UTC+4) يومياً
-cronSchedule = "0 2 * * *"
-restartPolicyType = "NEVER"
+worker: python agent_runner.py

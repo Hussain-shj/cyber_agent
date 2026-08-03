@@ -1,102 +1,119 @@
 """
-content_generator.py
-يستخدم Anthropic API (مع أداة web_search) للبحث عن آخر الأخبار السيبرانية
-وإنتاج محتوى عربي جاهز للنشر وفق مواصفات الحساب.
+agent_runner.py
+نقطة التشغيل الرئيسية للإيجنت اليومي:
+  1) توليد المحتوى (بحث + تصنيف + تقييم + كتابة) عبر Anthropic API.
+  2) توليد 3 تصاميم صور بالهوية البصرية السيبرانية — مع خلفية فنية اختيارية
+     عبر OpenAI Images API إن توفر OPENAI_API_KEY (والرجوع التلقائي لـ Pillow
+     المحلي المجاني عند غيابه أو عند أي فشل في الاستدعاء).
+  3) رفع الصور إلى GitHub للحصول على روابط عامة.
+  4) نشر منشور واحد (أول تصميم) على Instagram — فقط إذا AUTO_PUBLISH=true.
+
+الوضع الافتراضي هو "مراجعة" (Dry Run): يولّد كل شيء ويحفظه محلياً في posts/
+بدون نشر فعلي، حتى تتم مراجعته يدوياً أولاً. للتفعيل الكامل، اضبط
+AUTO_PUBLISH=true في متغيرات البيئة بعد أن تتأكد من جودة المخرجات.
 """
 
 import json
+import logging
 import os
-import re
-from anthropic import Anthropic
+import sys
+from datetime import datetime, timezone
 
-MODEL = "claude-sonnet-4-6"
+from dotenv import load_dotenv
 
-SYSTEM_PROMPT = """أنت وكيل ذكاء اصطناعي متخصص بإدارة محتوى يومي لحساب إنستغرام في الأمن
-السيبراني، يستهدف المؤسسات والجهات الحكومية والشركات والأفراد في الإمارات ودول الخليج.
+from content_generator import generate_daily_content
+from image_generator import generate_designs
+from github_uploader import upload_all, upload_image_to_github
+from instagram_publisher import publish_post
 
-نفّذ ما يلي:
-1) ابحث عن آخر 24-48 ساعة من الأخبار السيبرانية من مصادر موثوقة فقط: CISA, NIST,
-   NSA Cybersecurity, ENISA, CERT-EU, UAE Cyber Security Council, OWASP, MITRE, FIRST,
-   US-CERT, Microsoft Security, Google Threat Intelligence, Cisco Talos, Palo Alto Unit42,
-   CrowdStrike, Fortinet, Check Point, Kaspersky, Trend Micro, SentinelOne, Sophos,
-   Mandiant, Rapid7, Tenable, Qualys, وقواعد CVE/NVD/Exploit-DB/VulDB/MITRE ATT&CK.
-2) صنّف واختر خبراً واحداً هو الأعلى أولوية اليوم (تأثير على المؤسسات/الأفراد، مستوى
-   الخطورة، الحداثة، وهل يتعلق بأنظمة واسعة الانتشار مثل Microsoft, Cisco, Fortinet,
-   VMware, Windows, Azure, AWS...إلخ).
-3) اكتب محتوى عربي احترافي مختصر خالٍ من الحشو.
-4) لا تذكر تفاصيل استغلال (exploit) قابلة للإساءة؛ ركّز على التأثير والتخفيف العملي.
-5) أعد الصياغة دائماً؛ لا تنسخ نصوصاً حرفية من المصادر.
-6) إن لم يوجد خبر جديد يستحق النشر، صرّح بذلك بوضوح عبر الحقل "no_news": true.
+load_dotenv()
 
-أعد الإجابة **بصيغة JSON فقط** بدون أي نص إضافي قبله أو بعده، وفق هذا المخطط بالضبط:
-
-{
-  "no_news": false,
-  "classification": "ثغرة أمنية | خبر سيبراني | برمجية خبيثة | Ransomware | حملة تصيد | تسريب بيانات | تحديث أمني | نصائح توعوية | أفضل الممارسات | تحليل هجوم | أدوات جديدة | تقرير استخباراتي | تحذير عاجل",
-  "urgency": "عادي | مرتفع | عاجل",
-  "image_title": "عنوان لا يتجاوز 8 كلمات لعرضه داخل الصورة. فضّل العربية الفصحى الكاملة، واكتب أسماء المنتجات المعروفة بأحرف عربية إن أمكن (مثال: أدوبي بدلاً من Adobe)؛ إن استحال تجنّب اسم إنجليزي فاتركه كما هو، فهذا مدعوم",
-  "hook_title": "عنوان جذاب أطول قليلاً لبداية المنشور",
-  "summary": "شرح مختصر للخبر (2-3 جمل)",
-  "why_it_matters": "لماذا يهم هذا الخبر (1-2 جملة)",
-  "who_is_affected": "من المتأثر (جملة أو نقاط قصيرة)",
-  "recommended_actions": ["إجراء 1", "إجراء 2", "إجراء 3"],
-  "security_tip": "نصيحة أمنية قصيرة",
-  "cta": "دعوة للتفاعل",
-  "hashtags": ["#وسم1", "#وسم2", "..."],
-  "source": "اسم المصدر فقط (مثال: Cisco Talos، أو CISA، أو Microsoft Security) — لا تضف رابطاً ولا تاريخاً ولا أي نص إضافي بجانبه، الاسم فقط",
-  "problem_summary": "جملة أو جملتان قصيرتان تشرحان جوهر المشكلة بوضوح شديد لغير المختصين؛ املأ هذا الحقل دائماً عندما يكون التصنيف 'نصائح توعوية' أو 'أفضل الممارسات'",
-  "awareness_items": [
-    {"icon": "battery | heat | eye", "label": "عبارة قصيرة جداً (2-4 كلمات) لعلامة تحذيرية أو نقطة توعوية", "severity": "high | normal"}
-  ],
-  "full_caption": "النص الكامل الجاهز للنشر كتعليق (Caption) على إنستغرام، يجمع كل ما سبق بشكل منسق مع الإيموجي المناسبة والهاشتاقات في النهاية. عند ذكر المصدر داخل هذا النص، اكتب اسمه فقط دون رابط أو أي إضافة أخرى بجانبه"
-}
-
-ملاحظة مهمة: املأ "awareness_items" بثلاثة عناصر بالضبط فقط عندما يكون التصنيف
-"نصائح توعوية" أو "أفضل الممارسات" ويناسب المحتوى عرض علامات/خطوات مرئية (مثل
-علامات اختراق الهاتف، أو خطوات تأمين الحساب)؛ اترك القائمة فارغة [] في الأخبار
-والثغرات العادية التي لا تحتاج هذا الشكل.
-"""
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+log = logging.getLogger("cyber-agent")
 
 
-def _extract_json(text: str) -> dict:
-    """يستخرج أول كائن JSON صالح من نص الرد، حتى لو أحاطه Markdown fences."""
-    text = text.strip()
-    text = re.sub(r"^```json\s*|\s*```$", "", text.strip(), flags=re.MULTILINE)
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if not match:
-        raise ValueError(f"لم يتم العثور على JSON في رد النموذج:\n{text[:500]}")
-    return json.loads(match.group(0))
+def run() -> None:
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M%S")
+    out_dir = os.path.join("posts", stamp)
 
+    log.info("1/4 — توليد المحتوى عبر Anthropic API (بحث + كتابة)...")
+    content = generate_daily_content()
 
-def generate_daily_content(api_key: str | None = None) -> dict:
-    """يستدعي Anthropic API مع أداة البحث بالويب ويعيد قاموس المحتوى المُنتَج."""
-    client = Anthropic(api_key=api_key or os.environ["ANTHROPIC_API_KEY"])
+    if content.get("no_news"):
+        log.info("لا يوجد خبر جديد يستحق النشر اليوم. إنهاء التشغيل.")
+        return
 
-    response = client.messages.create(
-        model=MODEL,
-        max_tokens=4000,
-        system=SYSTEM_PROMPT,
-        tools=[{"type": "web_search_20250305", "name": "web_search"}],
-        messages=[
-            {
-                "role": "user",
-                "content": (
-                    "ابحث الآن عن أهم خبر/ثغرة سيبرانية خلال آخر 24-48 ساعة، ثم أنتج "
-                    "المحتوى الكامل وفق التعليمات، وأعد النتيجة بصيغة JSON فقط."
-                ),
-            }
-        ],
-    )
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "content.json"), "w", encoding="utf-8") as f:
+        json.dump(content, f, ensure_ascii=False, indent=2)
+    log.info("تم إنتاج المحتوى: %s", content.get("hook_title"))
 
-    # اجمع كل أجزاء النص من الرد (قد تتضمن أدوات بحث متعددة)
-    full_text = "\n".join(
-        block.text for block in response.content if getattr(block, "type", None) == "text"
-    )
+    log.info("2/4 — توليد 3 تصاميم بصرية...")
 
-    data = _extract_json(full_text)
-    return data
+    ai_background = None
+    if os.environ.get("OPENAI_API_KEY"):
+        try:
+            log.info("توليد خلفية فنية عبر OpenAI Images API...")
+            from openai_image_generator import generate_background
+            keywords = content.get("classification", "") + " " + content.get("image_title", "")
+            ai_background = generate_background(
+                content["classification"],
+                content.get("urgency") == "عاجل",
+                keywords=keywords,
+                quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"),
+            )
+            log.info("تم توليد الخلفية الفنية بنجاح.")
+        except Exception as exc:  # noqa: BLE001
+            log.warning("فشل توليد خلفية OpenAI (%s) — سيُستخدم التصميم المحلي بديلاً.", exc)
+            ai_background = None
+
+    image_paths = generate_designs(content, out_dir, ai_background=ai_background)
+    log.info("تم حفظ التصاميم محلياً في: %s (لن تبقى بعد انتهاء الحاوية)", out_dir)
+
+    # --- رفع دائم للمراجعة على GitHub (بغض النظر عن AUTO_PUBLISH) ---
+    # ملفات حاوية Railway مؤقتة وتُحذف بعد كل تشغيل Cron، لذا نرفع دائماً نسخة
+    # إلى GitHub ليتمكن المستخدم من فتحها ومراجعتها بسهولة من المتصفح.
+    repo = os.environ.get("GITHUB_REPO")
+    gh_token = os.environ.get("GITHUB_TOKEN")
+    branch = os.environ.get("GITHUB_BRANCH", "main")
+
+    public_urls: list[str] = []
+    if repo and gh_token:
+        log.info("3/4 — رفع النص والتصاميم إلى GitHub للمراجعة...")
+        review_folder = f"posts/{stamp}"
+        content_path = os.path.join(out_dir, "content.json")
+        upload_image_to_github(content_path, repo, branch, gh_token, dest_folder=review_folder)
+        public_urls = upload_all(image_paths, repo, branch, gh_token, dest_folder=review_folder)
+        for u in public_urls:
+            log.info("رابط للمراجعة: %s", u)
+        log.info("افتح مجلد '%s' في مستودعك على GitHub لمشاهدة كل شيء.", review_folder)
+    else:
+        log.warning(
+            "GITHUB_REPO/GITHUB_TOKEN غير مضبوطين — لن يتم رفع أي شيء للمراجعة، "
+            "والملفات ستُفقد بعد إغلاق الحاوية. أضف المتغيرين في Railway لرؤية المخرجات."
+        )
+
+    auto_publish = os.environ.get("AUTO_PUBLISH", "false").lower() == "true"
+    if not auto_publish:
+        log.info("وضع المراجعة (Dry Run) مفعّل — لن يتم النشر تلقائياً على Instagram.")
+        return
+
+    if not public_urls:
+        log.error("لا يمكن النشر على Instagram بدون رابط صورة عام — تحقق من إعدادات GitHub.")
+        return
+
+    log.info("4/4 — نشر المنشور على Instagram...")
+    ig_user_id = os.environ["IG_BUSINESS_ACCOUNT_ID"]
+    ig_token = os.environ["IG_ACCESS_TOKEN"]
+    caption = content["full_caption"]
+    image_url = public_urls[0]
+    post_id = publish_post(ig_user_id, image_url, caption, ig_token)
+    log.info("تم النشر بنجاح! معرّف المنشور: %s", post_id)
 
 
 if __name__ == "__main__":
-    result = generate_daily_content()
-    print(json.dumps(result, ensure_ascii=False, indent=2))
+    try:
+        run()
+    except Exception as exc:  # noqa: BLE001
+        log.exception("فشل تشغيل الإيجنت: %s", exc)
+        sys.exit(1)
