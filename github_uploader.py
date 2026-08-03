@@ -49,5 +49,5 @@ def upload_image_to_github(
     return f"https://raw.githubusercontent.com/{repo}/{branch}/{dest_path}"
 
 
-def upload_all(local_paths: list[str], repo: str, branch: str, token: str) -> list[str]:
-    return [upload_image_to_github(p, repo, branch, token) for p in local_paths]
+def upload_all(local_paths: list[str], repo: str, branch: str, token: str, dest_folder: str = "posts") -> list[str]:
+    return [upload_image_to_github(p, repo, branch, token, dest_folder=dest_folder) for p in local_paths]

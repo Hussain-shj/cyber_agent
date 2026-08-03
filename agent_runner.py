@@ -83,7 +83,7 @@ def run() -> None:
         review_folder = f"posts/{stamp}"
         content_path = os.path.join(out_dir, "content.json")
         upload_image_to_github(content_path, repo, branch, gh_token, dest_folder=review_folder)
-        public_urls = upload_all(image_paths, repo, branch, gh_token)
+        public_urls = upload_all(image_paths, repo, branch, gh_token, dest_folder=review_folder)
         for u in public_urls:
             log.info("رابط للمراجعة: %s", u)
         log.info("افتح مجلد '%s' في مستودعك على GitHub لمشاهدة كل شيء.", review_folder)
