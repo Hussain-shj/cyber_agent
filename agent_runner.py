@@ -2,7 +2,9 @@
 agent_runner.py
 نقطة التشغيل الرئيسية للإيجنت اليومي:
   1) توليد المحتوى (بحث + تصنيف + تقييم + كتابة) عبر Anthropic API.
-  2) توليد 3 تصاميم صور بالهوية البصرية السيبرانية.
+  2) توليد 3 تصاميم صور بالهوية البصرية السيبرانية — مع خلفية فنية اختيارية
+     عبر OpenAI Images API إن توفر OPENAI_API_KEY (والرجوع التلقائي لـ Pillow
+     المحلي المجاني عند غيابه أو عند أي فشل في الاستدعاء).
   3) رفع الصور إلى GitHub للحصول على روابط عامة.
   4) نشر منشور واحد (أول تصميم) على Instagram — فقط إذا AUTO_PUBLISH=true.
 
@@ -47,7 +49,25 @@ def run() -> None:
     log.info("تم إنتاج المحتوى: %s", content.get("hook_title"))
 
     log.info("2/4 — توليد 3 تصاميم بصرية...")
-    image_paths = generate_designs(content, out_dir)
+
+    ai_background = None
+    if os.environ.get("OPENAI_API_KEY"):
+        try:
+            log.info("توليد خلفية فنية عبر OpenAI Images API...")
+            from openai_image_generator import generate_background
+            keywords = content.get("classification", "") + " " + content.get("image_title", "")
+            ai_background = generate_background(
+                content["classification"],
+                content.get("urgency") == "عاجل",
+                keywords=keywords,
+                quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"),
+            )
+            log.info("تم توليد الخلفية الفنية بنجاح.")
+        except Exception as exc:  # noqa: BLE001
+            log.warning("فشل توليد خلفية OpenAI (%s) — سيُستخدم التصميم المحلي بديلاً.", exc)
+            ai_background = None
+
+    image_paths = generate_designs(content, out_dir, ai_background=ai_background)
     log.info("تم حفظ التصاميم محلياً في: %s (لن تبقى بعد انتهاء الحاوية)", out_dir)
 
     # --- رفع دائم للمراجعة على GitHub (بغض النظر عن AUTO_PUBLISH) ---
