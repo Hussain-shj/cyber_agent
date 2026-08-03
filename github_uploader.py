@@ -6,7 +6,6 @@ github_uploader.py
 """
 
 import base64
-import datetime
 import os
 
 import requests
@@ -21,10 +20,14 @@ def upload_image_to_github(
     token: str,
     dest_folder: str = "posts",
 ) -> str:
-    """يرفع الملف ويعيد الرابط العام (raw) القابل للاستخدام في Instagram Graph API."""
+    """يرفع الملف ويعيد الرابط العام (raw) القابل للاستخدام في Instagram Graph API.
+
+    يُحفظ الملف باسمه الأصلي كما هو (content.json، design_1_standard.png...)
+    دون أي بادئة إضافية، لأن dest_folder (المجلد اليومي المُوَقَّت من agent_runner)
+    يضمن التفرد أصلاً — وهذا يجعل أسماء الملفات متوقعة وقابلة للاستخدام مباشرة من
+    أي أداة عرض/مراجعة خارجية دون الحاجة لتخمين اسم الملف."""
     filename = os.path.basename(local_path)
-    stamp = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
-    dest_path = f"{dest_folder}/{stamp}_{filename}"
+    dest_path = f"{dest_folder}/{filename}"
 
     with open(local_path, "rb") as f:
         content_b64 = base64.b64encode(f.read()).decode("utf-8")
@@ -35,7 +38,7 @@ def upload_image_to_github(
         "Accept": "application/vnd.github+json",
     }
     payload = {
-        "message": f"chore: add generated post image {stamp}",
+        "message": f"chore: add {filename}",
         "content": content_b64,
         "branch": branch,
     }
