@@ -8,6 +8,7 @@ image_generator.py
 import math
 import os
 import random
+import unicodedata
 
 import arabic_reshaper
 from bidi.algorithm import get_display
@@ -16,9 +17,12 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 WIDTH, HEIGHT = 1080, 1350
 FONT_DIR = os.path.join(os.path.dirname(__file__), "fonts")
-FONT_BOLD = os.path.join(FONT_DIR, "NotoSansArabic-Bold.ttf")
-FONT_REGULAR = os.path.join(FONT_DIR, "NotoSansArabic-Regular.ttf")
-FONT_LATIN_BOLD = os.path.join(FONT_DIR, "NotoSans-Bold.ttf")
+FONT_BOLD = os.path.join(FONT_DIR, "Cairo-Bold.ttf")
+FONT_REGULAR = os.path.join(FONT_DIR, "Cairo-Regular.ttf")
+FONT_SEMIBOLD = os.path.join(FONT_DIR, "Cairo-SemiBold.ttf")
+# خط Cairo يغطي العربية واللاتينية أصلياً في ملف واحد، لكن نُبقي على منطق
+# اختيار الخط المزدوج (أدناه) كحماية إضافية إن ظهر حرف نادر غير مدعوم مستقبلاً.
+FONT_LATIN_BOLD = FONT_BOLD
 
 # نقرأ خرائط الحروف (cmap) مرة واحدة فقط لمعرفة أي حرف مدعوم فعلياً في كل خط،
 # بدلاً من الاعتماد على قائمة ثابتة قد تفوت علامات ترقيم مثل / ( ) %
@@ -39,9 +43,20 @@ COLORS = {
 
 
 def _ar(text: str) -> str:
-    """تجهيز نص عربي للعرض الصحيح (تشكيل + اتجاه) داخل Pillow."""
+    """تجهيز نص عربي للعرض الصحيح (تشكيل + اتجاه) داخل Pillow، مع معالجة احتياطية:
+    بعض الحروف غير الواصلة (مثل ر، ة، و، ا) قد لا يملك الخط ملف الشكل المُقدَّم من
+    reshaper لها تحديداً (لأنها متطابقة بصرياً مع الشكل الأساسي)؛ في هذه الحالة
+    نستبدلها تلقائياً بالحرف الأساسي غير المُشكَّل بدل أن تظهر كمربع فارغ."""
     reshaped = arabic_reshaper.reshape(text)
-    return get_display(reshaped)
+    displayed = get_display(reshaped)
+    result = []
+    for ch in displayed:
+        if ch.isspace() or ord(ch) in _AR_CMAP or ord(ch) in _LATIN_CMAP:
+            result.append(ch)
+            continue
+        fallback = unicodedata.normalize("NFKC", ch)
+        result.append(fallback if fallback else ch)
+    return "".join(result)
 
 
 def _font(path: str, size: int) -> ImageFont.FreeTypeFont:
@@ -103,6 +118,15 @@ def _measure_mixed_line(draw, text: str, size: int) -> float:
     if current_chunk:
         total += draw.textlength(current_chunk, font=(ar_font if current_ar else lat_font))
     return total
+
+
+def _cap_lines(lines: list[str], max_lines: int) -> list[str]:
+    """يحدّ عدد الأسطر بحد أقصى، ويضيف '…' لآخر سطر ظاهر إن جرى قصّ أسطر أخرى."""
+    if len(lines) <= max_lines:
+        return lines
+    capped = lines[:max_lines]
+    capped[-1] = capped[-1].rstrip() + " …"
+    return capped
 
 
 def _wrap_arabic(draw: ImageDraw.ImageDraw, text: str, size: int, max_width: int) -> list[str]:
@@ -222,7 +246,10 @@ def _footer_brand(draw, brand_name="Cyber Watch | الإمارات"):
     font = _font(FONT_REGULAR, 26)
     text = _ar(brand_name)
     w = draw.textlength(text, font=font)
-    draw.text((WIDTH - w - 50, HEIGHT - 60), text, font=font, fill=COLORS["cyan"])
+    x = WIDTH - w - 50
+    y = HEIGHT - 60
+    draw.rounded_rectangle([x - 16, y - 8, x + w + 16, y + 34], radius=10, fill=(6, 9, 14))
+    draw.text((x, y), text, font=font, fill=COLORS["cyan"])
 
 
 def _battery_icon(draw, cx, cy, size, color, width=6):
@@ -434,9 +461,11 @@ def _darken_overlay(img: Image.Image, top_alpha=140, bottom_alpha=195) -> Image.
     return Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
 
 
-def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = False) -> Image.Image:
-    """يضع عناصر الهوية (وسم التصنيف + العنوان العربي + التذييل) فوق خلفية فنية
-    مولّدة بالذكاء الاصطناعي (بدون نص داخلها أصلاً)، بنفس محرك الخطوط الموثوق."""
+def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = False,
+                          details: str = "") -> Image.Image:
+    """يضع عناصر الهوية (وسم التصنيف + العنوان العربي + سطرا تفاصيل + التذييل)
+    فوق خلفية فنية مولّدة بالذكاء الاصطناعي (بدون نص داخلها أصلاً)، بنفس محرك
+    الخطوط الموثوق."""
     img = _fit_background_to_canvas(bg)
     img = _darken_overlay(img)
     draw = ImageDraw.Draw(img)
@@ -452,11 +481,32 @@ def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = F
     )
     draw.text((WIDTH / 2 - tw / 2, 86), tag_text, font=tag_font, fill=COLORS["black"])
 
+    title_y = HEIGHT - 430
     wrapped = _wrap_arabic(draw, title, 62, WIDTH - 140)
-    _draw_multiline_centered(
-        draw, wrapped, 62, COLORS["white"], WIDTH / 2, HEIGHT - 300, 80,
+    y_after_title = _draw_multiline_centered(
+        draw, wrapped, 62, COLORS["white"], WIDTH / 2, title_y, 80,
     )
-    draw.rectangle([WIDTH / 2 - 90, HEIGHT - 330, WIDTH / 2 + 90, HEIGHT - 326], fill=tag_color)
+    draw.rectangle(
+        [WIDTH / 2 - 90, title_y - 30, WIDTH / 2 + 90, title_y - 26], fill=tag_color,
+    )
+
+    # سطرا التفاصيل: خلفية داكنة شفافة خلف النص لضمان وضوحه فوق أي صورة خلفية،
+    # مهما كانت درجة سطوعها أو تعقيدها بصرياً.
+    if details:
+        detail_lines = _cap_lines(_wrap_arabic(draw, details, 30, WIDTH - 180), max_lines=2)
+        box_top = y_after_title + 14
+        box_h = 30 + 40 * len(detail_lines)
+        panel = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+        pd = ImageDraw.Draw(panel)
+        pd.rounded_rectangle(
+            [60, box_top, WIDTH - 60, box_top + box_h],
+            radius=16, fill=(8, 11, 18, 165),
+        )
+        img = Image.alpha_composite(img.convert("RGBA"), panel).convert("RGB")
+        draw = ImageDraw.Draw(img)
+        _draw_multiline_centered(
+            draw, detail_lines, 30, (225, 230, 236), WIDTH / 2, box_top + 18, 40,
+        )
 
     _footer_brand(draw)
     return img
@@ -595,7 +645,8 @@ def generate_designs(content: dict, out_dir: str, ai_background=None) -> list[st
 
     paths = []
     if ai_background is not None:
-        design_1 = ("design_1_ai", design_ai_background(ai_background, title, tag, urgent))
+        details_text = content.get("summary", "")
+        design_1 = ("design_1_ai", design_ai_background(ai_background, title, tag, urgent, details=details_text))
     else:
         design_1 = ("design_1_standard", design_standard(title, tag, urgent))
 
