@@ -8,6 +8,7 @@ image_generator.py
 import math
 import os
 import random
+import re
 import unicodedata
 from datetime import datetime, timezone
 
@@ -43,12 +44,28 @@ COLORS = {
 }
 
 
+# محارف تحكم Unicode لعزل الاتجاه (LRE...PDF): تُستخدم لتغليف أي عبارة لاتينية
+# مدمجة داخل نص عربي (مثل "Firewall Management Center (FMC)") كوحدة واحدة قوية
+# الاتجاه (LTR)، لأن مكتبة bidi المستخدمة هنا (python-bidi 0.6.x) لا "تُرحّل"
+# الأقواس بشكل صحيح عند اعتمادها فقط على القواعد الضمنية دون عزل صريح — وهذا
+# يسبب خللاً ملحوظاً مثل ظهور "(FMC" بدل "(FMC)" منعكسة الموضع. عزل العبارة
+# بالكامل (بما فيها الأقواس الداخلية) كوحدة LTR واحدة يحل المشكلة جذرياً.
+_LRE, _PDF = "\u202A", "\u202C"
+_LATIN_RUN = re.compile(r"\(?[A-Za-z][A-Za-z0-9 _\-/%.,:()]*[A-Za-z0-9)%]|[A-Za-z]")
+
+
+def _isolate_latin_runs(text: str) -> str:
+    return _LATIN_RUN.sub(lambda m: _LRE + m.group(0) + _PDF, text)
+
+
 def _ar(text: str) -> str:
-    """تجهيز نص عربي للعرض الصحيح (تشكيل + اتجاه) داخل Pillow، مع معالجة احتياطية:
-    بعض الحروف غير الواصلة (مثل ر، ة، و، ا) قد لا يملك الخط ملف الشكل المُقدَّم من
-    reshaper لها تحديداً (لأنها متطابقة بصرياً مع الشكل الأساسي)؛ في هذه الحالة
-    نستبدلها تلقائياً بالحرف الأساسي غير المُشكَّل بدل أن تظهر كمربع فارغ."""
-    reshaped = arabic_reshaper.reshape(text)
+    """تجهيز نص عربي للعرض الصحيح (تشكيل + اتجاه) داخل Pillow، مع معالجتين احتياطيتين:
+    1) عزل أي عبارة لاتينية مدمجة (بما فيها الأقواس) كوحدة LTR واحدة قبل تطبيق
+       خوارزمية bidi، لتفادي خلل ترتيب الأقواس مع الاختصارات الإنجليزية.
+    2) بعض الحروف العربية غير الواصلة (مثل ر، ة) قد لا يملك الخط شكلها المُقدَّم
+       من reshaper تحديداً؛ في هذه الحالة نستبدلها بالحرف الأساسي غير المُشكَّل."""
+    isolated = _isolate_latin_runs(text)
+    reshaped = arabic_reshaper.reshape(isolated)
     displayed = get_display(reshaped, base_dir="R")
     result = []
     for ch in displayed:
