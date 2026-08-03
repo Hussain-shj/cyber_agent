@@ -496,7 +496,6 @@ def design_awareness(title: str, subtitle: str, items: list[dict], summary: str)
     draw = ImageDraw.Draw(img)
     _cracked_phone_icon(draw, WIDTH / 2, phone_cy, phone_w, phone_h, COLORS["red_alert"], COLORS["cyan"])
 
-    _footer_brand(draw)
     return img
 
 
@@ -560,7 +559,6 @@ def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = F
     if details:
         img, draw, _ = _details_panel(img, details, y_after_title + 14)
 
-    _footer_brand(draw)
     return img
 
 
@@ -598,7 +596,6 @@ def design_standard(title: str, tag: str, urgent: bool = False,
         img, draw, y_after = _details_panel(img, details, y_after + 14)
 
     _network_nodes(draw, COLORS["cyan"], count=10, seed=3)
-    _footer_brand(draw)
     return img
 
 
@@ -634,7 +631,6 @@ def design_alert(title: str, tag: str, details: str = "", date_str: str = "") ->
         img, draw, y_after = _details_panel(img, details, y_after + 14)
 
     _network_nodes(draw, COLORS["red_alert"], count=8, seed=4)
-    _footer_brand(draw, "Cyber Watch | تحذير عاجل")
     return img
 
 
@@ -676,7 +672,6 @@ def design_minimal_dark(title: str, tag: str, urgent: bool = False,
         img, draw, y_after = _details_panel(img, details, y_after + 14)
 
     _network_nodes(draw, accent, count=9, seed=6, region=(60, HEIGHT - 300, WIDTH - 60, HEIGHT - 100))
-    _footer_brand(draw)
     return img
 
 
