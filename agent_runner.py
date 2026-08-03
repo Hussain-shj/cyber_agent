@@ -15,13 +15,13 @@ import json
 import logging
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
 from content_generator import generate_daily_content
 from image_generator import generate_designs
-from github_uploader import upload_all
+from github_uploader import upload_all, upload_image_to_github
 from instagram_publisher import publish_post
 
 load_dotenv()
@@ -31,7 +31,7 @@ log = logging.getLogger("cyber-agent")
 
 
 def run() -> None:
-    stamp = datetime.utcnow().strftime("%Y-%m-%d_%H%M%S")
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M%S")
     out_dir = os.path.join("posts", stamp)
 
     log.info("1/4 — توليد المحتوى عبر Anthropic API (بحث + كتابة)...")
@@ -48,28 +48,45 @@ def run() -> None:
 
     log.info("2/4 — توليد 3 تصاميم بصرية...")
     image_paths = generate_designs(content, out_dir)
-    log.info("تم حفظ التصاميم في: %s", out_dir)
+    log.info("تم حفظ التصاميم محلياً في: %s (لن تبقى بعد انتهاء الحاوية)", out_dir)
+
+    # --- رفع دائم للمراجعة على GitHub (بغض النظر عن AUTO_PUBLISH) ---
+    # ملفات حاوية Railway مؤقتة وتُحذف بعد كل تشغيل Cron، لذا نرفع دائماً نسخة
+    # إلى GitHub ليتمكن المستخدم من فتحها ومراجعتها بسهولة من المتصفح.
+    repo = os.environ.get("GITHUB_REPO")
+    gh_token = os.environ.get("GITHUB_TOKEN")
+    branch = os.environ.get("GITHUB_BRANCH", "main")
+
+    public_urls: list[str] = []
+    if repo and gh_token:
+        log.info("3/4 — رفع النص والتصاميم إلى GitHub للمراجعة...")
+        review_folder = f"posts/{stamp}"
+        content_path = os.path.join(out_dir, "content.json")
+        upload_image_to_github(content_path, repo, branch, gh_token, dest_folder=review_folder)
+        public_urls = upload_all(image_paths, repo, branch, gh_token)
+        for u in public_urls:
+            log.info("رابط للمراجعة: %s", u)
+        log.info("افتح مجلد '%s' في مستودعك على GitHub لمشاهدة كل شيء.", review_folder)
+    else:
+        log.warning(
+            "GITHUB_REPO/GITHUB_TOKEN غير مضبوطين — لن يتم رفع أي شيء للمراجعة، "
+            "والملفات ستُفقد بعد إغلاق الحاوية. أضف المتغيرين في Railway لرؤية المخرجات."
+        )
 
     auto_publish = os.environ.get("AUTO_PUBLISH", "false").lower() == "true"
     if not auto_publish:
-        log.info("وضع المراجعة (Dry Run) مفعّل — لن يتم النشر تلقائياً.")
-        log.info("راجع الملفات في '%s' ثم انشر يدوياً، أو فعّل AUTO_PUBLISH=true.", out_dir)
+        log.info("وضع المراجعة (Dry Run) مفعّل — لن يتم النشر تلقائياً على Instagram.")
         return
 
-    log.info("3/4 — رفع الصورة المختارة إلى GitHub للحصول على رابط عام...")
-    repo = os.environ["GITHUB_REPO"]           # مثال: username/cyber-agent
-    branch = os.environ.get("GITHUB_BRANCH", "main")
-    gh_token = os.environ["GITHUB_TOKEN"]
-    # ننشر التصميم الأول (design_1_standard) كصورة المنشور اليومي
-    chosen_image = image_paths[0]
-    public_urls = upload_all([chosen_image], repo, branch, gh_token)
-    image_url = public_urls[0]
-    log.info("رابط الصورة العام: %s", image_url)
+    if not public_urls:
+        log.error("لا يمكن النشر على Instagram بدون رابط صورة عام — تحقق من إعدادات GitHub.")
+        return
 
     log.info("4/4 — نشر المنشور على Instagram...")
     ig_user_id = os.environ["IG_BUSINESS_ACCOUNT_ID"]
     ig_token = os.environ["IG_ACCESS_TOKEN"]
     caption = content["full_caption"]
+    image_url = public_urls[0]
     post_id = publish_post(ig_user_id, image_url, caption, ig_token)
     log.info("تم النشر بنجاح! معرّف المنشور: %s", post_id)
 
