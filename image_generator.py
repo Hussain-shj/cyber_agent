@@ -188,22 +188,25 @@ def _arabic_date(dt: datetime | None = None) -> str:
 
 
 def _details_panel(img: Image.Image, details: str, box_top: float,
-                    text_color=(225, 230, 236), max_lines: int = 2, canvas=None):
-    """يرسم صندوق 'المختصر' (سطرين تفاصيل) بخلفية داكنة شفافة فوق أي خلفية،
-    ويعيد (img, draw, box_bottom) الجديدين لمتابعة الرسم بعده."""
+                    text_color=(225, 230, 236), max_lines: int = 4, canvas=None):
+    """يرسم صندوق 'المختصر' (تفاصيل الصورة) بخلفية داكنة شفافة فوق أي خلفية،
+    ويعيد (img, draw, box_bottom) الجديدين لمتابعة الرسم بعده. الخط أكبر
+    والحد الأقصى للأسطر أعلى من السابق لتفادي قصّ الجملة في منتصف معناها —
+    النص المصدر (image_summary) مصمَّم أصلاً ليكون جملة واحدة قصيرة كاملة
+    المعنى، فزيادة الأسطر المسموحة هنا تحمي من القص دون تضخيم الصندوق فعلياً."""
     w, h = canvas or (WIDTH, HEIGHT)
-    text_size = max(20, round(w * 0.026))
-    line_h = round(text_size * 1.3)
+    text_size = max(24, round(w * 0.032))
+    line_h = round(text_size * 1.32)
     draw = ImageDraw.Draw(img)
     lines = _cap_lines(_wrap_arabic(draw, details, text_size, w - round(w * 0.148)), max_lines)
-    box_h = round(w * 0.028) + line_h * len(lines)
+    box_h = round(w * 0.032) + line_h * len(lines)
     panel = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     pd = ImageDraw.Draw(panel)
     margin = round(w * 0.056)
-    pd.rounded_rectangle([margin, box_top, w - margin, box_top + box_h], radius=round(w * 0.015), fill=(8, 11, 18, 165))
+    pd.rounded_rectangle([margin, box_top, w - margin, box_top + box_h], radius=round(w * 0.015), fill=(8, 11, 18, 175))
     img = Image.alpha_composite(img.convert("RGBA"), panel).convert("RGB")
     draw = ImageDraw.Draw(img)
-    _draw_multiline_centered(draw, lines, text_size, text_color, w / 2, box_top + round(w * 0.015), line_h)
+    _draw_multiline_centered(draw, lines, text_size, text_color, w / 2, box_top + round(w * 0.016), line_h)
     return img, draw, box_top + box_h
 
 
@@ -297,6 +300,188 @@ def _lock_icon(draw, cx, cy, size, color, width=6):
         start=180, end=360, fill=color, width=width,
     )
     draw.ellipse([cx - 6, cy + body_h * 0.15, cx + 6, cy + body_h * 0.35], fill=color)
+
+
+def _bug_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة حشرة (برمجية خبيثة / Malware): جسم بيضاوي + قرون استشعار + أرجل."""
+    body_w, body_h = size * 0.62, size * 0.95
+    draw.ellipse([cx - body_w / 2, cy - body_h / 2, cx + body_w / 2, cy + body_h / 2],
+                 outline=color, width=width)
+    draw.line([(cx, cy - body_h / 2), (cx, cy + body_h / 2)], fill=color, width=max(2, width - 3))
+    # قرنا الاستشعار
+    for side in (-1, 1):
+        draw.line([(cx, cy - body_h * 0.42), (cx + side * size * 0.35, cy - body_h * 0.75)],
+                   fill=color, width=max(2, width - 3))
+    # الأرجل (3 على كل جانب)
+    for i, ratio in enumerate((-0.28, 0, 0.32)):
+        y = cy + body_h * ratio
+        for side in (-1, 1):
+            draw.line([(cx + side * body_w * 0.5, y), (cx + side * size * 0.58, y + size * 0.08 * (i - 1))],
+                       fill=color, width=max(2, width - 3))
+
+
+def _ransom_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة Ransomware: مستندات مكدّسة مقفلة (بيانات محتجزة مقابل فدية)."""
+    doc_w, doc_h = size * 0.62, size * 0.8
+    for dx, dy in ((-10, 10), (10, -6), (0, -18)):
+        left = cx - doc_w / 2 + dx
+        top = cy - doc_h / 2 + dy
+        draw.rounded_rectangle([left, top, left + doc_w, top + doc_h], radius=6,
+                                outline=color, width=max(2, width - 3))
+    lock_size = size * 0.5
+    _lock_icon(draw, cx, cy + size * 0.18, lock_size, color, width=width)
+
+
+def _phishing_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة تصيّد احتيالي: مغلّف بريد إلكتروني + صنّارة صيد."""
+    env_w, env_h = size * 1.1, size * 0.72
+    left, top = cx - env_w / 2, cy - env_h / 2
+    draw.rounded_rectangle([left, top, left + env_w, top + env_h], radius=8, outline=color, width=width)
+    draw.line([(left, top), (cx, cy + env_h * 0.12), (left + env_w, top)], fill=color, width=max(2, width - 3), joint="curve")
+    # صنارة الصيد داخلة من الأعلى
+    hook_x = cx + env_w * 0.22
+    draw.line([(hook_x, top - size * 0.4), (hook_x, cy - size * 0.02)], fill=color, width=max(2, width - 3))
+    draw.arc([hook_x - 12, cy - size * 0.14, hook_x + 12, cy + size * 0.1], start=0, end=200,
+              fill=color, width=max(2, width - 3))
+
+
+def _leak_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة تسريب بيانات: أسطوانة قاعدة بيانات مع قطرة تسريب."""
+    db_w, db_h = size * 0.85, size * 0.32
+    top_y = cy - size * 0.5
+    draw.ellipse([cx - db_w / 2, top_y, cx + db_w / 2, top_y + db_h], outline=color, width=width)
+    draw.line([(cx - db_w / 2, top_y + db_h / 2), (cx - db_w / 2, top_y + size * 0.55)], fill=color, width=width)
+    draw.line([(cx + db_w / 2, top_y + db_h / 2), (cx + db_w / 2, top_y + size * 0.55)], fill=color, width=width)
+    draw.arc([cx - db_w / 2, top_y + size * 0.55 - db_h / 2, cx + db_w / 2, top_y + size * 0.55 + db_h / 2],
+              start=0, end=180, fill=color, width=width)
+    # قطرة تسريب أسفل القاعدة
+    drop_cx, drop_top = cx, top_y + size * 0.62
+    draw.polygon([
+        (drop_cx, drop_top),
+        (drop_cx - size * 0.13, drop_top + size * 0.28),
+        (drop_cx + size * 0.13, drop_top + size * 0.28),
+    ], outline=color, width=max(2, width - 3))
+    draw.ellipse([drop_cx - size * 0.13, drop_top + size * 0.14, drop_cx + size * 0.13, drop_top + size * 0.4],
+                 outline=color, width=max(2, width - 3))
+
+
+def _update_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة تحديث أمني: درع مع سهم دائري (تحديث/ترقيع)."""
+    _shield_icon(draw, cx, cy, size * 0.72, color, width=width)
+    r = size * 0.42
+    draw.arc([cx - r, cy - r - size * 0.1, cx + r, cy + r - size * 0.1], start=25, end=310,
+              fill=color, width=max(3, width - 2))
+    ax, ay = cx + r * 0.94, cy - r * 0.42
+    draw.polygon([(ax - 12, ay - 4), (ax + 10, ay + 6), (ax - 6, ay + 16)], fill=color)
+
+
+def _checklist_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة أفضل الممارسات: لوحة حافظة (Clipboard) مع علامات صح."""
+    board_w, board_h = size * 0.78, size * 1.05
+    left, top = cx - board_w / 2, cy - board_h / 2
+    draw.rounded_rectangle([left, top, left + board_w, top + board_h], radius=10, outline=color, width=width)
+    clip_w = board_w * 0.4
+    draw.rounded_rectangle([cx - clip_w / 2, top - size * 0.08, cx + clip_w / 2, top + size * 0.1],
+                            radius=6, outline=color, width=max(2, width - 3))
+    for i, ratio in enumerate((0.28, 0.52, 0.76)):
+        y = top + board_h * ratio
+        x0 = left + board_w * 0.16
+        draw.line([(x0, y), (x0 + board_w * 0.12, y + board_h * 0.06), (x0 + board_w * 0.32, y - board_h * 0.08)],
+                  fill=color, width=max(2, width - 3), joint="curve")
+        draw.line([(x0 + board_w * 0.42, y - board_h * 0.02), (left + board_w * 0.84, y - board_h * 0.02)],
+                   fill=color, width=max(2, width - 4))
+
+
+def _radar_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة تحليل هجوم: شاشة رادار/مسح دائري مع نقطة مرصودة."""
+    r = size * 0.55
+    for ratio in (1.0, 0.66, 0.33):
+        rr = r * ratio
+        draw.ellipse([cx - rr, cy - rr, cx + rr, cy + rr], outline=color, width=max(2, width - 3))
+    draw.line([(cx, cy), (cx + r * 0.9, cy - r * 0.55)], fill=color, width=max(2, width - 2))
+    # نقطة مرصودة
+    px, py = cx - r * 0.4, cy + r * 0.3
+    draw.ellipse([px - 7, py - 7, px + 7, py + 7], fill=color)
+
+
+def _tool_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة أدوات جديدة: مفتاح ربط + ترس متقاطعان."""
+    # الترس (دائرة مسننة مبسطة)
+    r = size * 0.36
+    gx, gy = cx - size * 0.12, cy - size * 0.12
+    draw.ellipse([gx - r, gy - r, gx + r, gy + r], outline=color, width=width)
+    draw.ellipse([gx - r * 0.35, gy - r * 0.35, gx + r * 0.35, gy + r * 0.35], outline=color, width=max(2, width - 3))
+    for angle in range(0, 360, 45):
+        rad = math.radians(angle)
+        x1, y1 = gx + math.cos(rad) * r, gy + math.sin(rad) * r
+        x2, y2 = gx + math.cos(rad) * (r + size * 0.13), gy + math.sin(rad) * (r + size * 0.13)
+        draw.line([(x1, y1), (x2, y2)], fill=color, width=max(3, width - 1))
+    # مفتاح الربط
+    wx1, wy1 = cx + size * 0.32, cy + size * 0.32
+    wx2, wy2 = cx - size * 0.05, cy - size * 0.05
+    draw.line([(wx1, wy1), (wx2, wy2)], fill=color, width=max(4, width))
+    draw.arc([wx1 - 14, wy1 - 14, wx1 + 14, wy1 + 14], start=30, end=300, fill=color, width=max(3, width - 1))
+
+
+def _report_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة تقرير استخباراتي: مستند مع خطوط نص وعدسة تكبير فوقه (تحليل/رصد)."""
+    doc_w, doc_h = size * 0.68, size * 0.92
+    left, top = cx - doc_w / 2 - size * 0.08, cy - doc_h / 2
+    draw.rounded_rectangle([left, top, left + doc_w, top + doc_h], radius=8, outline=color, width=width)
+    for ratio in (0.28, 0.46, 0.64):
+        y = top + doc_h * ratio
+        draw.line([(left + doc_w * 0.16, y), (left + doc_w * 0.84, y)], fill=color, width=max(2, width - 4))
+    # عدسة تكبير
+    lens_cx, lens_cy = cx + size * 0.28, cy + size * 0.22
+    lens_r = size * 0.24
+    draw.ellipse([lens_cx - lens_r, lens_cy - lens_r, lens_cx + lens_r, lens_cy + lens_r],
+                 outline=color, width=max(3, width - 1))
+    handle_dx = lens_r * 0.75
+    draw.line([(lens_cx + handle_dx, lens_cy + handle_dx), (lens_cx + handle_dx + size * 0.18, lens_cy + handle_dx + size * 0.18)],
+               fill=color, width=max(3, width - 1))
+
+
+def _news_icon(draw, cx, cy, size, color, width=6):
+    """أيقونة خبر سيبراني عام: جرس تنبيه مع موجات بث."""
+    bell_w, bell_h = size * 0.62, size * 0.7
+    top = cy - bell_h / 2
+    draw.arc([cx - bell_w / 2, top, cx + bell_w / 2, top + bell_h], start=180, end=360,
+              fill=color, width=width)
+    draw.line([(cx - bell_w / 2, top + bell_h / 2), (cx - bell_w * 0.62, cy + bell_h * 0.42)], fill=color, width=width)
+    draw.line([(cx + bell_w / 2, top + bell_h / 2), (cx + bell_w * 0.62, cy + bell_h * 0.42)], fill=color, width=width)
+    draw.line([(cx - bell_w * 0.62, cy + bell_h * 0.42), (cx + bell_w * 0.62, cy + bell_h * 0.42)], fill=color, width=width)
+    draw.ellipse([cx - 9, cy + bell_h * 0.42 + 6, cx + 9, cy + bell_h * 0.42 + 24], fill=color)
+    # موجات بث
+    for i, r in enumerate((0.75, 1.0)):
+        rr = bell_w * r
+        draw.arc([cx - rr, top - size * 0.25, cx + rr, top + size * 0.3], start=200, end=340,
+                  fill=color, width=max(2, width - 3))
+
+
+# خريطة ربط كل تصنيف بالأيقونة المناسبة له — هذا هو المكان الوحيد الذي يحتاج
+# تعديلاً لإضافة "مهارة" (أيقونة) جديدة لتصنيف جديد مستقبلاً. راجع التعليمة
+# التفصيلية أسفل الملف (CLASSIFICATION_ICONS) لمعرفة كيفية الإضافة.
+CLASSIFICATION_ICONS = {
+    "خبر سيبراني": _news_icon,
+    "ثغرة أمنية": _shield_icon,
+    "برمجية خبيثة": _bug_icon,
+    "Ransomware": _ransom_icon,
+    "حملة تصيد": _phishing_icon,
+    "تسريب بيانات": _leak_icon,
+    "تحديث أمني": _update_icon,
+    "نصائح توعوية": _checklist_icon,
+    "أفضل الممارسات": _checklist_icon,
+    "تحليل هجوم": _radar_icon,
+    "أدوات جديدة": _tool_icon,
+    "تقرير استخباراتي": _report_icon,
+    "تحذير عاجل": _shield_icon,
+}
+
+
+def _icon_for_classification(tag: str):
+    """يعيد دالة الأيقونة المناسبة للتصنيف، أو الدرع كافتراضي إن كان التصنيف
+    غير معروف (حماية من أي تصنيف جديد لم تُضَف له أيقونة بعد)."""
+    return CLASSIFICATION_ICONS.get(tag, _shield_icon)
 
 
 def _network_nodes(draw, color, count=8, seed=2, region=None, canvas=None):
@@ -610,7 +795,8 @@ def design_standard(title: str, tag: str, urgent: bool = False,
     # الدرع المركزي
     shield_cy = h * 0.356
     shield_size = min(w, h) * 0.13
-    _shield_icon(draw, w / 2, shield_cy, shield_size, COLORS["cyan"], width=max(5, round(w * 0.0074)))
+    icon_fn = _icon_for_classification(tag)
+    icon_fn(draw, w / 2, shield_cy, shield_size, COLORS["cyan"], width=max(5, round(w * 0.0074)))
 
     # العنوان
     title_size = max(30, round(w * 0.061))
@@ -706,7 +892,8 @@ def design_minimal_dark(title: str, tag: str, urgent: bool = False,
         draw.text((w - dw - w * 0.056, tag_y + tag_size * 1.5), date_text, font=date_font, fill=(190, 196, 204))
 
     lock_size = min(w, h) * 0.111
-    _lock_icon(draw, w - w * 0.13, h * 0.237, lock_size, accent, width=max(5, round(w * 0.0074)))
+    icon_fn = _icon_for_classification(tag)
+    icon_fn(draw, w - w * 0.13, h * 0.237, lock_size, accent, width=max(5, round(w * 0.0074)))
 
     title_size = max(30, round(w * 0.065))
     title_y = h * 0.459
@@ -752,7 +939,7 @@ def generate_platform_designs(content: dict, out_dir: str, platform: str = "link
     title = content["image_title"]
     tag = content["classification"]
     urgent = content.get("urgency") == "عاجل"
-    details_text = content.get("summary", "")
+    details_text = content.get("image_summary") or content.get("summary", "")
     date_str = _arabic_date()
     source = content.get("source", "")
 
@@ -792,7 +979,7 @@ def generate_designs(content: dict, out_dir: str, ai_background=None) -> list[st
     title = content["image_title"]
     tag = content["classification"]
     urgent = content.get("urgency") == "عاجل"
-    details_text = content.get("summary", "")
+    details_text = content.get("image_summary") or content.get("summary", "")
     date_str = _arabic_date()
     source = content.get("source", "")
 
