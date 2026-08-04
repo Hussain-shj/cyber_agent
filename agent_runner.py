@@ -53,16 +53,18 @@ def run() -> None:
     ai_background = None
     if os.environ.get("OPENAI_API_KEY"):
         try:
-            log.info("توليد خلفية فنية عبر OpenAI Images API...")
+            log.info("توليد خلفية فنية عبر OpenAI Images API (بناءً على تحليل Claude للخبر)...")
             from openai_image_generator import generate_background
+            visual_concept = content.get("visual_concept", "")
             keywords = content.get("classification", "") + " " + content.get("image_title", "")
             ai_background = generate_background(
                 content["classification"],
                 content.get("urgency") == "عاجل",
+                visual_concept=visual_concept,
                 keywords=keywords,
                 quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"),
             )
-            log.info("تم توليد الخلفية الفنية بنجاح.")
+            log.info("تم توليد الخلفية الفنية بنجاح (المفهوم: %s).", visual_concept or "افتراضي")
         except Exception as exc:  # noqa: BLE001
             log.warning("فشل توليد خلفية OpenAI (%s) — سيُستخدم التصميم المحلي بديلاً.", exc)
             ai_background = None
