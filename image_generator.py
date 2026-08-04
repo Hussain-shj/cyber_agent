@@ -705,10 +705,12 @@ def design_awareness(title: str, subtitle: str, items: list[dict], summary: str,
     return img
 
 
-def _fit_background_to_canvas(bg: Image.Image) -> Image.Image:
-    """يقصّ ويُحجّم أي صورة خلفية خارجية (مثل الناتجة عن OpenAI) لتطابق مقاس
-    المنشور 1080x1350 (نسبة 4:5) دون تشويه، عبر قصّ مركزي ثم إعادة تحجيم."""
-    target_ratio = WIDTH / HEIGHT
+def _fit_background_to_canvas(bg: Image.Image, canvas=None) -> Image.Image:
+    """يقصّ ويُحجّم أي صورة خلفية خارجية (مثل الناتجة عن OpenAI) لتطابق أي
+    مقاس هدف دون تشويه، عبر قصّ مركزي ثم إعادة تحجيم. يدعم أي نسبة عرض
+    لارتفاع (يُستخدم لإعادة توظيف نفس الصورة الفنية لإنستغرام و LinkedIn معاً)."""
+    target_w, target_h = canvas or (WIDTH, HEIGHT)
+    target_ratio = target_w / target_h
     w, h = bg.size
     current_ratio = w / h
     if current_ratio > target_ratio:
@@ -719,53 +721,173 @@ def _fit_background_to_canvas(bg: Image.Image) -> Image.Image:
         new_h = int(w / target_ratio)
         y0 = (h - new_h) // 2
         bg = bg.crop((0, y0, w, y0 + new_h))
-    return bg.resize((WIDTH, HEIGHT), Image.LANCZOS)
+    return bg.resize((target_w, target_h), Image.LANCZOS)
 
 
 def _darken_overlay(img: Image.Image, top_alpha=140, bottom_alpha=195) -> Image.Image:
     """يضيف تدرجاً داكناً شفافاً أعلى وأسفل الصورة لضمان وضوح النص فوق أي خلفية،
-    بغض النظر عن مدى فاتحة أو معقّدة الخلفية المولّدة بالذكاء الاصطناعي."""
-    overlay = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    بغض النظر عن مدى فاتحة أو معقّدة الخلفية المولّدة بالذكاء الاصطناعي.
+    يعتمد على مقاس img نفسه (أياً كان)، وليس على WIDTH/HEIGHT الثابتين."""
+    w, h = img.size
+    overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     od = ImageDraw.Draw(overlay)
-    band_h = 280
+    band_h = round(h * 0.207)
     for y in range(band_h):
         a = int(top_alpha * (1 - y / band_h))
-        od.line([(0, y), (WIDTH, y)], fill=(5, 8, 14, a))
-    for y in range(HEIGHT - 480, HEIGHT):
-        ratio = (y - (HEIGHT - 480)) / 480
+        od.line([(0, y), (w, y)], fill=(5, 8, 14, a))
+    bottom_band_h = round(h * 0.356)
+    for y in range(h - bottom_band_h, h):
+        ratio = (y - (h - bottom_band_h)) / bottom_band_h
         a = int(bottom_alpha * ratio)
-        od.line([(0, y), (WIDTH, y)], fill=(5, 8, 14, a))
+        od.line([(0, y), (w, y)], fill=(5, 8, 14, a))
     return Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
 
 
 def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = False,
-                          details: str = "", date_str: str = "", source: str = "") -> Image.Image:
+                          details: str = "", date_str: str = "", source: str = "",
+                          canvas: tuple[int, int] = (WIDTH, HEIGHT)) -> Image.Image:
     """يضع عناصر الهوية (وسم التصنيف في منتصف الخلفية + تاريخ الخبر + العنوان
     العربي + سطرا تفاصيل + اسم المصدر) فوق خلفية فنية مولّدة بالذكاء الاصطناعي
-    (بدون نص داخلها أصلاً)، بنفس محرك الخطوط الموثوق."""
-    img = _fit_background_to_canvas(bg)
+    (بدون نص داخلها أصلاً)، بنفس محرك الخطوط الموثوق. يدعم أي مقاس قماشة."""
+    w, h = canvas
+    img = _fit_background_to_canvas(bg, canvas=canvas)
     img = _darken_overlay(img)
     draw = ImageDraw.Draw(img)
 
     tag_color = COLORS["red_alert"] if urgent else COLORS["cyan"]
-    title_y = HEIGHT - 430
+    title_y = h - h * 0.319
 
     # وسم التصنيف + التاريخ في منتصف مساحة الخلفية الفنية (الفراغ بين الأعلى والعنوان)
     center_y = title_y * 0.42
-    _tag_badge_with_date(draw, tag, urgent, center_y, date_str)
+    _tag_badge_with_date(draw, tag, urgent, center_y, date_str, canvas=canvas)
 
-    wrapped = _wrap_arabic(draw, title, 62, WIDTH - 140)
+    title_size = max(30, round(w * 0.0574))
+    wrapped = _wrap_arabic(draw, title, title_size, w - round(w * 0.13))
     y_after_title = _draw_multiline_centered(
-        draw, wrapped, 62, COLORS["white"], WIDTH / 2, title_y, 80,
+        draw, wrapped, title_size, COLORS["white"], w / 2, title_y, round(title_size * 1.29),
     )
     draw.rectangle(
-        [WIDTH / 2 - 90, title_y - 30, WIDTH / 2 + 90, title_y - 26], fill=tag_color,
+        [w / 2 - w * 0.083, title_y - h * 0.022, w / 2 + w * 0.083, title_y - h * 0.019], fill=tag_color,
     )
 
     if details:
-        img, draw, _ = _details_panel(img, details, y_after_title + 14)
+        img, draw, _ = _details_panel(img, details, y_after_title + h * 0.01, canvas=canvas)
 
-    _source_line(draw, source)
+    _source_line(draw, source, canvas=canvas)
+    return img
+
+
+def _draw_multiline_right(draw, lines, size, fill, right_x, start_y, line_height):
+    """يرسم أسطراً متعددة محاذاة لليمين (المحاذاة الطبيعية لفقرة عربية طويلة،
+    بخلاف التوسيط المستخدم في العناوين القصيرة)."""
+    y = start_y
+    for line in lines:
+        rendered = _ar(line)
+        w = _measure_mixed_line(draw, rendered, size)
+        _draw_mixed_line(draw, rendered, size, fill, right_x - w, y)
+        y += line_height
+    return y
+
+
+def design_detailed(title: str, tag: str, urgent: bool, body_text: str,
+                     date_str: str = "", source: str = "", section_header: str = "ما الذي يحدث؟",
+                     canvas: tuple[int, int] = (WIDTH, HEIGHT), bg_image: Image.Image | None = None) -> Image.Image:
+    """تصميم 'تفصيلي': عنوان أعلى + رأس قسم (ما الذي يحدث؟) + فقرة كاملة
+    محاذاة لليمين + أيقونة التصنيف + شارتا تاريخ ومصدر بيضاويتان أسفل الصورة.
+    مستوحى من تخطيط نصي مرجعي زوّدنا به المستخدم. إن مُرِّر bg_image (خلفية
+    فنية من OpenAI مثلاً)، تُستخدم بدل الرسم المجرّد المحلي، مع تعتيم تلقائي
+    لضمان وضوح النص فوقها."""
+    w, h = canvas
+    accent = COLORS["red_alert"] if urgent else COLORS["cyan"]
+
+    if bg_image is not None:
+        img = _fit_background_to_canvas(bg_image, canvas=canvas)
+        img = _darken_overlay(img, top_alpha=110, bottom_alpha=170)
+        draw = ImageDraw.Draw(img)
+    else:
+        top_bg = COLORS["black"]
+        bottom_bg = (28, 10, 10) if urgent else COLORS["dark_blue"]
+        img, draw = _base_canvas(top_bg, bottom_bg, canvas=canvas)
+
+        grid = _grid_background(draw, top_bg, COLORS["cyber_blue"], canvas=canvas)
+        img = Image.alpha_composite(img.convert("RGBA"), grid).convert("RGB")
+        draw = ImageDraw.Draw(img)
+
+        lines_layer = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+        ld = ImageDraw.Draw(lines_layer)
+        _digital_lines(ld, accent, count=14, seed=9, canvas=canvas)
+        img = Image.alpha_composite(img.convert("RGBA"), lines_layer).convert("RGB")
+        draw = ImageDraw.Draw(img)
+
+    right_margin = w * 0.072
+    right_x = w - right_margin
+
+    # وسم مضغوط أعلى يميناً
+    tag_size = max(20, round(w * 0.026))
+    tag_font = _font(FONT_BOLD, tag_size)
+    tag_text = _ar(tag)
+    tw = draw.textlength(tag_text, font=tag_font)
+    pad = round(w * 0.02)
+    badge_h = round(tag_size * 1.7)
+    badge_top = h * 0.04
+    draw.rounded_rectangle([right_x - tw - pad, badge_top, right_x + pad, badge_top + badge_h],
+                            radius=badge_h / 2, fill=accent)
+    draw.text((right_x - tw, badge_top + badge_h * 0.2), tag_text, font=tag_font, fill=COLORS["black"])
+
+    # العنوان (محاذى لليمين، سطران كحد أقصى)
+    title_size = max(34, round(w * 0.052))
+    title_y = badge_top + badge_h + h * 0.03
+    wrapped_title = _cap_lines(_wrap_arabic(draw, title, title_size, w - right_margin * 2), 2)
+    y_after = _draw_multiline_right(draw, wrapped_title, title_size, COLORS["white"],
+                                     right_x, title_y, round(title_size * 1.3))
+
+    # رأس القسم: دائرة حمراء + عنوان القسم
+    section_y = y_after + h * 0.03
+    section_size = max(24, round(w * 0.03))
+    section_font = _font(FONT_BOLD, section_size)
+    section_text = _ar(section_header)
+    sw = _measure_mixed_line(draw, section_text, section_size)
+    dot_r = section_size * 0.28
+    draw.text((right_x - sw, section_y), section_text, font=section_font, fill=COLORS["white"])
+    draw.ellipse([right_x - sw - dot_r * 3, section_y + section_size * 0.22 - dot_r,
+                  right_x - sw - dot_r, section_y + section_size * 0.22 + dot_r], fill=accent)
+
+    # الفقرة الكاملة (محاذاة يمين، حتى 8 أسطر بدون أي قص لمعنى الجملة)
+    body_size = max(26, round(w * 0.0305))
+    body_y = section_y + h * 0.052
+    wrapped_body = _cap_lines(_wrap_arabic(draw, body_text, body_size, w - right_margin * 2), 8)
+    body_line_h = round(body_size * 1.55)
+    y_after_body = _draw_multiline_right(draw, wrapped_body, body_size, (225, 230, 236),
+                                          right_x, body_y, body_line_h)
+
+    # أيقونة التصنيف (بديل الرسم التوضيحي، مرسومة محلياً) — تُوسَّط في
+    # المساحة المتبقية بين نهاية الفقرة وشارتي التذييل، بدل موضع ثابت قد
+    # يترك فراغاً كبيراً مع الفقرات القصيرة أو يتداخل مع الفقرات الطويلة.
+    footer_zone_top = h - h * 0.135
+    icon_size = min(w, h) * 0.15
+    available_mid = (y_after_body + footer_zone_top) / 2
+    icon_cy = max(available_mid, y_after_body + icon_size * 0.7)
+    icon_cy = min(icon_cy, footer_zone_top - icon_size * 0.7)
+    icon_fn = _icon_for_classification(tag)
+    icon_fn(draw, w / 2, icon_cy, icon_size, accent, width=max(5, round(w * 0.0074)))
+
+    # شارتا التاريخ والمصدر (خلفية فاتحة، نص داكن) أسفل الصورة
+    footer_y = h - h * 0.075
+    if date_str:
+        d_text = _ar(f"تاريخ الإصدار: {date_str}")
+        d_font = _font(FONT_BOLD, max(20, round(w * 0.024)))
+        dw = draw.textlength(d_text, font=d_font)
+        pad2 = round(w * 0.024)
+        draw.rounded_rectangle([right_x - dw - pad2 * 2, footer_y, right_x, footer_y + round(w * 0.05)],
+                                radius=round(w * 0.025), fill=(240, 244, 248))
+        draw.text((right_x - dw - pad2, footer_y + round(w * 0.01)), d_text, font=d_font, fill=(10, 12, 16))
+
+    if source:
+        s_text = _ar(f"📌 المصدر: {source}")
+        s_font = _font(FONT_BOLD, max(20, round(w * 0.024)))
+        sw2 = draw.textlength(s_text, font=s_font)
+        draw.text((w / 2 - sw2 / 2, h - h * 0.026), s_text, font=s_font, fill=(235, 190, 60))
+
     return img
 
 
@@ -927,10 +1049,13 @@ PLATFORM_SIZES = {
 }
 
 
-def generate_platform_designs(content: dict, out_dir: str, platform: str = "linkedin") -> list[str]:
+def generate_platform_designs(content: dict, out_dir: str, platform: str = "linkedin",
+                               ai_backgrounds: list | None = None) -> list[str]:
     """يولّد 3 تصاميم إضافية بمقاس مخصص لمنصة معينة (مثل LinkedIn المربع)
-    باستخدام نفس محتوى الخبر وهويته البصرية، عبر القوالب الثلاثة الأساسية
-    المُعاد رسمها نسبياً لتناسب أي مقاس قماشة. يحفظها كـ {platform}_1/2/3.png."""
+    باستخدام نفس محتوى الخبر وهويته البصرية. يعيد استخدام نفس صور
+    ai_backgrounds المُولَّدة أصلاً لإنستغرام (إن وُجدت) بقصّ مختلف يناسب
+    مقاس المنصة الجديدة — دون أي استدعاء إضافي لـ OpenAI، فتكلفة الصور
+    الفنية تبقى ثابتة بغض النظر عن عدد المنصات."""
     if platform not in PLATFORM_SIZES:
         raise ValueError(f"منصة غير معروفة: {platform}. الخيارات المتاحة: {list(PLATFORM_SIZES)}")
     canvas = PLATFORM_SIZES[platform]
@@ -943,18 +1068,30 @@ def generate_platform_designs(content: dict, out_dir: str, platform: str = "link
     date_str = _arabic_date()
     source = content.get("source", "")
 
-    designs = [
-        (f"{platform}_1_standard", design_standard(
-            title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas,
-        )),
-        (f"{platform}_2_{'alert' if urgent else 'minimal'}", (
-            design_alert(title, tag, details=details_text, date_str=date_str, source=source, canvas=canvas) if urgent
-            else design_minimal_dark(title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas)
-        )),
-        (f"{platform}_3_minimal", design_minimal_dark(
-            title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas,
-        )),
-    ]
+    bgs = list(ai_backgrounds or [])
+    bg1 = bgs[0] if len(bgs) > 0 else None
+    bg2 = bgs[1] if len(bgs) > 1 else None
+    bg3 = bgs[2] if len(bgs) > 2 else None
+
+    design_1 = (f"{platform}_1_ai", design_ai_background(
+        bg1, title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas,
+    )) if bg1 is not None else (f"{platform}_1_standard", design_standard(
+        title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas,
+    ))
+
+    design_2 = (f"{platform}_2_ai", design_ai_background(
+        bg2, title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas,
+    )) if bg2 is not None else (f"{platform}_2_{'alert' if urgent else 'minimal'}", (
+        design_alert(title, tag, details=details_text, date_str=date_str, source=source, canvas=canvas) if urgent
+        else design_minimal_dark(title, tag, urgent, details=details_text, date_str=date_str, source=source, canvas=canvas)
+    ))
+
+    full_body = content.get("summary") or details_text
+    design_3 = (f"{platform}_3_detailed", design_detailed(
+        title, tag, urgent, full_body, date_str=date_str, source=source, canvas=canvas, bg_image=bg3,
+    ))
+
+    designs = [design_1, design_2, design_3]
 
     paths = []
     for name, img in designs:
@@ -964,16 +1101,18 @@ def generate_platform_designs(content: dict, out_dir: str, platform: str = "link
     return paths
 
 
-def generate_designs(content: dict, out_dir: str, ai_background=None) -> list[str]:
+def generate_designs(content: dict, out_dir: str, ai_backgrounds: list | None = None) -> list[str]:
     """يولّد 3 تصاميم بناءً على المحتوى ويحفظها كـ PNG، ويعيد قائمة المسارات.
 
-    ai_background: صورة PIL اختيارية (خلفية فنية بدون نص، من OpenAI مثلاً) —
-    إن مُررت، يُستخدم التصميم الأول (design_1) بهذه الخلفية بدل الرسم المجرّد.
-    إن لم تُمرَّر (None)، يعمل كل شيء بالكامل بـ Pillow المحلي كما كان.
+    ai_backgrounds: قائمة اختيارية من حتى 3 صور PIL (خلفيات فنية بدون نص، من
+    OpenAI مثلاً) — كل عنصر يقابل أحد التصاميم الثلاثة بالترتيب (design_1,
+    design_2, design_3). أي عنصر مفقود أو None يُستخدم له الرسم المحلي
+    بـ Pillow كبديل تلقائي. مرّر [] أو None لتجاهل الخلفيات الفنية بالكامل.
 
     إن كان الخبر تصنيفه 'نصائح توعوية' أو 'أفضل الممارسات' وتوفرت عناصر
     awareness_items (3 علامات) في المحتوى، يُستخدم قالب التوعية (أيقونات +
-    ملخص المشكلة + هاتف متصدّع) كأحد التصاميم الثلاثة بدلاً من التصميم المجرّد.
+    ملخص المشكلة + هاتف متصدّع) كأحد التصاميم الثلاثة بدلاً من التصميم المجرّد
+    (هذا القالب لا يدعم الخلفية الفنية حالياً بسبب تخطيطه المتخصص).
     """
     os.makedirs(out_dir, exist_ok=True)
     title = content["image_title"]
@@ -983,37 +1122,52 @@ def generate_designs(content: dict, out_dir: str, ai_background=None) -> list[st
     date_str = _arabic_date()
     source = content.get("source", "")
 
+    bgs = list(ai_backgrounds or [])
+    bg1 = bgs[0] if len(bgs) > 0 else None
+    bg2 = bgs[1] if len(bgs) > 1 else None
+    bg3 = bgs[2] if len(bgs) > 2 else None
+
     paths = []
-    if ai_background is not None:
+    if bg1 is not None:
         design_1 = ("design_1_ai", design_ai_background(
-            ai_background, title, tag, urgent, details=details_text, date_str=date_str, source=source,
+            bg1, title, tag, urgent, details=details_text, date_str=date_str, source=source,
         ))
     else:
         design_1 = ("design_1_standard", design_standard(
             title, tag, urgent, details=details_text, date_str=date_str, source=source,
         ))
 
-    designs = [
-        design_1,
-        ("design_2_alert" if urgent else "design_2_minimal", (
+    if bg2 is not None:
+        design_2 = ("design_2_ai", design_ai_background(
+            bg2, title, tag, urgent, details=details_text, date_str=date_str, source=source,
+        ))
+    else:
+        design_2 = ("design_2_alert" if urgent else "design_2_minimal", (
             design_alert(title, tag, details=details_text, date_str=date_str, source=source) if urgent
             else design_minimal_dark(title, tag, urgent, details=details_text, date_str=date_str, source=source)
-        )),
-    ]
+        ))
+
+    designs = [design_1, design_2]
 
     items = content.get("awareness_items")
-    summary = content.get("problem_summary")
+    awareness_summary = content.get("problem_summary")
     is_awareness_type = tag in ("نصائح توعوية", "أفضل الممارسات")
-    if is_awareness_type and items and len(items) >= 3 and summary:
+    if is_awareness_type and items and len(items) >= 3 and awareness_summary:
         subtitle = content.get("hook_title", "")
         designs.append((
             "design_3_awareness",
-            design_awareness(title, subtitle, items, summary, source=source),
+            design_awareness(title, subtitle, items, awareness_summary, source=source),
         ))
     else:
-        designs.append(("design_3_minimal", design_minimal_dark(
-            title, tag, urgent, details=details_text, date_str=date_str, source=source,
-        )))
+        # التصميم التفصيلي: فقرة كاملة (وليست جملة مختصرة) + رأس قسم + أيقونة
+        # التصنيف — يستخدم حقل summary الأطول بدل image_summary القصير، لأن
+        # الغرض هنا عرض شرح كامل داخل الصورة نفسه بدل عبارة بصرية موجزة.
+        # يستخدم bg3 كخلفية فنية إن توفرت.
+        full_body = content.get("summary") or details_text
+        designs.append((
+            "design_3_detailed" if bg3 is None else "design_3_detailed_ai",
+            design_detailed(title, tag, urgent, full_body, date_str=date_str, source=source, bg_image=bg3),
+        ))
 
     for name, img in designs:
         path = os.path.join(out_dir, f"{name}.png")

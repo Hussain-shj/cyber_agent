@@ -72,6 +72,22 @@ def generate_background(classification: str, urgent: bool, visual_concept: str =
     return Image.open(BytesIO(image_bytes)).convert("RGB")
 
 
+def generate_backgrounds(visual_concepts: list[str], classification: str, urgent: bool,
+                          api_key: str | None = None, quality: str = "medium") -> list:
+    """يولّد خلفية فنية منفصلة لكل فكرة بصرية في القائمة (حتى 3 عادةً). عند
+    فشل توليد فكرة معيّنة، يُدرَج None في مكانها بدل رفع استثناء يوقف البقية
+    — بحيث تحصل على أكبر عدد ممكن من الخلفيات الناجحة حتى لو فشلت واحدة."""
+    results = []
+    for concept in visual_concepts:
+        try:
+            results.append(generate_background(
+                classification, urgent, visual_concept=concept, api_key=api_key, quality=quality,
+            ))
+        except Exception:  # noqa: BLE001
+            results.append(None)
+    return results
+
+
 if __name__ == "__main__":
     img = generate_background(
         "Ransomware", urgent=True,
