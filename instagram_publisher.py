@@ -1,53 +1,68 @@
 """
-github_uploader.py
-يرفع صورة PNG إلى مستودع GitHub عبر REST API للحصول على رابط عام
-(raw.githubusercontent.com) يمكن لواجهة Instagram Graph API قراءته
-عند إنشاء حاوية الوسائط (Media Container).
+instagram_publisher.py
+ينشر صورة + تعليق على حساب Instagram Business/Creator عبر Meta Graph API.
+
+المتطلبات المسبقة (تُجهَّز مرة واحدة من Meta Developers):
+  - صفحة فيسبوك مرتبطة بحساب Instagram احترافي (Business/Creator).
+  - تطبيق Meta App فيه صلاحيات: instagram_basic, instagram_content_publish,
+    pages_show_list, pages_read_engagement.
+  - Access Token طويل الأمد (Long-Lived Page/User Token) بصلاحية الحساب أعلاه.
+  - معرف حساب Instagram Business (IG_BUSINESS_ACCOUNT_ID) — يُستخرج مرة واحدة
+    عبر: GET /{page-id}?fields=instagram_business_account
 """
 
-import base64
-import os
+import time
 
 import requests
 
-GITHUB_API = "https://api.github.com"
+GRAPH_API = "https://graph.facebook.com/v20.0"
 
 
-def upload_image_to_github(
-    local_path: str,
-    repo: str,            # مثال: "username/cyber-agent"
-    branch: str,
-    token: str,
-    dest_folder: str = "posts",
-) -> str:
-    """يرفع الملف ويعيد الرابط العام (raw) القابل للاستخدام في Instagram Graph API.
+class InstagramPublishError(RuntimeError):
+    pass
 
-    يُحفظ الملف باسمه الأصلي كما هو (content.json، design_1_standard.png...)
-    دون أي بادئة إضافية، لأن dest_folder (المجلد اليومي المُوَقَّت من agent_runner)
-    يضمن التفرد أصلاً — وهذا يجعل أسماء الملفات متوقعة وقابلة للاستخدام مباشرة من
-    أي أداة عرض/مراجعة خارجية دون الحاجة لتخمين اسم الملف."""
-    filename = os.path.basename(local_path)
-    dest_path = f"{dest_folder}/{filename}"
 
-    with open(local_path, "rb") as f:
-        content_b64 = base64.b64encode(f.read()).decode("utf-8")
+def _check(resp: requests.Response):
+    if resp.status_code >= 400:
+        raise InstagramPublishError(f"{resp.status_code}: {resp.text}")
+    return resp.json()
 
-    url = f"{GITHUB_API}/repos/{repo}/contents/{dest_path}"
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Accept": "application/vnd.github+json",
-    }
+
+def create_media_container(ig_user_id: str, image_url: str, caption: str, access_token: str) -> str:
+    url = f"{GRAPH_API}/{ig_user_id}/media"
     payload = {
-        "message": f"chore: add {filename}",
-        "content": content_b64,
-        "branch": branch,
+        "image_url": image_url,
+        "caption": caption,
+        "access_token": access_token,
     }
-
-    resp = requests.put(url, headers=headers, json=payload, timeout=30)
-    resp.raise_for_status()
-
-    return f"https://raw.githubusercontent.com/{repo}/{branch}/{dest_path}"
+    data = _check(requests.post(url, data=payload, timeout=30))
+    return data["id"]
 
 
-def upload_all(local_paths: list[str], repo: str, branch: str, token: str, dest_folder: str = "posts") -> list[str]:
-    return [upload_image_to_github(p, repo, branch, token, dest_folder=dest_folder) for p in local_paths]
+def wait_until_ready(container_id: str, access_token: str, timeout_s: int = 60) -> None:
+    url = f"{GRAPH_API}/{container_id}"
+    waited = 0
+    while waited < timeout_s:
+        data = _check(requests.get(url, params={"fields": "status_code", "access_token": access_token}, timeout=30))
+        status = data.get("status_code")
+        if status == "FINISHED":
+            return
+        if status == "ERROR":
+            raise InstagramPublishError(f"فشل تجهيز الحاوية: {data}")
+        time.sleep(3)
+        waited += 3
+    raise InstagramPublishError("انتهت مهلة انتظار تجهيز الوسائط.")
+
+
+def publish_container(ig_user_id: str, container_id: str, access_token: str) -> str:
+    url = f"{GRAPH_API}/{ig_user_id}/media_publish"
+    payload = {"creation_id": container_id, "access_token": access_token}
+    data = _check(requests.post(url, data=payload, timeout=30))
+    return data["id"]
+
+
+def publish_post(ig_user_id: str, image_url: str, caption: str, access_token: str) -> str:
+    """تسلسل النشر الكامل: إنشاء حاوية -> انتظار الجاهزية -> نشر. يعيد معرّف المنشور."""
+    container_id = create_media_container(ig_user_id, image_url, caption, access_token)
+    wait_until_ready(container_id, access_token)
+    return publish_container(ig_user_id, container_id, access_token)
