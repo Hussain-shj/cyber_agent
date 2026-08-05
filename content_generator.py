@@ -85,7 +85,16 @@ def _extract_json(text: str) -> dict:
     match = re.search(r"\{.*\}", text, re.DOTALL)
     if not match:
         raise ValueError(f"لم يتم العثور على JSON في رد النموذج:\n{text[:500]}")
-    return json.loads(match.group(0))
+    try:
+        return json.loads(match.group(0))
+    except json.JSONDecodeError as exc:
+        # نطبع بداية ونهاية النص لتشخيص السبب بسرعة: إن كانت النهاية تنتهي
+        # فجأة وسط كلمة/جملة، فالسبب غالباً max_tokens غير كافٍ (انقطاع الرد).
+        raise ValueError(
+            f"فشل تحليل JSON ({exc}).\n"
+            f"بداية الرد ({len(text)} حرفاً):\n{text[:300]}\n"
+            f"...\nنهاية الرد:\n{text[-300:]}"
+        ) from exc
 
 
 # ============================================================================
@@ -164,7 +173,7 @@ def generate_candidate_topics(count: int = 3, api_key: str | None = None) -> dic
 
     response = client.messages.create(
         model=MODEL,
-        max_tokens=6000,
+        max_tokens=10000,
         system=CANDIDATES_SYSTEM_PROMPT,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[
