@@ -49,5 +49,29 @@ def upload_image_to_github(
     return f"https://raw.githubusercontent.com/{repo}/{branch}/{dest_path}"
 
 
+def list_folder(repo: str, branch: str, token: str, path: str) -> list[dict]:
+    """يسرد محتويات مجلد في المستودع. يعيد [] إن لم يكن المجلد موجوداً (404)."""
+    url = f"{GITHUB_API}/repos/{repo}/contents/{path}"
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+    resp = requests.get(url, headers=headers, params={"ref": branch}, timeout=30)
+    if resp.status_code == 404:
+        return []
+    resp.raise_for_status()
+    return resp.json()
+
+
+def download_file_json(repo: str, branch: str, token: str, path: str) -> dict:
+    """يقرأ ملف JSON من المستودع ويعيده كقاموس بايثون."""
+    import json
+
+    url = f"{GITHUB_API}/repos/{repo}/contents/{path}"
+    headers = {"Authorization": f"Bearer {token}", "Accept": "application/vnd.github+json"}
+    resp = requests.get(url, headers=headers, params={"ref": branch}, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
+    content_b64 = data["content"].replace("\n", "")
+    return json.loads(base64.b64decode(content_b64).decode("utf-8"))
+
+
 def upload_all(local_paths: list[str], repo: str, branch: str, token: str, dest_folder: str = "posts") -> list[str]:
     return [upload_image_to_github(p, repo, branch, token, dest_folder=dest_folder) for p in local_paths]

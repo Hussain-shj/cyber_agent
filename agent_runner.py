@@ -1,6 +1,12 @@
 """
 agent_runner.py
 نقطة التشغيل الرئيسية للإيجنت اليومي:
+  0) يبحث أولاً عن ملف "مواضيع مرشحة" حديث في posts/candidates/ (من
+     propose_topics.py). إن وُجد، يستخدم الموضوع رقم SELECTED_TOPIC_INDEX
+     منه (0 افتراضياً) بدل البحث من جديد — هذا يوفر تكلفة توليد الصور لأن
+     الصور لا تُولَّد إلا للموضوع المختار فعلياً. إن لم يوجد ملف مرشحين
+     (لم يُشغَّل propose_topics.py بعد)، يبحث ويكتب خبراً واحداً مباشرة
+     كما كان سابقاً — النظام يعمل بكلا الطريقتين دون كسر أي شيء.
   1) توليد المحتوى (بحث + تصنيف + تقييم + كتابة + 3 أفكار تصميم بصرية) عبر
      Anthropic API.
   2) توليد 3 خلفيات فنية عبر OpenAI Images API بناءً على الأفكار الثلاث التي
@@ -27,7 +33,7 @@ from dotenv import load_dotenv
 
 from content_generator import generate_daily_content
 from image_generator import generate_designs, generate_platform_designs
-from github_uploader import upload_all, upload_image_to_github
+from github_uploader import download_file_json, list_folder, upload_all, upload_image_to_github
 from instagram_publisher import publish_post
 
 load_dotenv()
@@ -36,12 +42,51 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 log = logging.getLogger("cyber-agent")
 
 
+def _load_selected_candidate(repo: str, branch: str, token: str) -> dict | None:
+    """يبحث عن أحدث ملف مواضيع مرشحة في posts/candidates/ ويعيد الموضوع
+    المختار (حسب SELECTED_TOPIC_INDEX) منه، أو None إن لم يوجد أي ملف."""
+    entries = list_folder(repo, branch, token, "posts/candidates")
+    files = [e for e in entries if e["type"] == "file" and e["name"].endswith(".json")]
+    if not files:
+        return None
+    files.sort(key=lambda e: e["name"], reverse=True)
+    latest = files[0]
+    log.info("وُجد ملف مواضيع مرشحة: %s", latest["path"])
+
+    data = download_file_json(repo, branch, token, latest["path"])
+    candidates = data.get("candidates") or []
+    if not candidates:
+        return None
+
+    idx = int(os.environ.get("SELECTED_TOPIC_INDEX", "0"))
+    if idx >= len(candidates):
+        log.warning("SELECTED_TOPIC_INDEX=%d خارج النطاق (يوجد %d مواضيع) — استخدام 0.", idx, len(candidates))
+        idx = 0
+    log.info("تم اختيار الموضوع رقم %d من %d.", idx, len(candidates))
+    return candidates[idx]
+
+
 def run() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M%S")
     out_dir = os.path.join("posts", stamp)
 
-    log.info("1/4 — توليد المحتوى عبر Anthropic API (بحث + كتابة)...")
-    content = generate_daily_content()
+    repo = os.environ.get("GITHUB_REPO")
+    gh_token = os.environ.get("GITHUB_TOKEN")
+    branch = os.environ.get("GITHUB_BRANCH", "main")
+
+    content = None
+    if repo and gh_token:
+        try:
+            content = _load_selected_candidate(repo, branch, gh_token)
+        except Exception as exc:  # noqa: BLE001
+            log.warning("تعذّرت قراءة ملف المواضيع المرشحة (%s) — سيُبحث مباشرة بدلاً منه.", exc)
+            content = None
+
+    if content is not None:
+        log.info("1/4 — تم استخدام موضوع مُختار مسبقاً من posts/candidates/ (بدون بحث جديد).")
+    else:
+        log.info("1/4 — لا يوجد ملف مواضيع مرشحة؛ البحث والكتابة مباشرة عبر Anthropic API...")
+        content = generate_daily_content()
 
     if content.get("no_news"):
         log.info("لا يوجد خبر جديد يستحق النشر اليوم. إنهاء التشغيل.")
@@ -100,10 +145,6 @@ def run() -> None:
     # --- رفع دائم للمراجعة على GitHub (بغض النظر عن AUTO_PUBLISH) ---
     # ملفات حاوية Railway مؤقتة وتُحذف بعد كل تشغيل Cron، لذا نرفع دائماً نسخة
     # إلى GitHub ليتمكن المستخدم من فتحها ومراجعتها بسهولة من المتصفح.
-    repo = os.environ.get("GITHUB_REPO")
-    gh_token = os.environ.get("GITHUB_TOKEN")
-    branch = os.environ.get("GITHUB_BRANCH", "main")
-
     public_urls: list[str] = []
     if repo and gh_token:
         log.info("3/4 — رفع النص والتصاميم إلى GitHub للمراجعة...")
