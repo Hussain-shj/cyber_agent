@@ -1,0 +1,44 @@
+{
+  "no_news": false,
+  "classification": "ثغرة أمنية",
+  "urgency": "عاجل",
+  "visual_concepts": [
+    "A dark control room dashboard shattered in the center, with glowing red 'ADMIN ACCESS GRANTED' text flooding the cracked screen, surrounded by network topology nodes cascading downward — centered composition on the broken screen.",
+    "A single master key made of circuit-board traces floating in darkness, unlocking a chain of interconnected server racks that extend symmetrically left and right, emitting red light from within — key centered vertically and horizontally.",
+    "A spider's web of endpoint devices (laptops, servers, workstations) all connected by glowing threads to one central RMM console hub that displays a skull icon — the hub perfectly centered with threads radiating outward symmetrically."
+  ],
+  "image_title": "ثغرة حرجة في منصة N-central تُستغَل الآن",
+  "hook_title": "🚨 تحذير عاجل: مهاجمون يسيطرون على آلاف الأجهزة عبر ثغرة في منصة إدارة MSP",
+  "image_summary": "ثغرة تمنح المهاجم صلاحيات إدارية كاملة على جميع الأجهزة المُدارة دون أي مصادقة",
+  "summary": "رصدت CISA وفريق Huntress استغلالاً فعلياً لثغرة تجاوز المصادقة CVE-2026-18577 في منصة N-central من N-able، إذ تتيح للمهاجم غير المُصادَق الاستيلاء على حساب المسؤول والتنقل عبر ميزة التحكم المدمجة لاختراق جميع الأجهزة المُدارة المرتبطة بالمنصة. المهاجمون نشروا نفقاً مخفياً عبر Cloudflare لضمان استمرار الوصول حتى بعد إغلاق الثغرة. أصدرت N-able إصلاحاً عاجلاً (الإصدار 2026.3.1.7) وأكدت تأثر عدد محدود من عملائها حتى الآن.",
+  "why_it_matters": "منصات RMM مثل N-central هي بوابة مركزية لإدارة مئات أو آلاف الأجهزة في بيئات المؤسسات؛ اختراقها يعني تحكماً كاملاً في البنية التحتية لعملاء متعددين في آنٍ واحد. تاريخياً، استُهدفت منصات مشابهة (Kaseya، SolarWinds) في هجمات ransomware واسعة النطاق.",
+  "who_is_affected": "مزودو الخدمات المُدارة (MSPs) المستخدمون لـ N-central بجميع الإصدارات السابقة للإصدار 2026.3.1.7 — سواء كانت بيئات مستضافة ذاتياً أو سحابية؛ وبشكل غير مباشر: جميع عملاء هؤلاء المزودين من مؤسسات وشركات.",
+  "recommended_actions": [
+    "الترقية الفورية إلى إصدار N-central 2026.3.1.7 (Hotfix 1) — المستضافون ذاتياً يثبّتون التحديث يدوياً",
+    "تقييد الوصول إلى لوحة تحكم N-central عبر VPN أو جدار الحماية وعدم تعريضها للإنترنت المفتوح",
+    "مراجعة سجلات تسجيل الدخول الأخيرة والبحث عن ملف svchost.exe في مجلد Documents وخدمة Cloudflared على الأجهزة المُدارة كمؤشرات اختراق"
+  ],
+  "security_tip": "منصات الإدارة المركزية (RMM/SIEM/AD) هي الهدف الأعلى قيمة للمهاجمين — عزلها عن الإنترنت المباشر ومراقبة جلساتها أولوية قصوى.",
+  "cta": "💬 هل مؤسستك أو شركاؤك يستخدمون منصات RMM؟ شارك هذا التحذير فوراً — وأخبرنا في التعليقات: ما آليات الحماية التي طبّقتموها؟",
+  "hashtags": [
+    "#أمن_سيبراني",
+    "#الإمارات",
+    "#الخليج",
+    "#ثغرة_أمنية",
+    "#MSP",
+    "#N_central",
+    "#CISA",
+    "#تحديث_عاجل",
+    "#حماية_البيانات",
+    "#CyberSecurity",
+    "#UAE",
+    "#GulfSecurity",
+    "#RMM",
+    "#CVE_2026_18577",
+    "#أمن_المعلومات"
+  ],
+  "source": "CISA / Huntress / N-able",
+  "problem_summary": "",
+  "awareness_items": [],
+  "full_caption": "🚨 تحذير عاجل: مهاجمون يسيطرون على آلاف الأجهزة عبر ثغرة في منصة إدارة MSP\n\n⚠️ الثغرة: CVE-2026-18577 | N-able N-central\n📊 الخطورة: CVSS 8.2 | مستغَلة فعلياً في البرية\n\n🔍 ما الذي جرى؟\nرصدت CISA وفريق Huntress استغلالاً نشطاً لثغرة تجاوز المصادقة CVE-2026-18577 في منصة N-central، إذ تُمكّن المهاجم غير المُصادَق من الاستيلاء على حساب المسؤول والتنقل عبر ميزة التحكم المدمجة لاختراق جميع الأجهزة المُدارة. المهاجمون نشروا نفقاً مخفياً عبر Cloudflare لضمان بقاء الوصول حتى بعد إغلاق الثغرة.\n\n🎯 من المتأثر؟\nجميع مزودي الخدمات المُدارة (MSPs) المستخدمين لـ N-central بإصدارات سابقة لـ 2026.3.1.7 — وبشكل غير مباشر: عملاؤهم من مؤسسات وشركات وجهات حكومية.\n\n✅ الإجراءات العاجلة:\n1️⃣ الترقية الفورية إلى إصدار N-central 2026.3.1.7 (المستضافون ذاتياً يثبّتون التحديث يدوياً)\n2️⃣ تقييد الوصول للوحة التحكم عبر VPN وجدار الحماية — لا تعرّضها للإنترنت المفتوح\n3️⃣ البحث عن مؤشرات الاختراق: ملف svchost.exe في مجلد Documents وخدمة Cloudflared على الأجهزة المُدارة\n\n💡 نصيحة أمنية:\nمنصات الإدارة المركزية هي الهدف الأعلى قيمة للمهاجمين — عزلها عن الإنترنت المباشر ومراقبة جلساتها أولوية قصوى.\n\n📌 المصدر: CISA / Huntress / N-able\n\n💬 هل مؤسستك أو شركاؤك يستخدمون منصات RMM؟ شارك هذا التحذير فوراً — وأخبرنا في التعليقات: ما آليات الحماية التي طبّقتموها؟\n\n#أمن_سيبراني #الإمارات #الخليج #ثغرة_أمنية #MSP #N_central #CISA #تحديث_عاجل #حماية_البيانات #CyberSecurity #UAE #GulfSecurity #RMM #CVE_2026_18577 #أمن_المعلومات"
+}
