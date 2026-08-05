@@ -1,0 +1,6 @@
+[build]
+   builder = "NIXPACKS"
+
+   [deploy]
+   startCommand = "python agent_runner_grc.py"
+   restartPolicyType = "NEVER"
