@@ -33,7 +33,9 @@ from dotenv import load_dotenv
 
 from content_generator import generate_daily_content
 from image_generator import generate_designs, generate_platform_designs
-from github_uploader import download_file_json, list_folder, upload_all, upload_image_to_github
+from github_uploader import (
+    delete_file, download_file_json, get_file_sha, list_folder, upload_all, upload_image_to_github,
+)
 from instagram_publisher import publish_post
 
 load_dotenv()
@@ -43,10 +45,44 @@ log = logging.getLogger("cyber-agent")
 
 
 def _load_selected_candidate(repo: str, branch: str, token: str) -> dict | None:
-    """يبحث عن أحدث ملف مواضيع مرشحة في posts/candidates/ ويعيد الموضوع
-    المختار (حسب SELECTED_TOPIC_INDEX) منه، أو None إن لم يوجد أي ملف."""
+    """يحدد الموضوع المختار بترتيب أولوية:
+    1) ملف posts/candidates/selected.json (يكتبه زر "اختر هذا الموضوع" في
+       صفحة المراجعة) — يحدد بدقة أي ملف مرشحين وأي فهرس بالضبط.
+    2) إن لم يوجد، يُستخدم أحدث ملف مرشحين + SELECTED_TOPIC_INDEX (افتراضياً 0).
+    يعيد None إن لم يوجد أي ملف مرشحين على الإطلاق."""
+    selected_marker = None
+    try:
+        selected_marker = download_file_json(repo, branch, token, "posts/candidates/selected.json")
+    except Exception:  # noqa: BLE001
+        pass  # طبيعي: الملف غير موجود إن لم يُستخدم الزر بعد
+
+    if selected_marker and selected_marker.get("source_file"):
+        source_file = selected_marker["source_file"]
+        idx = int(selected_marker.get("index", 0))
+        log.info("وُجد اختيار محفوظ من صفحة المراجعة: %s [%d]", source_file, idx)
+        try:
+            data = download_file_json(repo, branch, token, source_file)
+            candidates = data.get("candidates") or []
+            if candidates and idx < len(candidates):
+                chosen = candidates[idx]
+                # نحذف ملف الاختيار فوراً بعد استخدامه بنجاح، حتى لا يُعاد
+                # استخدامه خطأً في التشغيل التالي (اليوم القادم) إن نسي
+                # المستخدم اختيار موضوع جديد.
+                try:
+                    sha = get_file_sha(repo, branch, token, "posts/candidates/selected.json")
+                    if sha:
+                        delete_file(repo, branch, token, "posts/candidates/selected.json", sha)
+                        log.info("تم حذف ملف الاختيار المحفوظ (استُهلك بنجاح).")
+                except Exception as exc:  # noqa: BLE001
+                    log.warning("تعذّر حذف ملف الاختيار المحفوظ (%s) — لن يمنع المتابعة.", exc)
+                return chosen
+            log.warning("الاختيار المحفوظ غير صالح (فهرس خارج النطاق أو ملف فارغ) — سيُتجاهَل.")
+        except Exception as exc:  # noqa: BLE001
+            log.warning("تعذّرت قراءة ملف الاختيار المحفوظ (%s) — سيُتجاهَل.", exc)
+
     entries = list_folder(repo, branch, token, "posts/candidates")
-    files = [e for e in entries if e["type"] == "file" and e["name"].endswith(".json")]
+    files = [e for e in entries if e["type"] == "file" and e["name"].endswith(".json")
+             and e["name"] != "selected.json"]
     if not files:
         return None
     files.sort(key=lambda e: e["name"], reverse=True)
