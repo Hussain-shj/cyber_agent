@@ -2,6 +2,6 @@
    builder = "NIXPACKS"
 
    [deploy]
-   startCommand = "python agent_runner_grc.py"
+   startCommand = "python clear_posts.py"
    restartPolicyType = "NEVER"
 # trigger redeploy
