@@ -1,0 +1,41 @@
+{
+  "no_news": false,
+  "classification": "ثغرة أمنية",
+  "urgency": "عاجل",
+  "visual_concepts": [
+    "A dark server rack at the center of a web of glowing red connection lines branching outward to dozens of smaller endpoint icons, symbolizing a compromised RMM hub spreading access to all managed clients, centered composition on dark background",
+    "A single broken padlock rendered in deep crimson floating centrally, its shackle open, surrounded by cascading ghost-key silhouettes fading outward — representing authentication bypass with no credentials required, minimalist flat design",
+    "A digital control panel dashboard with a masked intruder figure seated at the center console, manipulating network nodes arranged symmetrically around them, visualizing god-mode administrative takeover of an MSP management platform"
+  ],
+  "image_title": "ثغرة عاجلة في منصة N-central تُهدد المؤسسات",
+  "hook_title": "🚨 تحذير عاجل: ثغرة تجاوز المصادقة في N-central تُستغَل الآن — وكل عملاء MSP في خطر",
+  "image_summary": "ثغرة تمنح المهاجمين صلاحيات مطلقة على الخوادم دون أي بيانات اعتماد",
+  "summary": "اكتشفت N-able ثغرة نشطة الاستغلال (CVE-2026-18577) في منصة N-central لإدارة الأجهزة عن بُعد، تتيح لأي مهاجم غير موثّق الحصول على صلاحيات إدارية كاملة على الخادم. المهاجمون استغلوا الثغرة لتفعيل ميزة 'Take Control' المدمجة والتحرك أفقياً نحو الأنظمة المُدارة لدى عملاء شركات MSP. أصدرت الشركة إصلاحاً طارئاً (الإصدار 2026.3.1.7) وأضافت CISA الثغرة لفهرس الثغرات المستغَلّة المعروفة بتاريخ 3 أغسطس 2026.",
+  "why_it_matters": "منصة N-central تُستخدم من شركات MSP لإدارة مئات البيئات المؤسسية في آنٍ واحد، ما يعني أن اختراق خادم واحد قد يُفضي إلى اختراق متسلسل لجميع عملاء تلك الشركة. الهجمات الموثّقة أثبتت وصول المهاجمين إلى وحدات التحكم بالنطاق (Domain Controllers) خلال دقائق.",
+  "who_is_affected": "شركات MSP (مزودو الخدمات المُدارة) وفرق IT المؤسسية التي تستخدم N-central في نشر سحابي أو محلي — جميع الإصدارات السابقة لـ 2026.3.1.7 معرّضة للخطر",
+  "recommended_actions": [
+    "ترقية فورية إلى الإصدار 2026.3.1.7 (Hotfix 1) — البيئات المحلية تحتاج تحديثاً يدوياً عاجلاً",
+    "مراجعة سجلات تسجيل الدخول وأنشطة 'Take Control' بأثر رجعي منذ 1 أغسطس 2026 للكشف عن أي اختراق محتمل",
+    "تقييد الوصول لواجهة N-central على عناوين IP موثوقة فقط، وتفعيل المصادقة متعددة العوامل (MFA)"
+  ],
+  "security_tip": "أدوات RMM هي مفاتيح مملكة المؤسسة — احرص على عزلها عن الإنترنت المباشر وتأمينها بطبقات مصادقة متعددة كأولوية قصوى.",
+  "cta": "هل تستخدم منصة N-central أو تتعامل مع MSP يستخدمها؟ شارك هذا التحذير الآن مع فريقك التقني ⬇️",
+  "hashtags": [
+    "#أمن_سيبراني",
+    "#الإمارات",
+    "#الخليج",
+    "#ثغرة_أمنية",
+    "#CyberSecurity",
+    "#CVE2026_18577",
+    "#CISA",
+    "#MSP",
+    "#RMM",
+    "#تحديث_أمني",
+    "#حماية_المؤسسات",
+    "#UAE_CyberSecurity"
+  ],
+  "source": "CISA / Rapid7 / Huntress",
+  "problem_summary": "",
+  "awareness_items": [],
+  "full_caption": "🚨 تحذير عاجل | ثغرة تجاوز المصادقة في N-central تُستغَل الآن — وكل عملاء MSP في خطر\n\n🔴 ما الذي حدث؟\nرصدت N-able استغلالاً نشطاً لثغرة خطيرة (CVE-2026-18577) في منصة N-central لإدارة الأجهزة عن بُعد. الثغرة تمنح أي مهاجم غير موثّق صلاحيات إدارية مطلقة على الخادم المستهدف — دون أي بيانات اعتماد.\n\n⚡ لماذا هذا خطير جداً؟\nمنصة N-central يستخدمها مزودو خدمات مُدارة (MSPs) لإدارة مئات البيئات المؤسسية في وقت واحد. اختراق خادم واحد يعني اختراقاً متسلسلاً لجميع العملاء المرتبطين به. وثّق فريق Huntress هجمات وصل فيها المهاجمون إلى وحدات التحكم بالنطاق (Domain Controllers) خلال دقائق، مستغلّين ميزة 'Take Control' المدمجة، ومُثبّتين نفقاً خفياً عبر Cloudflare لضمان الوصول الدائم.\n\n🛡️ ما الإجراءات المطلوبة الآن؟\n✅ ترقية فورية إلى الإصدار 2026.3.1.7 (Hotfix 1) — البيئات المحلية تحتاج تحديثاً يدوياً عاجلاً\n✅ مراجعة سجلات تسجيل الدخول وأنشطة Take Control بأثر رجعي منذ 1 أغسطس 2026\n✅ تقييد الوصول لواجهة N-central على عناوين IP موثوقة فقط وتفعيل MFA\n\n💡 نصيحة أمنية\nأدوات RMM هي مفاتيح مملكة المؤسسة — احرص على عزلها عن الإنترنت المباشر وتأمينها بطبقات مصادقة متعددة كأولوية قصوى.\n\n📌 المصدر: CISA / Rapid7 / Huntress\n\n🔔 هل تستخدم منصة N-central أو تتعامل مع MSP يستخدمها؟ شارك هذا التحذير الآن مع فريقك التقني ⬇️\n\n#أمن_سيبراني #الإمارات #الخليج #ثغرة_أمنية #CyberSecurity #CVE2026_18577 #CISA #MSP #RMM #تحديث_أمني #حماية_المؤسسات #UAE_CyberSecurity"
+}
