@@ -1,0 +1,7 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "python propose_topics_grc.py"
+cronSchedule = "0 3 * * *"
+restartPolicyType = "NEVER"
