@@ -132,19 +132,19 @@ CANDIDATES_SYSTEM_PROMPT = """أنت وكيل ذكاء اصطناعي متخصص
    أمنية عامة عند التقاطع (Dark Reading, SecurityWeek, The Hacker News,
    BleepingComputer, IBM Security Intelligence, SANS NewsBites). Reddit
    وقنوات YouTube تكميلية فقط، لا تُعتمد كمصدر خبري وحيد.
-2) اختر **أفضل 3 مواضيع مختلفة تماماً عن بعضها** (وليس موضوعاً واحداً) حسب
-   أولويتها اليوم لجمهور GRC (تحديث تنظيمي ملزم، معيار جديد، تقرير مخاطر
-   مؤثر، أو ممارسة حوكمة مهمة). لا تكرار لنفس الموضوع بصياغة مختلفة.
-3) لكل موضوع من الثلاثة، اكتب محتوى عربي احترافي رسمي (أسلوب مؤسسي) خالٍ من
-   الحشو، بنفس جودة واكتمال موضوع واحد عادي (كل الحقول المطلوبة أدناه لكل
-   موضوع على حدة). صمّم لكل موضوع ثلاث أفكار بصرية (visual_concepts) بأسلوب
-   **أبيض/فاتح رسمي مؤسسي** (مستندات، أختام، موازين، شهادات — بلا أشخاص أو
-   نصوص أو شعارات).
+2) اجمع وصنّف أكبر عدد ممكن من المواضيع المرشحة، ثم اختر منها العدد المطلوب من
+   المواضيع **المختلفة تماماً معنوياً عن بعضها** — ليس فقط اختلاف الصياغة، بل
+   اختلاف التحديث/المعيار/الجهة فعلياً. **قبل إضافة أي موضوع، تحقق داخلياً: هل
+   هذا نفس التحديث الذي أضفته سابقاً بزاوية مختلفة؟** إن كان كذلك استبعده.
+3) لكل موضوع، اكتب محتوى عربي احترافي رسمي (أسلوب مؤسسي) خالٍ من الحشو وفق
+   الحقول أدناه فقط (نسخة مختصرة للمراجعة والاختيار؛ التفاصيل الكاملة كالنص
+   النهائي والهاشتاقات تُستكمل لاحقاً للموضوع المختار فقط، توفيراً للتكلفة).
+   صمّم لكل موضوع ثلاث أفكار بصرية (visual_concepts) بأسلوب **أبيض/فاتح رسمي
+   مؤسسي** (مستندات، أختام، موازين، شهادات — بلا أشخاص أو نصوص أو شعارات).
 4) أعد الصياغة دائماً؛ لا تنسخ نصوصاً حرفية من المصادر.
 5) إن لم توجد مواضيع جديدة تستحق النشر، صرّح بذلك عبر "no_news": true وأعد "candidates": [].
 
-أعد الإجابة **بصيغة JSON فقط** بدون أي نص إضافي قبله أو بعده، وفق هذا المخطط بالضبط
-(لاحظ: "candidates" مصفوفة تحتوي 3 عناصر بالضبط):
+أعد الإجابة **بصيغة JSON فقط** بدون أي نص إضافي قبله أو بعده، وفق هذا المخطط بالضبط:
 
 {
   "no_news": false,
@@ -163,39 +163,38 @@ CANDIDATES_SYSTEM_PROMPT = """أنت وكيل ذكاء اصطناعي متخصص
       "summary": "شرح مختصر أكثر تفصيلاً (2-4 جمل)",
       "why_it_matters": "لماذا يهم هذا الموضوع لمسؤولي GRC تحديداً (1-2 جملة)",
       "who_is_affected": "من المتأثر (جملة أو نقاط قصيرة)",
-      "recommended_actions": ["إجراء 1", "إجراء 2", "إجراء 3"],
-      "key_takeaway": "الخلاصة العملية الأهم بجملة واحدة",
-      "cta": "دعوة للتفاعل",
-      "hashtags": ["#وسم1", "#وسم2", "..."],
-      "source": "اسم المصدر فقط (بدون رابط أو أي إضافة أخرى)",
-      "full_caption": "النص الكامل الجاهز للنشر كتعليق، بأسلوب رسمي مؤسسي، مع الهاشتاقات في النهاية"
+      "source": "اسم المصدر فقط (بدون رابط أو أي إضافة أخرى)"
     }
   ]
 }
 
-كرّر نفس بنية الكائن أعلاه بالضبط لكل من الموضوعين الآخرين داخل نفس مصفوفة
-"candidates" حتى يصبح إجمالي عناصرها 3. اجعل كل visual_concepts متمركزة
+كرّر نفس بنية الكائن أعلاه بالضبط لكل موضوع إضافي داخل نفس مصفوفة "candidates"
+حتى تصل للعدد المطلوب في رسالة المستخدم. اجعل كل visual_concepts متمركزة
 تقريباً (غير قريبة من الحواف) لأنها ستُقصّ لاحقاً لمقاسي إنستغرام (4:5) و
 LinkedIn (1:1)."""
 
 
-def generate_candidate_grc_topics(count: int = 3, api_key: str | None = None) -> dict:
+def generate_candidate_grc_topics(count: int = 10, api_key: str | None = None) -> dict:
     """يستدعي Anthropic API ويعيد {"no_news": bool, "candidates": [...]} بعدد
-    'count' مواضيع GRC مرشحة كاملة النص، بدون أي توليد صور."""
+    'count' مواضيع GRC مرشحة (نسخة مختصرة للمراجعة، بدون تفاصيل النشر الكاملة
+    وبدون أي توليد صور). استخدم flesh_out_grc_candidate() لاحقاً لإكمال تفاصيل
+    الموضوع المختار فقط قبل توليد صوره."""
     client = Anthropic(api_key=api_key or os.environ["ANTHROPIC_API_KEY"])
 
     response = client.messages.create(
         model=MODEL,
-        max_tokens=10000,
+        max_tokens=14000,
         system=CANDIDATES_SYSTEM_PROMPT,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
         messages=[
             {
                 "role": "user",
                 "content": (
-                    f"ابحث الآن عن أفضل {count} مواضيع GRC مختلفة خلال آخر 48-72 ساعة، "
-                    "ثم أنتج المحتوى الكامل لكل واحد منها وفق التعليمات، وأعد النتيجة "
-                    "بصيغة JSON فقط تحتوي مصفوفة candidates."
+                    f"ابحث الآن عن أفضل {count} مواضيع GRC **مختلفة تماماً معنوياً** عن "
+                    "بعضها خلال آخر 48-72 ساعة (راجع تعليمات منع التكرار المعنوي بعناية)، "
+                    "ثم أنتج المحتوى المختصر لكل واحد منها وفق التعليمات، وأعد النتيجة "
+                    f"بصيغة JSON فقط تحتوي مصفوفة candidates بعدد {count} بالضبط (أو أقل "
+                    "إن لم تجد مواضيع كافية غير مكرَّرة معنوياً)."
                 ),
             }
         ],
@@ -205,6 +204,56 @@ def generate_candidate_grc_topics(count: int = 3, api_key: str | None = None) ->
         block.text for block in response.content if getattr(block, "type", None) == "text"
     )
     return _extract_json(full_text)
+
+
+FLESH_OUT_SYSTEM_PROMPT = """أنت تُكمل محتوى منشور GRC (حوكمة/مخاطر/امتثال) تم
+اختياره مسبقاً من بين عدة مواضيع مرشحة. لديك بالفعل: التصنيف، العنوان،
+الملخص، ولماذا يهم ومن المتأثر. أكمل الحقول المتبقية أدناه فقط، بأسلوب رسمي
+مؤسسي مختصر، دون تكرار أو حشو، ودون الحاجة للبحث من جديد.
+
+أعد الإجابة **بصيغة JSON فقط** بالحقول التالية فقط:
+{
+  "recommended_actions": ["إجراء 1", "إجراء 2", "إجراء 3"],
+  "key_takeaway": "الخلاصة العملية الأهم بجملة واحدة",
+  "cta": "دعوة للتفاعل",
+  "hashtags": ["#وسم1", "#وسم2", "..."],
+  "full_caption": "النص الكامل الجاهز للنشر كتعليق، بأسلوب رسمي مؤسسي، مع الهاشتاقات في النهاية. عند ذكر المصدر اكتب اسمه فقط"
+}"""
+
+
+def flesh_out_grc_candidate(candidate: dict, api_key: str | None = None) -> dict:
+    """يكمل الحقول المتبقية (الهاشتاقات، النص الكامل، الإجراءات...) لموضوع GRC
+    واحد فقط تم اختياره مسبقاً. استدعاء رخيص وسريع (بدون بحث بالويب)."""
+    client = Anthropic(api_key=api_key or os.environ["ANTHROPIC_API_KEY"])
+
+    brief = {
+        "classification": candidate.get("classification"),
+        "urgency": candidate.get("urgency"),
+        "image_title": candidate.get("image_title"),
+        "hook_title": candidate.get("hook_title"),
+        "summary": candidate.get("summary"),
+        "why_it_matters": candidate.get("why_it_matters"),
+        "who_is_affected": candidate.get("who_is_affected"),
+        "source": candidate.get("source"),
+    }
+
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=2000,
+        system=FLESH_OUT_SYSTEM_PROMPT,
+        messages=[
+            {
+                "role": "user",
+                "content": f"أكمل الحقول المتبقية لهذا الموضوع:\n{json.dumps(brief, ensure_ascii=False, indent=2)}",
+            }
+        ],
+    )
+
+    full_text = "\n".join(
+        block.text for block in response.content if getattr(block, "type", None) == "text"
+    )
+    extra_fields = _extract_json(full_text)
+    return {**candidate, **extra_fields}
 
 
 if __name__ == "__main__":

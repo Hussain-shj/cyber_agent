@@ -1,6 +1,6 @@
 """
 propose_topics_grc.py
-نظير propose_topics.py لكن لمحتوى GRC — يبحث ويكتب نصاً كاملاً لـ3 مواضيع
+نظير propose_topics.py لكن لمحتوى GRC — يبحث ويكتب نصاً كاملاً لعدة مواضيع
 GRC مرشحة (بدون أي توليد صور)، ويرفعها إلى posts_grc/candidates/{stamp}.json
 ليختار المستخدم واحداً منها من صفحة المراجعة (تبويب "📝 مرشحة GRC").
 
@@ -27,8 +27,8 @@ log = logging.getLogger("propose-topics-grc")
 def run() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M%S")
 
-    log.info("1/2 — البحث وكتابة 3 مواضيع GRC مرشحة عبر Anthropic API (بدون صور)...")
-    result = generate_candidate_grc_topics(count=3)
+    log.info("1/2 — البحث وكتابة مواضيع GRC مرشحة عبر Anthropic API (بدون صور)...")
+    result = generate_candidate_grc_topics(count=10)
 
     candidates = result.get("candidates") or []
     if result.get("no_news") or not candidates:

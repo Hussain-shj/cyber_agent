@@ -26,7 +26,7 @@ from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
-from content_generator_grc import generate_daily_grc_content
+from content_generator_grc import flesh_out_grc_candidate, generate_daily_grc_content
 from grc_image_generator import generate_grc_designs, generate_grc_platform_designs
 from github_uploader import (
     delete_file, download_file_json, get_file_sha, list_folder, upload_all, upload_image_to_github,
@@ -111,6 +111,12 @@ def run() -> None:
 
     if content is not None:
         log.info("1/4 — تم استخدام موضوع GRC مُختار مسبقاً (بدون بحث جديد).")
+        if "full_caption" not in content:
+            log.info("استكمال الحقول المتبقية للموضوع المختار...")
+            try:
+                content = flesh_out_grc_candidate(content)
+            except Exception as exc:  # noqa: BLE001
+                log.warning("فشل استكمال الحقول (%s) — سيُتابَع بالحقول المتوفرة فقط.", exc)
     else:
         log.info("1/4 — لا يوجد ملف مواضيع مرشحة؛ البحث والكتابة مباشرة عبر Anthropic API...")
         content = generate_daily_grc_content()

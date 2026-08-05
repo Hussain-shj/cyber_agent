@@ -1,7 +1,7 @@
 """
 propose_topics.py
 المرحلة الأولى من تدفق "اختيار الموضوع قبل توليد الصور": يبحث ويكتب نصاً
-كاملاً لـ3 مواضيع مرشحة (بما فيها 3 أفكار بصرية لكل موضوع)، بدون أي استدعاء
+كاملاً لعدة مواضيع مرشحة (بما فيها 3 أفكار بصرية لكل موضوع)، بدون أي استدعاء
 لتوليد صور — منخفض التكلفة. يرفع النتيجة كملف واحد إلى GitHub تحت
 posts/candidates/{stamp}.json ليراجعه المستخدم.
 
@@ -34,8 +34,8 @@ log = logging.getLogger("propose-topics")
 def run() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d_%H%M%S")
 
-    log.info("1/2 — البحث وكتابة 3 مواضيع مرشحة عبر Anthropic API (بدون صور)...")
-    result = generate_candidate_topics(count=3)
+    log.info("1/2 — البحث وكتابة مواضيع مرشحة عبر Anthropic API (بدون صور)...")
+    result = generate_candidate_topics(count=10)
 
     candidates = result.get("candidates") or []
     if result.get("no_news") or not candidates:
@@ -66,7 +66,7 @@ def run() -> None:
     url = upload_image_to_github(local_path, repo, branch, gh_token, dest_folder="posts/candidates")
     log.info("رابط المراجعة: %s", url)
     log.info(
-        "افتح الملف أعلاه، راجع المواضيع الثلاثة (وعدّل visual_concepts مباشرة إن "
+        "افتح الملف أعلاه، راجع المواضيع (وعدّل visual_concepts مباشرة إن "
         "أردت)، ثم اضبط SELECTED_TOPIC_INDEX (0/1/2) وشغّل agent_runner.py."
     )
 

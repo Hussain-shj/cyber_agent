@@ -31,7 +31,7 @@ from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 
-from content_generator import generate_daily_content
+from content_generator import flesh_out_candidate, generate_daily_content
 from image_generator import generate_designs, generate_platform_designs
 from github_uploader import (
     delete_file, download_file_json, get_file_sha, list_folder, upload_all, upload_image_to_github,
@@ -120,6 +120,12 @@ def run() -> None:
 
     if content is not None:
         log.info("1/4 — تم استخدام موضوع مُختار مسبقاً من posts/candidates/ (بدون بحث جديد).")
+        if "full_caption" not in content:
+            log.info("استكمال الحقول المتبقية (هاشتاقات، نص كامل، إجراءات...) للموضوع المختار...")
+            try:
+                content = flesh_out_candidate(content)
+            except Exception as exc:  # noqa: BLE001
+                log.warning("فشل استكمال الحقول (%s) — سيُتابَع بالحقول المتوفرة فقط.", exc)
     else:
         log.info("1/4 — لا يوجد ملف مواضيع مرشحة؛ البحث والكتابة مباشرة عبر Anthropic API...")
         content = generate_daily_content()
