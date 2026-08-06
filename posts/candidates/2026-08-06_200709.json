@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "هجوم سيبراني | تحليل هجوم",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A large water treatment facility control panel with glowing warning lights and circuit-board patterns overlaid, deep blue and red tones, centered composition",
+        "Abstract pipeline network map with broken digital nodes and lock icons scattered across the connections, dark teal background, centered",
+        "Industrial PLC device rendered as a 3D glowing cube with cracks spreading across its surface, surrounded by red warning rings, centered on dark background"
+      ],
+      "image_title": "هجوم إيراني يضرب شبكات المياه الأمريكية",
+      "hook_title": "أكثر من 30 محطة مياه في 7 ولايات أمريكية تتعرض لهجمات إلكترونية منسّقة مرتبطة بإيران",
+      "image_summary": "هجمات منسّقة استهدفت أنظمة التحكم في محطات المياه بولايات أمريكية متعددة وأجبرت بعضها على التشغيل اليدوي.",
+      "summary": "استهدفت هجمات إلكترونية منسّقة أكثر من 30 نظام مياه في ولاية مينيسوتا وحدها، امتدت لاحقاً لتشمل 7 ولايات على الأقل، مع تقارير تشير إلى ارتباط محتمل بجهات إيرانية. اخترق المهاجمون أجهزة التحكم المنطقي القابل للبرمجة (PLC) وعدّلوا كلمات المرور لإقفال المشغّلين، مما أجبر بعض المنشآت على التحول للتشغيل اليدوي. التحقيقات لا تزال جارية من قِبَل مكتب التحقيقات الفيدرالي (FBI) ووكالة حماية البيئة (EPA).",
+      "why_it_matters": "يُجسّد الهجوم التهديد المتصاعد على البنية التحتية الحيوية، ويستدعي مراجعة عاجلة لحماية أنظمة التشغيل الصناعي (OT/ICS) في قطاعي المياه والطاقة بمنطقة الخليج.",
+      "who_is_affected": "محطات المياه والصرف الصحي البلدية في الولايات المتحدة؛ والدرس يخصّ كل مشغّلي البنية التحتية الحيوية عالمياً.",
+      "source": "Tenable / NBC News / Al Jazeera / CISA Advisory AA26-097A"
+    },
+    {
+      "classification": "ثغرة أمنية | تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A glowing AI brain connected to multiple server icons via red broken chains, dark background, centered abstract composition showing autonomous hacking concept",
+        "Abstract digital maze with an AI agent token navigating through interconnected server nodes, each node labeled with a lock symbol, blue and orange palette, centered",
+        "Three-dimensional interconnected vulnerability nodes forming a web pattern with a central cracked shield, centered on dark purple background"
+      ],
+      "image_title": "وكيل ذكاء اصطناعي يستغل ثغرات Apache وLangflow",
+      "hook_title": "ذكاء اصطناعي صيني مستقل يشنّ هجمات إلكترونية باستخدام DeepSeek دون تدخل بشري",
+      "image_summary": "جهة تهديد صينية وظّفت نموذج DeepSeek كعامل هجوم ذاتي مستقل لاستغلال ثغرات خطيرة في Apache Tomcat وLangflow.",
+      "summary": "رصدت Palo Alto Networks Unit 42 جهة تهديد صينية تعمل باسم 'knaithe/KnYuan' تستخدم نموذج DeepSeek عبر إطار Hermes Agent لشنّ هجمات إلكترونية مستقلة بلا تدخل بشري، تستهدف ثغرات في Langflow وApache Tomcat وCitrix وغيرها. أضافت CISA ثلاث ثغرات مستغَلة فعلياً إلى كتالوج KEV: CVE-2026-9198 (Langflow، CVSS 9.8) وCVE-2026-34486 (Apache Tomcat) وCVE-2026-18556 (N-able N-central)، مع مهلة إصلاح للوكالات الفيدرالية حتى 7 أغسطس 2026.",
+      "why_it_matters": "يُمثّل هذا الهجوم نقلة نوعية خطيرة: ذكاء اصطناعي يصبح أداة هجوم مستقلة تقييّم الأهداف وتختار الثغرات وتنفّذ الاختراق دون إشراف بشري.",
+      "who_is_affected": "مديرو الخوادم التي تعمل بـ Apache Tomcat، وبيئات Langflow للذكاء الاصطناعي، ومنصات N-able N-central لإدارة الشبكات.",
+      "source": "CISA KEV / Palo Alto Networks Unit 42 / The Hacker News"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A network of business routers and access points connected to a central controller node, with red cracks spreading from the controller outward to all devices, dark background, centered",
+        "Abstract zero-trust provisioning flow diagram showing broken handshake symbols at each authentication step, blue and red color scheme, centered",
+        "Fifteen glowing vulnerability icons arranged in a circular pattern around a cracked router silhouette, dark teal background, centered composition"
+      ],
+      "image_title": "15 ثغرة في أجهزة TP-Link Omada تهدد الشبكات",
+      "hook_title": "ثغرات متسلسلة في أجهزة TP-Link Omada تتيح السيطرة الكاملة على شبكات الشركات",
+      "image_summary": "15 ثغرة في منظومة TP-Link Omada تتيح خطف الأجهزة والتجسس على الاتصالات وتسريب بيانات اعتماد الشبكة بالكامل.",
+      "summary": "كشفت Forescout في مؤتمر Black Hat USA 2026 عن 15 ثغرة جديدة في منظومة Zero-Touch Provisioning الخاصة بـ TP-Link Omada، تشمل مفاتيح تشفير مضمّنة ثابتة، وبيانات اعتماد افتراضية، وخللاً في المصادقة يتيح هجمات man-in-the-middle. اكتُشف أن أكثر من 1800 وحدة تحكم Omada مكشوفة مباشرة على الإنترنت. تمتد الثغرات لتشمل كاميرات VIGI وأجهزة Tapo وKasa للمنازل الذكية.",
+      "why_it_matters": "تُستخدم أجهزة Omada على نطاق واسع في الشركات الصغيرة والمتوسطة بالخليج؛ والسيطرة على وحدة التحكم تعني السيطرة على كامل شبكة الموقع.",
+      "who_is_affected": "الشركات الصغيرة والمتوسطة ومديرو الشبكات الذين يعتمدون أجهزة TP-Link Omada للراوترات والمحوّلات ونقاط الوصول اللاسلكي.",
+      "source": "Forescout Vedere Labs / BleepingComputer / SecurityWeek"
+    },
+    {
+      "classification": "أدوات جديدة | تحليل هجوم",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A smartphone silhouette with a glowing key symbol fragmenting into digital particles that flow into a shadowy external device, dark blue background, centered",
+        "Abstract representation of a digital lock being bypassed by invisible threads connecting a fingerprint icon to a cracked shield, purple and gold tones, centered",
+        "Three interconnected attack path diagrams rendered as glowing circuits on a dark background, centered, showing escalating access levels"
+      ],
+      "image_title": "هجوم Pass-ta-key يسرق مفاتيح Google المزامَنة",
+      "hook_title": "باحثو Unit 42 يكشفون: البرمجيات الخبيثة تسرق مفاتيح المرور Passkeys من Google دون كلمة سر أو بصمة",
+      "image_summary": "ثلاث تقنيات هجومية جديدة تتيح لبرمجيات خبيثة على Windows سرقة مفاتيح Google المزامَنة وتجاوز التحقق البيومتري.",
+      "summary": "كشف باحثو Palo Alto Networks Unit 42 عن ثلاث تقنيات هجومية جديدة تُسمّى 'Pass-ta-key' تستهدف Google Password Manager في متصفح Chrome على Windows. البرمجية الخبيثة الموجودة مسبقاً على الجهاز تستطيع قراءة قاعدة بيانات المزامنة المحلية لاستخراج بيانات الحسابات المحمية بـ Passkeys، أو سرقة المفتاح الرئيسي السري (SDS) من ذاكرة Chrome لفك تشفير جميع Passkeys المزامَنة، دون الحاجة لصلاحيات مرتفعة أو تفاعل المستخدم.",
+      "why_it_matters": "يُثير هذا الكشف تساؤلات جوهرية حول مصداقية نموذج Passkeys بوصفه البديل الأكثر أماناً لكلمات المرور، خاصةً في بيئات المؤسسات التي تعتمد Chrome.",
+      "who_is_affected": "مستخدمو Google Password Manager مع Chrome على Windows في المؤسسات والجهات الحكومية والأفراد الذين اعتمدوا Passkeys.",
+      "source": "Palo Alto Networks Unit 42 / BleepingComputer / SecurityWeek"
+    },
+    {
+      "classification": "ثغرة أمنية | تحديث أمني",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A large enterprise network diagram showing Cisco SD-WAN nodes with glowing red critical warning badges, connected by broken data streams, dark blue background centered",
+        "Abstract shield with CVSS score meter showing 9.9, surrounded by multiple cracked lock icons in a circular arrangement, centered on dark background",
+        "Multiple network device silhouettes arranged in a data center rack formation with red injection arrows targeting authentication points, centered dark composition"
+      ],
+      "image_title": "سيسكو تُصدر تحديثات لثغرات حرجة CVSS 9.9",
+      "hook_title": "سيسكو تُطلق تحديثات طارئة لأكثر من 24 ثغرة حرجة في SD-WAN وIOS XE وFMC",
+      "image_summary": "سيسكو تُصدر تحديثات أمنية شاملة لثغرات حرجة تبلغ 9.9 في SD-WAN وIOS XE تتيح الوصول الجذري غير المصرّح به.",
+      "summary": "أصدرت سيسكو في 5 أغسطس 2026 حزمة تحديثات أمنية شاملة تعالج 24 ثغرة عبر منتجاتها الرئيسية. أخطر هذه الثغرات CVE-2026-20079 في Firepower Management Center (CVSS 10.0) الذي يتيح تنفيذ أوامر بصلاحيات جذرية دون مصادقة، إضافة إلى ثغرات SD-WAN بدرجة 9.9 وIOS XE بدرجة 9.8. اكتُشفت الثغرات داخلياً بمساعدة نماذج ذكاء اصطناعي، ولم يُرصد استغلال فعلي حتى الآن.",
+      "why_it_matters": "تُهيمن أجهزة سيسكو على البنية التحتية للشبكات في معظم المؤسسات والجهات الحكومية الخليجية؛ والثغرات غير المرقّعة تُشكّل بوابة دخول مباشرة للمهاجمين.",
+      "who_is_affected": "كل مؤسسة تعتمد Cisco Catalyst SD-WAN أو IOS XE أو Firepower Management Center في بيئات الإنتاج.",
+      "source": "Cisco PSIRT / SecurityWeek / The Hacker News"
+    },
+    {
+      "classification": "برمجية خبيثة | تحليل هجوم",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A Samsung smartphone silhouette with a glowing assistant microphone icon that morphs into a spider web trap with lock icons caught in it, centered dark background",
+        "Abstract chain of vulnerability nodes connecting a messenger app icon to a system root access symbol through multiple intermediate device icons, red and blue tones, centered",
+        "A single-click cursor icon surrounded by cascading cracked permission shields in a radial pattern, dark purple background, centered composition"
+      ],
+      "image_title": "ثغرة Bixby تُسيطر على هاتف Galaxy بنقرة واحدة",
+      "hook_title": "باحثو Black Hat يكشفون: سلسلة استغلال بـ 50,000 دولار تحوّل Bixby إلى باب خلفي في هواتف Samsung",
+      "image_summary": "سلسلة ثغرات في تطبيقَي Samsung Members وSamsung Account تتيح للمهاجم اختراق الهاتف بمجرد نقرة على رابط إعلاني.",
+      "summary": "كشف باحثون من Microsoft وMobile Hacking Lab في مؤتمر Black Hat 2026 عن سلسلة ثغرات تستغل CVE-2025-21079 وCVE-2025-58486 وCVE-2025-58487 في تطبيقات Samsung Members وSamsung Account وBixby. يكفي إغراء الضحية بالنقر على رابط ليحصل المهاجم على صلاحيات النظام الكاملة دون أي تفاعل إضافي. عُرضت هذه التقنية بنجاح في مسابقة Pwn2Own Ireland 2025 مقابل 50,000 دولار.",
+      "why_it_matters": "هواتف Samsung Galaxy الأكثر انتشاراً في الخليج، وهذا الاستغلال لا يتطلب تثبيت تطبيق أو تدخل المستخدم سوى نقرة واحدة على إعلان.",
+      "who_is_affected": "مستخدمو هواتف Samsung Galaxy الذين لم يُحدّثوا أجهزتهم بتحديثات أمان أغسطس 2025 أو أحدث.",
+      "source": "SecurityWeek / Microsoft Security Blog / Black Hat USA 2026"
+    },
+    {
+      "classification": "تسريب بيانات",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An insurance policy document icon fragmenting into scattered digital data pieces flowing out of a broken portal screen, centered, dark blue background with gold accents",
+        "Abstract customer database cylinder cracking open with 4.38 million small data nodes spilling outward in a radial pattern, red and dark background, centered",
+        "A broken digital vault door surrounded by floating personal data icons (names, dates, bank symbols) in an orbital arrangement, centered dark composition"
+      ],
+      "image_title": "اختراق Aflac Japan يطال 4.38 مليون عميل",
+      "hook_title": "قراصنة يسرقون بيانات 4.38 مليون عميل من بوابة شركة تأمين Aflac اليابانية",
+      "image_summary": "قراصنة نجحوا في الوصول لبوابة عملاء Aflac اليابانية عشرة أيام متواصلة وسرقوا بيانات شخصية ومصرفية لملايين العملاء.",
+      "summary": "أعلنت شركة Aflac Life Insurance Japan عن خرق بياناتي كبير اكتُشف في 25 يونيو 2026 بعد أن اخترق مهاجمون بوابة حاملي الوثائق بين 15 و25 يونيو، وسرقوا بيانات شخصية ومصرفية لنحو 4.38 مليون عميل ووكيل. تضمنت البيانات المسرّبة الأسماء والعناوين وتواريخ الميلاد ومعلومات الحسابات المصرفية لحوالي 230,000 عميل. هذا هو الاختراق الثاني الكبير لمجموعة Aflac خلال ثلاثة عشر شهراً.",
+      "why_it_matters": "يكشف الخبر عن ضعف حماية بوابات العملاء في قطاع التأمين، ويُذكّر بضرورة المراقبة المستمرة للوصول المتكرر غير المعتاد إلى الأنظمة.",
+      "who_is_affected": "4.38 مليون عميل ووكيل تأمين في اليابان؛ وقطاع التأمين عالمياً كنموذج لهجمات الاستهداف.",
+      "source": "SecurityWeek / BleepingComputer / The Record"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A CPU chip cross-section diagram with glowing interrupt signals bypassing a security checkpoint gate, centered, dark technical background with blue and red highlights",
+        "Abstract binary clock showing race condition timing between a shield activation and an attack signal, with the attack landing in the gap, centered on dark background",
+        "Multiple processor die renders showing cracks spreading from an interrupt injection point across the silicon surface, centered dark blue composition"
+      ],
+      "image_title": "هجوم INTERRUPT INJECTION يتخطى حماية Spectre v2",
+      "hook_title": "باحثو MIT يكشفون هجوم INTERRUPT INJECTION: أوقف دفاعات Spectre v2 على معالجات Intel وAMD",
+      "image_summary": "هجوم جديد من MIT يُمكّن برمجية بلا صلاحيات من تجاوز حمايات Spectre v2 وسرقة كلمات مرور النواة من معالجات Intel وAMD.",
+      "summary": "اكتشف باحثون في MIT CSAIL هجوماً جديداً يُسمّى INTERRUPT INJECTION يستغل نافذة زمنية ضيقة بين تفعيل حمايات Spectre v2 واستخدام النواة لها. يتيح الهجوم لبرنامج عادي بلا صلاحيات مرتفعة تسريب ذاكرة النواة الحساسة كملف /etc/shadow (كلمات المرور المُجزّأة) بمعدل 5.47 بايت/ثانية على معالجات AMD Zen 2. النموذج الجديد يُصنَّف كـ TONTOU (Time-of-Neutralization To Time-of-Use) وهو امتداد لفئة الثغرات المعمارية الدقيقة.",
+      "why_it_matters": "يُعيد هذا الهجوم فتح باب الثغرات المعمارية الدقيقة التي اعتُقد أنها خُففت نهائياً، مما يستدعي مراجعة جميع بيئات السحابة والخوادم المشتركة.",
+      "who_is_affected": "مشغّلو الخوادم والبيئات السحابية المشتركة التي تعمل بمعالجات Intel وAMD على أنظمة Linux.",
+      "source": "The Hacker News / TipRanks"
+    },
+    {
+      "classification": "Ransomware",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A globe with multiple ransomware group emblems displayed as warning flags planted in different geographic regions, dark background, centered dramatic composition",
+        "Abstract bar chart showing ransomware attack volume rising as a 3D wave across a timeline, with LockBit and Qilin icons as peak markers, centered dark background",
+        "Multiple locked file cabinet icons arranged in a grid pattern with different colored ransomware chains binding them, centered on dark red background"
+      ],
+      "image_title": "LockBit 5 وQilin يصعّدان هجمات الفدية عالمياً",
+      "hook_title": "LockBit 5.0 وQilin يُكثّفان هجماتهما: ضحايا من الصناعة والتأمين والسياحة في أغسطس 2026",
+      "image_summary": "مجموعات Ransomware تُضاعف هجماتها في 2026 بارتفاع 74% على الشركات الكبرى مع ضحايا جدد لـ LockBit 5 وQilin وDragonforce.",
+      "summary": "سجّل الربع الأول من 2026 ارتفاعاً قياسياً في هجمات الفدية بنسبة 74% على الشركات الكبرى. خلال أغسطس 2026 طالت هجمات LockBit 5.0 شركات صناعية وإلكترونية أمريكية وهندية وفرنسية، فيما استهدف Dragonforce شركة TUI China مع تسريب جوازات سفر ومستندات مالية، بينما ضربت مجموعة Qilin شركة Freedom Claims Management الأمريكية للتأمين. تُشير بيانات BlackFog إلى أن قطاع الرعاية الصحية يتصدر الاستهداف بنسبة 35%.",
+      "why_it_matters": "التصعيد في تنوع القطاعات المستهدفة يُنبّه المؤسسات الخليجية في السياحة والتأمين والتصنيع إلى ضرورة تعزيز خطط استمرارية الأعمال وعزل الأنظمة الحيوية.",
+      "who_is_affected": "الشركات الصناعية وقطاع التأمين والسياحة والرعاية الصحية؛ خاصةً الجهات التي تعتمد على بنية تحتية غير مُحدَّثة.",
+      "source": "BlackFog / Dexpose.io / SecurityWeek"
+    },
+    {
+      "classification": "تحديث أمني",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "Abstract router and firewall device silhouettes arranged in a defensive semicircle formation with green patch badges appearing on each device, centered dark background",
+        "A digital wall of CVSS severity scores displayed as glowing panels, with patch checkmarks appearing in sequence, centered dark blue composition",
+        "Multiple security shield icons stacked in a 3D pyramid with critical vulnerability icons being neutralized from bottom to top, centered dark background"
+      ],
+      "image_title": "CISA تُلزم بتصحيح 4 ثغرات مستغَلة فعلياً",
+      "hook_title": "CISA تُضيف أربع ثغرات نشطة الاستغلال لكتالوج KEV وتُلزم الوكالات الفيدرالية بالإصلاح الفوري",
+      "image_summary": "CISA أضافت خلال أسبوع واحد أربع ثغرات مستغَلة فعلياً تشمل N-able N-central وLangflow وApache Tomcat إلى كتالوج KEV.",
+      "summary": "أصدرت CISA تنبيهَين متتاليَين الأسبوع الماضي بإضافة أربع ثغرات مستغَلة فعلياً إلى كتالوج CVEs المعروفة بالاستغلال (KEV): ثغرة تجاوز المصادقة في N-able N-central (CVE-2026-18577 وCVE-2026-18556)، وثغرة تنفيذ كود عن بُعد في IBM Langflow (CVE-2026-9198، CVSS 9.8)، وثغرة في Apache Tomcat (CVE-2026-34486). حدد التوجيه التشغيلي الملزم BOD 26-04 موعد الإصلاح بـ 7 أغسطس 2026 للوكالات الفيدرالية.",
+      "why_it_matters": "كتالوج KEV الخاص بـ CISA يُعدّ المرجع الأول عالمياً لتحديد أولويات التصحيح؛ والثغرات المُدرجة فيه تخضع للاستغلال الفعلي الآن وتستوجب التحرك الفوري.",
+      "who_is_affected": "مديرو تقنية المعلومات وفرق الأمن في كل مؤسسة تُشغّل N-able N-central أو Langflow أو Apache Tomcat في بيئات مكشوفة على الإنترنت.",
+      "source": "CISA / SecurityWeek / BleepingComputer"
+    }
+  ]
+}
