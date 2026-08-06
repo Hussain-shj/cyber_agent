@@ -27,30 +27,32 @@ DEFAULT_MODEL = "gemini-2.5-flash-image"
 
 
 def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", keywords: str = "") -> str:
-    """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بهوية GRC البيضاء/
-    الفاتحة الرسمية، يمنع صراحة أي كتابة أو أشخاص حقيقيين في الصورة. عند توفر
-    visual_concept (وصف كتبه Claude خصيصاً لهذا الموضوع)، يصبح هو محور الصورة."""
-    mood = "warm gold and deep red accent tones over a clean white background, formal urgent notice atmosphere" \
+    """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بهوية GRC الهادئة/
+    الفاتحة الرسمية. يسمح بمشاهد تعبيرية سردية (واقعية أو مرسومة، قد تتضمن
+    أشخاصاً عامين غير محددي الهوية) وليس فقط عناصر رمزية مجردة — بناءً على
+    وصف المشهد الذي كتبه Claude خصيصاً لهذا الخبر بعد فهم تفاصيله."""
+    mood = "warm gold and soft red accent tones over a calm, muted, soft-lit palette" \
         if urgent else \
-        "soft navy and gold accent tones over a clean white/cream background, calm professional atmosphere"
+        "soft navy and gold accents over a calm, muted, soft-lit palette"
 
     if visual_concept:
         subject = visual_concept.strip().rstrip(".") + ". "
     elif keywords:
-        subject = f"An abstract formal visual motif related to: {keywords}. "
+        subject = f"An expressive editorial scene related to: {keywords}. "
     else:
-        subject = "An abstract governance, risk, and compliance motif (documents, seals, scales). "
+        subject = "A calm, professional governance/compliance office scene. "
 
     base = (
         f"{subject}"
-        "Rendered as a modern minimalist institutional illustration background, "
-        f"{mood}, clean white or cream gradient background, subtle fine gold linework, "
-        "elegant corporate/legal aesthetic, soft studio lighting, high-end business "
-        "magazine style, 4k quality, tall portrait orientation composition. "
+        "Rendered as a modern editorial illustration or soft realistic photo-style image, "
+        f"{mood}, gentle natural or studio lighting, calm and composed mood, high-end "
+        "business/institutional magazine style, 4k quality, tall portrait orientation "
+        "composition, generous empty space near the center for text overlay later. "
+        "If people are shown, they must be generic, non-identifiable, fictional-looking "
+        "individuals (e.g. a compliance officer, an auditor, a boardroom) — never a real, "
+        "named, or recognizable public figure, and never any real brand logo or trademark. "
         "IMPORTANT: absolutely no text, no letters, no numbers, no words, no logos, "
-        "no watermarks anywhere in the image. No real human faces or realistic people; "
-        "any figure, if present at all, must be a fully abstract/geometric silhouette only. "
-        "Pure abstract/illustrative background only, not dark or cyberpunk-styled."
+        "no watermarks anywhere in the image."
     )
     return base
 

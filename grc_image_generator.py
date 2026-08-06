@@ -52,18 +52,20 @@ def _grc_icon_for(tag: str):
     return GRC_CLASSIFICATION_ICONS.get(tag, _report_icon)
 
 
-def _grc_lighten_overlay(img: Image.Image, top_alpha=150, bottom_alpha=200) -> Image.Image:
+def _grc_lighten_overlay(img: Image.Image, top_alpha=165, bottom_alpha=215) -> Image.Image:
     """يضيف تدرجاً أبيض/فاتح شفافاً أعلى وأسفل الصورة لضمان وضوح النص الكحلي
-    الداكن فوق أي خلفية فنية (حتى لو كانت معقدة أو ملونة)، عكس _darken_overlay
-    السيبراني — هنا نُفتّح بدل نُعتّم لأن نص GRC داكن على خلفية فاتحة."""
+    الداكن فوق أي خلفية فنية (حتى لو كانت مشهداً واقعياً مزدحماً بصرياً يتضمن
+    أشخاصاً)، عكس _darken_overlay السيبراني — هنا نُفتّح بدل نُعتّم لأن نص GRC
+    داكن على خلفية فاتحة. النطاق أوسع من المعتاد لأن المشاهد التعبيرية الآن قد
+    تكون أكثر تفصيلاً من الخلفيات التجريدية البسيطة السابقة."""
     w, h = img.size
     overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     od = ImageDraw.Draw(overlay)
-    band_h = round(h * 0.22)
+    band_h = round(h * 0.32)
     for y in range(band_h):
         a = int(top_alpha * (1 - y / band_h))
         od.line([(0, y), (w, y)], fill=(255, 255, 253, a))
-    bottom_band_h = round(h * 0.4)
+    bottom_band_h = round(h * 0.5)
     for y in range(h - bottom_band_h, h):
         ratio = (y - (h - bottom_band_h)) / bottom_band_h
         a = int(bottom_alpha * ratio)
