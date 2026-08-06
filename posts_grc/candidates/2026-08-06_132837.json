@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A clean white institutional document titled 'Threat Hunting Report 2026' with a bold red seal stamp in the center, surrounded by minimalist bar charts showing sharp percentage increases, on a light gray background",
+        "A formal white infographic featuring three interconnected shield icons labeled 'AI', 'Identity', and 'Cloud' arranged in a triangle, with upward trend arrows beneath each, set against an off-white matte background",
+        "A crisp white certificate-style layout displaying a large percentage figure '171%' centered prominently, framed by thin gold institutional borders, with subtle cloud and chain-link watermark patterns in the background"
+      ],
+      "image_title": "تقرير CrowdStrike 2026: الذكاء الاصطناعي سلاح المهاجمين",
+      "hook_title": "الذكاء الاصطناعي أصبح أداةً وهدفاً في آنٍ واحد — ماذا كشف تقرير التهديدات لعام 2026؟",
+      "image_summary": "تقرير CrowdStrike يرصد تضاعف هجمات الهوية وارتفاع نشاط الجرائم السيبرانية السحابية بنسبة 171%.",
+      "summary": "كشف تقرير CrowdStrike للتهديدات لعام 2026 الصادر في 3 أغسطس أن الذكاء الاصطناعي بات مُدمجاً في عمليات المهاجمين على كافة المستويات. سجّل النشاط الإجرامي الموجّه نحو السحابة ارتفاعاً بنسبة 171%، فيما تضاعفت هجمات التصيد الصوتي (Vishing) في النصف الأول من 2026 مقارنةً بالنصف الثاني من 2025. استغل مهاجمون مرتبطون بالصين ثغرات حرجة خلال 24 ساعة من نشر نماذج الاستغلال، في حين سمّم مهاجمون مرتبطون بكوريا الشمالية 131 حزمة في منظومات تطوير الذكاء الاصطناعي.",
+      "why_it_matters": "يُبيّن التقرير أن الهجمات باتت تستهدف علاقات الثقة عبر الهويات والسحابة وتطبيقات SaaS بدلاً من استغلال ثغرات تقنية تقليدية، مما يستلزم إعادة هيكلة برامج إدارة مخاطر الهوية والامتثال.",
+      "who_is_affected": "مسؤولو إدارة المخاطر، فرق الامتثال السيبراني، مدراء العمليات الأمنية، المؤسسات المعتمدة على بيئات السحابة وتطبيقات SaaS في القطاعين العام والخاص.",
+      "source": "CrowdStrike 2026 Threat Hunting Report"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A pristine white legal document with the EU emblem watermark centered, bold text 'AI Act Enforcement 2026' at the top, with a formal golden seal and a clean timeline bar at the bottom showing '2 August 2026', on a white linen-textured background",
+        "A formal white institutional poster featuring a large balance scale icon centered, with 'High-Risk AI' on one side and 'Compliance Obligations' on the other, surrounded by minimalist checkboxes and thin institutional borders on an ivory background",
+        "A clean white compliance checklist graphic centered on the page, titled 'EU AI Act Article 50' with five formal checkbox rows below, each with a thin gold checkmark, on a light gray gradient background with no text visible"
+      ],
+      "image_title": "سريان قانون الذكاء الاصطناعي الأوروبي: 2 أغسطس 2026",
+      "hook_title": "بدأ التطبيق الفعلي لقانون الذكاء الاصطناعي الأوروبي — ما الذي تغيّر فعلياً اليوم؟",
+      "image_summary": "مكتب الذكاء الاصطناعي الأوروبي يبدأ إنفاذ القانون رسمياً مع التزامات الشفافية وحوكمة النماذج العامة.",
+      "summary": "في 2 أغسطس 2026، شرع مكتب الذكاء الاصطناعي التابع للمفوضية الأوروبية في تطبيق قانون الذكاء الاصطناعي رسمياً. وتشمل الالتزامات السارية اليوم: الإفصاح عن تفاعلات الروبوتات الآلية، وضع علامات على المحتوى الاصطناعي، وتحديد محتوى التزوير العميق (المادة 50)، فضلاً عن تفعيل أدوات إنفاذ نماذج الذكاء الاصطناعي العامة. في المقابل، أجّل مرسوم الذكاء الاصطناعي المُعدَّل (AI Omnibus) تطبيق اشتراطات الأنظمة عالية الخطورة (الملحق III) إلى ديسمبر 2027.",
+      "why_it_matters": "يُلزم القانون كل مؤسسة تتعامل مع الذكاء الاصطناعي في القطاعات الحرجة بإنشاء سجل خوارزميات وآليات إشراف بشري وتوثيق تقني قابل للتدقيق، وهو ما يقع مباشرةً في صميم مسؤوليات الامتثال والحوكمة.",
+      "who_is_affected": "مسؤولو الامتثال في الشركات المُصدِّرة للسوق الأوروبية، فرق حوكمة الذكاء الاصطناعي، موردو الأنظمة في قطاعات البيومترية والبنية التحتية الحرجة والخدمات المالية.",
+      "source": "European Commission AI Office / Help Net Security"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A clean white institutional document centered on the page, titled 'SBOM 2026 Minimum Elements' with CISA and NSA official seals at the bottom, a subtle software component tree diagram as watermark, on a crisp white background",
+        "A formal white infographic showing four stacked horizontal layers labeled 'Open Source', 'AI Software', 'SaaS', and 'Commercial Software', each with a small lock icon, centered on a light gray linen background with no text",
+        "A minimalist white governance chart featuring a central hexagon labeled 'SBOM' with six connecting nodes for component hash, license, tool name, producer, version, and context fields, displayed on an off-white matte surface with thin gold borders"
+      ],
+      "image_title": "CISA تُحدّث معايير SBOM 2026",
+      "hook_title": "وداعاً لمعايير 2021 — CISA تُصدر الحد الأدنى الجديد لقوائم مكوّنات البرمجيات",
+      "image_summary": "CISA وشركاؤها الدوليون يُصدرون معايير SBOM المحدّثة لعام 2026 تشمل البرمجيات التقليدية والذكاء الاصطناعي وSaaS.",
+      "summary": "أصدرت CISA بالتعاون مع NSA وFBI وشركاء دوليين من مجموعة G7 الإصدار المحدّث من المعايير الدنيا لقوائم مكوّنات البرمجيات (SBOM 2026)، ليحلّ محل الإصدار الصادر عن NTIA عام 2021. يُضيف الإصدار الجديد عناصر بيانات إلزامية تشمل: خوارزمية تجزئة المكوّن، ورخصة الاستخدام، واسم أداة توليد SBOM، وسياق الإنشاء. ويمتد نطاق التطبيق لأول مرة ليشمل البرمجيات مفتوحة المصدر وبرمجيات الذكاء الاصطناعي وخدمات SaaS.",
+      "why_it_matters": "يُعدّ SBOM ركيزةً جوهرية في إدارة مخاطر سلسلة التوريد البرمجية، وتُلزم المعايير الجديدة المؤسسات بمستوى أعلى من الشفافية والتوثيق يمسّ مباشرةً متطلبات تدقيق الامتثال والمشتريات الحكومية.",
+      "who_is_affected": "مسؤولو أمن سلسلة التوريد، فرق مشتريات البرمجيات الحكومية والخاصة، مدققو الامتثال السيبراني، موردو البرمجيات الراغبون في الوصول للأسواق الحكومية.",
+      "source": "CISA / GRC Report"
+    },
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A clean white security alert document centered on a light gray background, featuring a large centered warning triangle icon with a phishing hook symbol inside, titled 'Device Code Phishing 2026' in formal bold type, with thin red institutional borders",
+        "A formal white diagram showing the OAuth 2.0 device authorization flow as three clean boxes connected by arrows, with a centered red 'X' mark on the authentication token node, on an ivory matte background with no text",
+        "A minimalist white institutional poster with a large upward-pointing bar chart in red and gray showing '15x increase', centered on the page with a subtle lock icon above it, on a white background with thin gold frame border"
+      ],
+      "image_title": "تصيد Device Code: ارتفاع 1500% في 2026",
+      "hook_title": "الهجوم الذي يتجاوز المصادقة المتعددة — تصيد رموز الأجهزة يجتاح المؤسسات",
+      "image_summary": "CrowdStrike ترصد ارتفاعاً بمقدار 15 ضعفاً في هجمات تصيد رموز الأجهزة خلال النصف الأول من 2026.",
+      "summary": "كشف تقرير CrowdStrike ومؤسسات أخرى عن ارتفاع حاد في هجمات تصيد Device Code التي تستغل تدفق توثيق OAuth 2.0 لسرقة رموز الوصول دون الحاجة لكلمات مرور. سُجّل 10 إلى 15 حملة جديدة يومياً في أبريل 2026، ويستهدف الهجوم بصفة رئيسية حسابات Microsoft وبيئات السحابة. الأخطر أن هذه التقنية تتجاوز جميع آليات المصادقة متعددة العوامل (MFA) بما فيها مفاتيح الأمن المادية، وأصبحت متاحةً للبيع كخدمة عبر منصات PhaaS.",
+      "why_it_matters": "يكشف هذا التهديد عن ثغرة جوهرية في ضوابط الهوية المعتمدة حالياً لدى كثير من المؤسسات، ويستوجب مراجعة فورية لسياسات التفويض وعمليات رصد الجلسات.",
+      "who_is_affected": "مسؤولو إدارة الهوية والوصول (IAM)، فرق مركز العمليات الأمنية (SOC)، مسؤولو الامتثال في المؤسسات المعتمدة على Microsoft 365 وبيئات SaaS السحابية.",
+      "source": "CrowdStrike / Dark Reading / The Hacker News"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A pristine white institutional document page centered on a light background, showing the NIST seal watermark and the heading 'SP 800-213 Rev.1 IoT' in formal typography, surrounded by a subtle circuit-board pattern in light gray, with no legible text",
+        "A clean white governance framework diagram displaying a vertical hierarchy of five labeled tiers from 'IoT Product' at the top down to 'Risk Controls', each tier represented by a thin horizontal bar with a small shield icon, centered on an ivory background",
+        "A formal white procurement checklist layout centered on a matte background, showing five checkbox rows with icons representing identity, configuration, access, data protection, and monitoring, framed by a thin gold institutional border"
+      ],
+      "image_title": "NIST SP 800-213r1: اشتراطات أمن منتجات إنترنت الأشياء",
+      "hook_title": "NIST يُوسّع نطاق حوكمة أمن إنترنت الأشياء — الأجهزة لم تعد كافية",
+      "image_summary": "NIST يفتح باب التعليق على مسودة SP 800-213r1 التي تُوسّع نطاق أمن IoT ليشمل المنتج الكامل وسلسلة دورة حياته.",
+      "summary": "أصدر مكتب أمن إنترنت الأشياء في NIST في 24 يونيو 2026 المسودة الأولى من الدليل المُحدَّث SP 800-213r1 لاشتراطات أمن منتجات IoT للجهات الحكومية الفيدرالية، والمفتوح للتعليق حتى 24 أغسطس 2026. يُوسّع الإصدار الجديد النطاق من 'الجهاز' إلى 'المنتج الكامل' ليشمل التطبيقات المحمولة والخدمات السحابية ومنصات الدعم، وهو ما يعني توسيع نطاق تقييم المخاطر بشكل جذري.",
+      "why_it_matters": "سيصبح هذا الإطار بحكم الأمر الواقع المعيار الأدنى لصناعة IoT في القطاعات المنظّمة والبنية التحتية الحيوية، وعلى موردي التقنيات الحكومية في دول الخليج الاستعداد لمتطلبات مشابهة.",
+      "who_is_affected": "مسؤولو المشتريات الحكومية، موردو منتجات IoT الراغبون في الأسواق الفيدرالية، مدراء مخاطر البنية التحتية الحيوية، مدققو الامتثال في قطاعات الطاقة والصحة والمدن الذكية.",
+      "source": "NIST CSRC"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A clean white standards document layout centered on a light background, showing 'ISO 9001:2026 FDIS' as a bold centered heading above a simple timeline bar with a gold marker at 'September 2026', with the ISO logo watermark faintly visible, no legible text",
+        "A formal white governance wheel diagram with six spokes labeled with icons for risk, ethics, culture, sustainability, resilience, and digitalization, centered on an off-white matte background with a thin institutional border",
+        "A minimalist white comparison chart showing two columns titled '2015' and '2026' with six horizontal rows of paired icons showing upgrades — risk split, climate integration, ethical leadership — centered on a light gray linen background"
+      ],
+      "image_title": "ISO 9001:2026 FDIS: النشر في سبتمبر",
+      "hook_title": "المسودة النهائية من ISO 9001:2026 جاهزة — ما الذي يجب أن تعرفه قبل سبتمبر؟",
+      "image_summary": "ISO تُصدر المسودة النهائية FDIS لمعيار 9001:2026 استعداداً للنشر الرسمي في سبتمبر وبدء فترة انتقال ثلاث سنوات.",
+      "summary": "أعلنت اللجنة الفنية ISO/TC 176 اكتمال الاقتراع على المسودة النهائية للمعيار الدولي ISO/FDIS 9001:2026، مع توقع النشر الرسمي في سبتمبر 2026 لاستبدال الإصدار الساري منذ 2015. يتبنّى المعيار الجديد مقاربة «التطوير لا الثورة» إذ يُفصل لأول مرة بين إدارة المخاطر والفرص في بنود منفصلة قابلة للتدقيق، ويُدمج اعتبارات المناخ والأخلاقيات وثقافة الجودة ضمن متطلبات القيادة.",
+      "why_it_matters": "يُمثّل هذا التحديث منعطفاً استراتيجياً لمديري الامتثال والجودة؛ إذ يُرسّخ إدارة المخاطر كأداة استراتيجية وليس مجرد نشاط داعم، مما ينعكس مباشرةً على متطلبات التدقيق والشهادات.",
+      "who_is_affected": "مدراء نظم إدارة الجودة المُعتمَدة، مسؤولو الامتثال المؤسسي، هيئات الاعتماد والتدقيق، الشركات الساعية للتصديق على معايير الجودة في السوقين الحكومي والخاص.",
+      "source": "ANSI Blog / DQS Global / ISO"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A clean white institutional risk diagram centered on a light gray background, showing a large centered cloud outline with three ghost-like identity icons floating inside labeled 'NHI', 'Service Account', and 'API Token', each with a faded dashed border indicating dormancy",
+        "A formal white governance poster featuring a centered Venn diagram of two overlapping circles titled 'Human Identities' and 'Non-Human Identities', with the overlapping area labeled 'Governance Gap' in bold, on an ivory matte background with thin gold borders",
+        "A minimalist white infographic with a centered horizontal risk meter gauge showing a needle pointing to 'Critical', surrounded by three small icons for certificate expiry, over-privilege, and orphaned credentials, on a white linen-textured background"
+      ],
+      "image_title": "هويات الآلات المهجورة: ثغرة حوكمة جوهرية",
+      "hook_title": "الهويات غير البشرية خارج نطاق السيطرة — ماذا يكشف Black Hat 2026 عن مخاطر الوصول الخفي؟",
+      "image_summary": "72% من المؤسسات تعرّضت لاختراق عبر هويات غير بشرية، وأدوات الحوكمة الحالية لم تُصمَّم لهذا النوع من الهويات.",
+      "summary": "كشفت أبحاث معروضة في Black Hat USA 2026 أن هويات الآلات غير البشرية (NHI) — كرموز API وحسابات الخدمات — باتت ثغرة حوكمية حرجة. فـ72% من المؤسسات تعرّضت أو يُشتبه بتعرّضها لاختراق عبر هويات غير بشرية، فيما تمنح 70% من المؤسسات الأنظمة الذكية صلاحيات تفوق ما تُعطيه لموظفيها البشريين. أدوات حوكمة الهوية التقليدية (IAM/PAM) غير مُصمَّمة لإدارة كيانات بلا مالك أو دورة مراجعة منتظمة.",
+      "why_it_matters": "يُمثّل غياب حوكمة الهويات غير البشرية فجوة تدقيقية مباشرة تؤثر في مراجعات الامتثال واختبارات الاختراق والتدقيق على ضوابط الوصول، وتستوجب مراجعة نماذج إدارة الهوية المعتمدة.",
+      "who_is_affected": "مسؤولو إدارة الهوية والوصول، مدققو الأنظمة والضوابط، مسؤولو الحوكمة المؤسسية في بيئات السحابة متعددة الأطراف، وفرق استمرارية الأعمال.",
+      "source": "Dark Reading / CSO Online / NHIMG"
+    },
+    {
+      "classification": "أفضل ممارسات حوكمة",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A pristine white institutional poster centered on an off-white background, showing a large centered robot/agent icon inside a formal rectangular governance framework with four surrounding labeled boxes: 'Discover', 'Monitor', 'Govern', 'Respond', connected by thin arrows",
+        "A clean white enterprise dashboard mockup with a centered 'AI Agent Inventory' panel showing three rows of agent icons with green/amber/red status dots, framed by a thin gold institutional border on a light gray background, no readable text",
+        "A minimalist white risk matrix grid centered on a matte background, with axes labeled 'Agent Access Level' and 'Oversight Maturity', featuring four quadrant zones in light shades of green, yellow, orange, and red, with no text visible inside quadrants"
+      ],
+      "image_title": "حوكمة وكلاء الذكاء الاصطناعي: الأولوية القصوى لـ GRC",
+      "hook_title": "Black Hat 2026 يُحذّر: كل وكيل ذكاء اصطناعي هوية مستقلة — وكل هوية طريق محتمل للاختراق",
+      "image_summary": "98% من المؤسسات تستخدم أدوات ذكاء اصطناعي غير مُصرَّح بها، ومنظومة GRC بحاجة ماسّة لإطار حوكمة وكلاء مُخصَّص.",
+      "summary": "خلص مؤتمر Black Hat USA 2026 إلى أن وكلاء الذكاء الاصطناعي (Agentic AI) يُمثّلون تحدياً غير مسبوق لحوكمة المؤسسات؛ إذ تستخدم 98% من الشركات أدوات ذكاء اصطناعي غير مُصرَّح بها بحسب بيانات Mimecast، ولا تمتلك سوى 44% منها سياسات لإدارة وكلاء الذكاء الاصطناعي رغم اتفاق 92% على أن حوكمتهم ضرورية. أطلق عدد من الموردين بما فيهم Mimecast وKnowBe4 وCyera منصات متخصصة لاكتشاف الوكلاء ومراقبتهم وتطبيق سياسات الحوكمة في الوقت الفعلي.",
+      "why_it_matters": "تفتقر الأطر التنظيمية الحالية كـISO 42001 وNIST AI RMF وقانون الذكاء الاصطناعي الأوروبي إلى معالجة صريحة لوكلاء الذكاء الاصطناعي المُدمجين، مما يضع مسؤولي GRC أمام فجوات امتثال فعلية يجب معالجتها بشكل استباقي.",
+      "who_is_affected": "مسؤولو الحوكمة المؤسسية، متخصصو حوكمة الذكاء الاصطناعي، مدراء المخاطر في المؤسسات المعتمدة على أتمتة سير العمل، المدققون الداخليون لأنظمة التحكم.",
+      "source": "SecurityWeek / SC Media / Mimecast"
+    },
+    {
+      "classification": "فعالية وتدريب",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A clean white conference brochure-style layout centered on a light gray background, showing a formal podium icon at the center top, with three rows of professional title cards below representing keynote speakers, framed by a thin gold institutional border — no real names or logos",
+        "A minimalist white institutional poster featuring a centered badge icon labeled 'GRC 2026 Conference' with '40+ Sessions' text beneath it, surrounded by three small icons representing governance, risk, and compliance, on an off-white linen background",
+        "A formal white calendar page graphic centered on a matte background, showing a large '17-19 August 2026' date block, with icons of a globe, a graduation cap, and a handshake arranged symmetrically below, on a white background with thin silver borders"
+      ],
+      "image_title": "مؤتمر GRC 2026: سان دييغو 17-19 أغسطس",
+      "hook_title": "أكبر تجمّع لمحترفي GRC في 2026 — أكثر من 40 جلسة تخصصية تُشكّل مستقبل المهنة",
+      "image_summary": "ISACA وIIA يعقدان المؤتمر السنوي الـ13 لحوكمة المخاطر والامتثال في سان دييغو بمشاركة هجينة حضورية وافتراضية.",
+      "summary": "ينعقد المؤتمر السنوي الـ13 للحوكمة وإدارة المخاطر والامتثال بتنظيم مشترك من ISACA والمعهد الدولي للمدققين الداخليين (IIA) في الفترة من 17 إلى 19 أغسطس 2026 في سان دييغو بشكل هجين. يضم البرنامج أكثر من 40 جلسة تتناول حوكمة الذكاء الاصطناعي المؤسسي، والذكاء الاصطناعي الوكيل في GRC، وإدارة مخاطر الأطراف الثالثة، وتدقيق أنظمة الذكاء الاصطناعي التوليدي. يُعقد قبل المؤتمر ورشتان متخصصتان تشملان تدقيق الذكاء الاصطناعي التوليدي ودمج الأمن السيبراني في إطار GRC المؤسسي.",
+      "why_it_matters": "يُتيح المؤتمر لمحترفي GRC في منطقة الخليج اكتساب أحدث الرؤى العملية حول تقاطع التنظيم التقني والامتثال المؤسسي، وبناء شبكة علاقات مع القيادات العالمية في المجال.",
+      "who_is_affected": "مسؤولو الامتثال والمخاطر، المدققون الداخليون، متخصصو حوكمة المعلومات وتقنيتها، حاملو شهادات CISA وCRISC وCGEIT.",
+      "source": "ISACA / The IIA"
+    },
+    {
+      "classification": "تدقيق وامتثال",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A clean white auditing document centered on an off-white background, showing the NIST seal watermark and the title 'SP 800-219r2 macOS Compliance' in formal typography, with an automated checklist icon below it featuring green checkmarks, framed by thin silver borders",
+        "A minimalist white governance framework diagram showing three horizontal layers labeled 'macOS', 'iOS', and 'visionOS' stacked vertically, each with a shield and gear icon to the right, centered on a light gray linen background with no readable text",
+        "A formal white institutional checklist poster with the heading area blank, showing five checkbox rows with Apple platform icons (desktop, laptop, phone, tablet, headset) each with a formal lock icon beside it, centered on a white matte background with thin gold frame"
+      ],
+      "image_title": "NIST SP 800-219r2: ضبط أمان macOS وiOS آلياً",
+      "hook_title": "NIST يُحدّث دليل الضبط الأمني الآلي لمنصات Apple — فرصة للتعليق قبل 14 أغسطس",
+      "image_summary": "NIST يفتح التعليق على مسودة SP 800-219r2 التي تُوحّد إرشادات الضبط الأمني الآلي لمنصات macOS وiOS وvisionOS.",
+      "summary": "نشر NIST في 22 يونيو 2026 المسودة الأولى من الإصدار الثاني لدليل SP 800-219 المُخصَّص لتوجيهات الضبط الأمني الآلي عبر مشروع توافق أمن macOS (mSCP)، وهو مفتوح للتعليق حتى 14 أغسطس 2026. يُوحّد الإصدار الجديد فرعاً واحداً يغطي macOS وiOS/iPadOS وvisionOS، مع تبسيط إدارة إصدارات نظام التشغيل وتوسيع جمهور المستخدمين. تُشتقّ قواعد الضبط من NIST SP 800-53r5 وتدعم التحقق الآلي المتوافق مع معايير الأمن الحكومي.",
+      "why_it_matters": "يُعدّ هذا الدليل أداةً عملية مباشرة لمدققي الأنظمة ومسؤولي الامتثال الذين يديرون أجهزة Apple في البيئات الحكومية والمؤسسية؛ إذ يُحوّل متطلبات NIST SP 800-53 إلى ضوابط تقنية قابلة للتحقق الآلي.",
+      "who_is_affected": "مدراء أمن تقنية المعلومات في البيئات الحكومية والمؤسسية التي تعتمد أجهزة Apple، مدققو الامتثال الأمني، مسؤولو إدارة التكوين (Configuration Management).",
+      "source": "NIST CSRC"
+    }
+  ]
+}
