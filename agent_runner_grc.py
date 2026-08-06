@@ -133,28 +133,35 @@ def run() -> None:
     log.info("2/4 — توليد التصاميم البصرية (بهوية GRC البيضاء الرسمية)...")
 
     ai_backgrounds = []
-    if os.environ.get("OPENAI_API_KEY"):
+    concepts = content.get("visual_concepts") or []
+    if concepts and os.environ.get("GOOGLE_API_KEY"):
         try:
-            from openai_image_generator import generate_backgrounds
-            concepts = content.get("visual_concepts") or []
-            if concepts:
-                log.info("أفكار Claude البصرية الثلاث (GRC): %s", concepts)
-                ai_backgrounds = generate_backgrounds(
-                    concepts,
-                    content["classification"],
-                    content.get("urgency") == "عاجل",
-                    quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"),
-                )
-                ok = sum(1 for b in ai_backgrounds if b is not None)
-                log.info("تم توليد %d من %d خلفيات فنية بنجاح.", ok, len(concepts))
+            from nano_banana_image_generator import generate_backgrounds as nb_generate_backgrounds
+            log.info("توليد خلفيات فنية عبر Nano Banana (Gemini) — أفكار Claude: %s", concepts)
+            ai_backgrounds = nb_generate_backgrounds(
+                concepts, content["classification"], content.get("urgency") == "عاجل",
+            )
+            ok = sum(1 for b in ai_backgrounds if b is not None)
+            log.info("تم توليد %d من %d خلفيات فنية بنجاح عبر Nano Banana.", ok, len(concepts))
+        except Exception as exc:  # noqa: BLE001
+            log.warning("فشل توليد الخلفيات عبر Nano Banana (%s) — سيُجرَّب OpenAI إن توفر.", exc)
+            ai_backgrounds = []
+
+    if not any(ai_backgrounds) and concepts and os.environ.get("OPENAI_API_KEY"):
+        try:
+            from openai_image_generator import generate_backgrounds as oa_generate_backgrounds
+            log.info("توليد خلفيات فنية عبر OpenAI — أفكار Claude: %s", concepts)
+            ai_backgrounds = oa_generate_backgrounds(
+                concepts, content["classification"], content.get("urgency") == "عاجل",
+                quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"),
+            )
+            ok = sum(1 for b in ai_backgrounds if b is not None)
+            log.info("تم توليد %d من %d خلفيات فنية بنجاح عبر OpenAI.", ok, len(concepts))
         except Exception as exc:  # noqa: BLE001
             log.warning("فشل توليد الخلفيات الفنية (%s) — سيُستخدم التصميم المحلي بديلاً.", exc)
             ai_backgrounds = []
 
-    # ملاحظة: قوالب GRC الحالية (grc_image_generator.py) لا تدعم بعد تركيب
-    # خلفية فنية خارجية فوقها (بخلاف قوالب الأمن السيبراني) — تُستخدم الرسوم
-    # المحلية بالهوية البيضاء دائماً حالياً. سيُضاف الدعم لاحقاً إن احتيج.
-    image_paths = generate_grc_designs(content, out_dir)
+    image_paths = generate_grc_designs(content, out_dir, ai_backgrounds=ai_backgrounds)
     log.info("تم حفظ تصاميم GRC محلياً في: %s", out_dir)
 
     extra_platforms = [
@@ -162,7 +169,9 @@ def run() -> None:
     ]
     for platform in extra_platforms:
         try:
-            platform_paths = generate_grc_platform_designs(content, out_dir, platform=platform)
+            platform_paths = generate_grc_platform_designs(
+                content, out_dir, platform=platform, ai_backgrounds=ai_backgrounds,
+            )
             image_paths += platform_paths
             log.info("تم توليد %d صور إضافية لمنصة '%s'.", len(platform_paths), platform)
         except Exception as exc:  # noqa: BLE001

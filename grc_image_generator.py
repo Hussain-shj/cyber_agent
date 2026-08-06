@@ -16,8 +16,9 @@ from PIL import Image, ImageDraw, ImageFilter
 from image_generator import (
     FONT_BOLD, FONT_REGULAR, FONT_SEMIBOLD,
     _ar, _arabic_date, _cap_lines, _checklist_icon, _draw_mixed_line,
-    _draw_multiline_centered, _font, _lock_icon, _measure_mixed_line,
-    _news_icon, _radar_icon, _report_icon, _shield_icon, _wrap_arabic,
+    _draw_multiline_centered, _fit_background_to_canvas, _font, _lock_icon,
+    _measure_mixed_line, _news_icon, _radar_icon, _report_icon, _shield_icon,
+    _wrap_arabic,
 )
 
 WIDTH, HEIGHT = 1080, 1350
@@ -49,6 +50,25 @@ GRC_CLASSIFICATION_ICONS = {
 
 def _grc_icon_for(tag: str):
     return GRC_CLASSIFICATION_ICONS.get(tag, _report_icon)
+
+
+def _grc_lighten_overlay(img: Image.Image, top_alpha=150, bottom_alpha=200) -> Image.Image:
+    """يضيف تدرجاً أبيض/فاتح شفافاً أعلى وأسفل الصورة لضمان وضوح النص الكحلي
+    الداكن فوق أي خلفية فنية (حتى لو كانت معقدة أو ملونة)، عكس _darken_overlay
+    السيبراني — هنا نُفتّح بدل نُعتّم لأن نص GRC داكن على خلفية فاتحة."""
+    w, h = img.size
+    overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    od = ImageDraw.Draw(overlay)
+    band_h = round(h * 0.22)
+    for y in range(band_h):
+        a = int(top_alpha * (1 - y / band_h))
+        od.line([(0, y), (w, y)], fill=(255, 255, 253, a))
+    bottom_band_h = round(h * 0.4)
+    for y in range(h - bottom_band_h, h):
+        ratio = (y - (h - bottom_band_h)) / bottom_band_h
+        a = int(bottom_alpha * ratio)
+        od.line([(0, y), (w, y)], fill=(255, 255, 253, a))
+    return Image.alpha_composite(img.convert("RGBA"), overlay).convert("RGB")
 
 
 def _grc_base_canvas(canvas=None):
@@ -151,12 +171,19 @@ def _grc_network_dots(draw, color, count=8, seed=2, region=None, canvas=None):
 
 
 def grc_design_standard(title, tag, urgent=False, details="", date_str="", source="",
-                         canvas: tuple[int, int] = (WIDTH, HEIGHT)) -> Image.Image:
-    """تصميم GRC 1: خلفية بيضاء/كريمية + إطار زوايا + أيقونة مركزية + عنوان."""
+                         canvas: tuple[int, int] = (WIDTH, HEIGHT), bg_image=None) -> Image.Image:
+    """تصميم GRC 1: خلفية بيضاء/كريمية (أو فنية عبر bg_image) + إطار زوايا +
+    أيقونة مركزية + عنوان."""
     w, h = canvas
-    img, draw = _grc_base_canvas(canvas)
     accent = GRC["red_critical"] if urgent else GRC["navy"]
-    _grc_frame(draw, GRC["gold"], canvas)
+
+    if bg_image is not None:
+        img = _fit_background_to_canvas(bg_image, canvas=canvas)
+        img = _grc_lighten_overlay(img)
+        draw = ImageDraw.Draw(img)
+    else:
+        img, draw = _grc_base_canvas(canvas)
+        _grc_frame(draw, GRC["gold"], canvas)
 
     _grc_tag_badge_with_date(draw, tag, urgent, h * 0.09, date_str, canvas=canvas)
 
@@ -182,12 +209,18 @@ def grc_design_standard(title, tag, urgent=False, details="", date_str="", sourc
 
 
 def grc_design_highlight(title, tag, urgent, details="", date_str="", source="",
-                          canvas: tuple[int, int] = (WIDTH, HEIGHT)) -> Image.Image:
+                          canvas: tuple[int, int] = (WIDTH, HEIGHT), bg_image=None) -> Image.Image:
     """تصميم GRC 2: بطاقة 'إشعار رسمي' — شريط علوي كحلي/ذهبي + عنوان بارز،
     بديل مؤسسي لنمط 'التحذير العاجل' السيبراني."""
     w, h = canvas
-    img, draw = _grc_base_canvas(canvas)
     accent = GRC["red_critical"] if urgent else GRC["gold"]
+
+    if bg_image is not None:
+        img = _fit_background_to_canvas(bg_image, canvas=canvas)
+        img = _grc_lighten_overlay(img)
+        draw = ImageDraw.Draw(img)
+    else:
+        img, draw = _grc_base_canvas(canvas)
 
     band_h = round(h * 0.1)
     draw.rectangle([0, 0, w, band_h], fill=GRC["navy"])
@@ -237,13 +270,20 @@ def _grc_draw_multiline_right(draw, lines, size, fill, right_x, start_y, line_he
 
 
 def grc_design_detailed(title, tag, urgent, body_text, date_str="", source="",
-                         section_header="التفاصيل", canvas: tuple[int, int] = (WIDTH, HEIGHT)) -> Image.Image:
+                         section_header="التفاصيل", canvas: tuple[int, int] = (WIDTH, HEIGHT),
+                         bg_image=None) -> Image.Image:
     """تصميم GRC 3: عنوان + رأس قسم + فقرة كاملة محاذاة يمين + أيقونة + تذييل،
     نظير design_detailed السيبراني لكن بالهوية البيضاء الرسمية."""
     w, h = canvas
     accent = GRC["red_critical"] if urgent else GRC["gold"]
-    img, draw = _grc_base_canvas(canvas)
-    _grc_frame(draw, GRC["gold"], canvas)
+
+    if bg_image is not None:
+        img = _fit_background_to_canvas(bg_image, canvas=canvas)
+        img = _grc_lighten_overlay(img)
+        draw = ImageDraw.Draw(img)
+    else:
+        img, draw = _grc_base_canvas(canvas)
+        _grc_frame(draw, GRC["gold"], canvas)
 
     right_margin = w * 0.072
     right_x = w - right_margin
@@ -301,8 +341,12 @@ def grc_design_detailed(title, tag, urgent, body_text, date_str="", source="",
     return img
 
 
-def generate_grc_designs(content: dict, out_dir: str) -> list[str]:
-    """يولّد 3 تصاميم GRC (إنستغرام 1080×1350) ويحفظها كـ PNG."""
+def generate_grc_designs(content: dict, out_dir: str, ai_backgrounds: list | None = None) -> list[str]:
+    """يولّد 3 تصاميم GRC (إنستغرام 1080×1350) ويحفظها كـ PNG.
+
+    ai_backgrounds: قائمة اختيارية من حتى 3 صور PIL (خلفيات فنية بدون نص، من
+    Nano Banana/Gemini مثلاً) — كل عنصر يقابل أحد التصاميم الثلاثة بالترتيب.
+    أي عنصر مفقود أو None يُستخدم له الرسم المحلي الأبيض كبديل تلقائي."""
     os.makedirs(out_dir, exist_ok=True)
     title = content["image_title"]
     tag = content["classification"]
@@ -312,10 +356,18 @@ def generate_grc_designs(content: dict, out_dir: str) -> list[str]:
     source = content.get("source", "")
     full_body = content.get("summary") or details_text
 
+    bgs = list(ai_backgrounds or [])
+    bg1 = bgs[0] if len(bgs) > 0 else None
+    bg2 = bgs[1] if len(bgs) > 1 else None
+    bg3 = bgs[2] if len(bgs) > 2 else None
+
     designs = [
-        ("grc_1_standard", grc_design_standard(title, tag, urgent, details_text, date_str, source)),
-        ("grc_2_highlight", grc_design_highlight(title, tag, urgent, details_text, date_str, source)),
-        ("grc_3_detailed", grc_design_detailed(title, tag, urgent, full_body, date_str, source)),
+        ("grc_1_standard" if bg1 is None else "grc_1_ai",
+         grc_design_standard(title, tag, urgent, details_text, date_str, source, bg_image=bg1)),
+        ("grc_2_highlight" if bg2 is None else "grc_2_ai",
+         grc_design_highlight(title, tag, urgent, details_text, date_str, source, bg_image=bg2)),
+        ("grc_3_detailed" if bg3 is None else "grc_3_detailed_ai",
+         grc_design_detailed(title, tag, urgent, full_body, date_str, source, bg_image=bg3)),
     ]
     paths = []
     for name, img in designs:
@@ -325,8 +377,11 @@ def generate_grc_designs(content: dict, out_dir: str) -> list[str]:
     return paths
 
 
-def generate_grc_platform_designs(content: dict, out_dir: str, platform: str = "linkedin") -> list[str]:
-    """نسخة بمقاس منصة مخصص (مثل LinkedIn المربع 1080×1080) من نفس تصاميم GRC."""
+def generate_grc_platform_designs(content: dict, out_dir: str, platform: str = "linkedin",
+                                   ai_backgrounds: list | None = None) -> list[str]:
+    """نسخة بمقاس منصة مخصص (مثل LinkedIn المربع 1080×1080) من نفس تصاميم GRC.
+    يعيد استخدام نفس ai_backgrounds المُولَّدة أصلاً لإنستغرام (إن وُجدت) بقصّ
+    مختلف يناسب مقاس المنصة الجديدة — دون أي استدعاء إضافي للنموذج."""
     from image_generator import PLATFORM_SIZES
     if platform not in PLATFORM_SIZES:
         raise ValueError(f"منصة غير معروفة: {platform}")
@@ -341,10 +396,15 @@ def generate_grc_platform_designs(content: dict, out_dir: str, platform: str = "
     source = content.get("source", "")
     full_body = content.get("summary") or details_text
 
+    bgs = list(ai_backgrounds or [])
+    bg1 = bgs[0] if len(bgs) > 0 else None
+    bg2 = bgs[1] if len(bgs) > 1 else None
+    bg3 = bgs[2] if len(bgs) > 2 else None
+
     designs = [
-        (f"{platform}_grc_1", grc_design_standard(title, tag, urgent, details_text, date_str, source, canvas=canvas)),
-        (f"{platform}_grc_2", grc_design_highlight(title, tag, urgent, details_text, date_str, source, canvas=canvas)),
-        (f"{platform}_grc_3", grc_design_detailed(title, tag, urgent, full_body, date_str, source, canvas=canvas)),
+        (f"{platform}_grc_1", grc_design_standard(title, tag, urgent, details_text, date_str, source, canvas=canvas, bg_image=bg1)),
+        (f"{platform}_grc_2", grc_design_highlight(title, tag, urgent, details_text, date_str, source, canvas=canvas, bg_image=bg2)),
+        (f"{platform}_grc_3", grc_design_detailed(title, tag, urgent, full_body, date_str, source, canvas=canvas, bg_image=bg3)),
     ]
     paths = []
     for name, img in designs:
