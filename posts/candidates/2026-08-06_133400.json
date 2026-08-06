@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A bright red warning shield icon centered on a dark background, with three glowing cracked chain links radiating outward, symbolizing three broken authentication barriers",
+        "A dark server rack with three doors forced open, highlighted by orange alarm beams crossing the center of the image",
+        "Abstract digital lock dissolving into scattered pixels in the center of a deep blue field, representing authentication bypass"
+      ],
+      "image_title": "CISA تُضيف ثلاث ثغرات مستغلة فعلياً",
+      "hook_title": "⚠️ تحذير عاجل: CISA ترصد استغلالاً نشطاً لثلاث ثغرات خطيرة في Langflow وTomcat وN-central",
+      "image_summary": "CISA تُدرج ثلاث ثغرات مستغلة بشكل نشط تطال بنى تحتية حيوية وتُلزم الوكالات بالتصحيح.",
+      "summary": "أضافت CISA في 4 أغسطس 2026 ثلاث ثغرات إلى قائمة KEV، أبرزها CVE-2026-9198 في Langflow بدرجة CVSS 9.8 تتيح تنفيذ أكواد عن بُعد دون مصادقة، وCVE-2026-34486 في Apache Tomcat تُتيح تجاوز تشفير الاتصالات، وCVE-2026-18556 في N-able N-central لتجاوز المصادقة. حُدد موعد الإصلاح الإلزامي للوكالات الفيدرالية في 7 أغسطس 2026.",
+      "why_it_matters": "الثغرات الثلاث قيد الاستغلال الفعلي حالياً، مما يعني أن كل يوم تأخير يرفع احتمال الاختراق بشكل مباشر لأي مؤسسة تعمل بهذه الأنظمة.",
+      "who_is_affected": "جميع مستخدمي Langflow، وApache Tomcat (الإصدارات قبل 9.0.117 / 10.1.54 / 11.0.21)، وN-able N-central في المؤسسات والحكومات والشركات",
+      "source": "CISA / The Hacker News"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A network of interconnected routers and switches glowing in teal, with a central spider-web crack pattern spreading from the middle controller outward",
+        "A padlock icon at the center of a circuit board design, with 15 small red dots indicating vulnerability points scattered symmetrically around it",
+        "An abstract chain-of-trust diagram where each link in the center chain is visibly broken and highlighted in amber, on a dark navy background"
+      ],
+      "image_title": "15 ثغرة خطيرة في أجهزة TP-Link Omada",
+      "hook_title": "🔓 تحذير للشبكات المؤسسية: 15 ثغرة في TP-Link Omada تُفضي إلى سيطرة كاملة على الشبكة",
+      "image_summary": "Forescout تكشف 15 ثغرة في نظام التوفير التلقائي لـ TP-Link Omada تُتيح خطف الأجهزة والشبكات بأكملها.",
+      "summary": "كشف باحثو Forescout خلال مؤتمر Black Hat USA 2026 عن 15 ثغرة في نظام Zero-Touch Provisioning الخاص بـ TP-Link Omada، تمكّن المهاجمين من خطف المتحكمات، وسرقة بيانات الاعتماد، وتنفيذ هجمات man-in-the-middle، بل وتمتد إلى كاميرات VIGI وأجهزة المنزل الذكي Tapo وKasa. رُصد أكثر من 1800 متحكم Omada مكشوف مباشرةً على الإنترنت رغم التوصيات بعزله.",
+      "why_it_matters": "أجهزة Omada منتشرة على نطاق واسع في الشركات الصغيرة والمتوسطة بمنطقة الخليج؛ والسيطرة على المتحكم تعني السيطرة على كل جهاز تحت إدارته دفعةً واحدة.",
+      "who_is_affected": "الشركات الصغيرة والمتوسطة والمؤسسات التي تعتمد أجهزة TP-Link Omada (راوترات، سويتشات، نقاط وصول، كاميرات VIGI، وأجهزة المنزل الذكي)",
+      "source": "Forescout / SecurityWeek / BleepingComputer"
+    },
+    {
+      "classification": "تحليل هجوم",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A glowing brain-shaped AI neural network at the center of a dark screen, with automated attack arrows radiating outward toward server icons",
+        "A robotic arm pressing a keyboard autonomously in a neon-lit dark environment, with code streams flowing from a central point outward",
+        "A central drone-like AI agent icon surrounded by concentric scanning rings targeting multiple server nodes, all on a deep purple background"
+      ],
+      "image_title": "ذكاء اصطناعي صيني يشنّ هجمات إلكترونية مستقلة",
+      "hook_title": "🤖 سابقة خطيرة: هاكر صيني يُطلق DeepSeek لمهاجمة أكثر من 460 خادماً دون تدخل بشري",
+      "image_summary": "Unit 42 ترصد أول حملة هجومية مستقلة بالكامل تعتمد على نموذج DeepSeek AI لاستهداف خوادم مكشوفة.",
+      "summary": "رصدت وحدة Unit 42 التابعة لـ Palo Alto Networks ممثلاً تهديدياً صينياً يُعرّف بنفسه بالاسمين 'knaithe' وKnYuan، يستخدم نموذج DeepSeek ضمن إطار Hermes Agent المفتوح لشنّ هجمات إلكترونية مستقلة. استطاع الذكاء الاصطناعي تحديد الأهداف وتنزيل ثغرات proof-of-concept ومحاولة الاختراق دون تدخل بشري مستمر، مستهدفاً أكثر من 460 نظاماً في قطاعات متعددة. وقد انكشفت بنية الهجوم بسبب خطأ ذاتي أوجد خادم ملفات مكشوفاً.",
+      "why_it_matters": "هذه الحادثة تُثبت لأول مرة وجود قدرة هجومية آلية شاملة من الاستطلاع حتى الاستغلال، مما يُنبئ بتصاعد سرعة الهجمات مستقبلاً.",
+      "who_is_affected": "جميع المؤسسات التي تُشغّل خدمات مكشوفة على الإنترنت لا سيما Langflow وn8n وأدوات أتمتة العمليات",
+      "source": "Palo Alto Networks Unit 42"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A golden key icon at the center of a dark screen being copied by a ghost-like duplicate key, symbolizing silent passkey theft",
+        "A fingerprint scan icon in the center of a Windows screen with a subtle red override arrow bypassing the biometric gate",
+        "A cracked vault door at the center of an abstract digital environment, with small key fragments floating outward representing stolen credentials"
+      ],
+      "image_title": "هجوم Pass-ta-key يخترق مفاتيح المرور في جوجل",
+      "hook_title": "🔑 تحذير للمؤسسات: برمجيات خبيثة تُتيح سرقة Passkeys من Google دون تدخل المستخدم",
+      "image_summary": "Unit 42 تكشف ثلاث تقنيات هجوم جديدة تُمكّن البرمجيات الخبيثة من سرقة مفاتيح مرور Google المُزامَنة.",
+      "summary": "كشف باحثو Palo Alto Networks Unit 42 في أغسطس 2026 عن ثلاثة أساليب هجوم تحمل اسم Pass-ta-key تستهدف Google Password Manager في Chrome على ويندوز. تُمكّن هذه الأساليب برمجيات خبيثة تعمل بصلاحيات عادية من الاستيلاء على حسابات محمية بمفاتيح مرور دون الحاجة لرفع الصلاحيات أو تفاعل المستخدم، وذلك باستغلال ثغرات في آليات المزامنة السحابية وإدارة ثقة الأجهزة لا في الخوارزميات التشفيرية ذاتها.",
+      "why_it_matters": "يُزعزع هذا الاكتشاف الاعتقاد السائد بأن Passkeys مضمونة تماماً، ويُبيّن أن أمن نقطة النهاية لا يزال ركيزةً أساسية حتى مع اعتماد المصادقة بلا كلمات مرور.",
+      "who_is_affected": "مستخدمو Google Password Manager على Chrome في ويندوز؛ والمؤسسات التي تعتمد Passkeys المُزامَنة كآلية مصادقة وحيدة",
+      "source": "Palo Alto Networks Unit 42 / SecurityWeek / BleepingComputer"
+    },
+    {
+      "classification": "تحليل هجوم",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "An industrial water pipeline system viewed from above, with a central red alert beacon glowing over a PLC controller unit in the middle of the layout",
+        "A digital map of interconnected water towers across a region with orange warning signals clustered at the center, representing coordinated infrastructure attack",
+        "Abstract OT network diagram centered on a programmable logic controller icon cracked open, with malware signals spreading outward in concentric rings"
+      ],
+      "image_title": "هجوم إلكتروني منسّق يضرب 30+ محطة مياه أمريكية",
+      "hook_title": "💧 استهداف البنية التحتية الحيوية: هجوم منسّق يعطّل أكثر من 30 محطة مياه في مينيسوتا",
+      "image_summary": "هجوم إلكتروني منسّق يُرجَّح ارتباطه بإيران يضرب 30 محطة مياه أمريكية ويُعطّل أنظمة التحكم التشغيلي.",
+      "summary": "استهدف هجوم إلكتروني منسّق في 26 و27 يوليو 2026 أكثر من 30 منظومة مائية في مينيسوتا، عبر اختراق وحدات التحكم المنطقي القابل للبرمجة (PLCs)، وتعديل كلمات المرور، وتعطيل قدرات المراقبة والسيطرة، مما اضطر بعض المدن إلى التحول للتشغيل اليدوي. وتُشير مؤشرات فيدرالية أولية إلى احتمال ارتباطه بجهات مرتبطة بإيران، فيما وسّعت CISA نطاق تحذيرها في تحديث جولة AA26-097A.",
+      "why_it_matters": "الهجوم يُجسّد خطر استهداف البنية التحتية الحيوية OT/ICS التي تعاني من ضعف بنيوي تاريخي في التأمين، وهو نمط مقلق لدول الخليج التي تعتمد أنظمة مائية مماثلة.",
+      "who_is_affected": "منظومات المياه والبنية التحتية الحيوية التي تستخدم PLCs مكشوفة على الإنترنت، بما تشمل قطاعات الطاقة والصرف الصحي والبلديات",
+      "source": "CISA / Tenable / Minnesota IT Services"
+    },
+    {
+      "classification": "Ransomware",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A large factory building silhouette at the center with chains wrapping around it glowing in red, and a skull icon hovering above the entrance",
+        "A milk bottle icon at the center of a dark digital background being locked by a ransomware padlock symbol with data streams escaping",
+        "An encrypted folder icon in the center surrounded by corporate document silhouettes dissolving into red pixel fragments"
+      ],
+      "image_title": "فدية Anubis تُوقف إنتاج Fairlife التابعة لكوكاكولا",
+      "hook_title": "🥛 هجوم فدية يُوقف إنتاج الألبان: مجموعة Anubis تخترق Fairlife وتسرق 1 تيرابايت من البيانات",
+      "image_summary": "مجموعة Anubis للفدية تشلّ إنتاج شركة Fairlife الأمريكية للألبان وتهدد بتسريب 1 تيرابايت من البيانات.",
+      "summary": "أعلنت مجموعة Anubis للفدية مسؤوليتها عن الهجوم الذي أوقف الإنتاج في مصانع Fairlife الأمريكية التابعة لكوكاكولا، مُهددةً بنشر تيرابايت من البيانات السرية المسروقة. وكانت كوكاكولا قد أبلغت هيئة الأوراق المالية في 16 يوليو 2026 بأن الهجوم جاء عبر طرف ثالث. وتعتمد Anubis نموذج Ransomware-as-a-Service وهي إعادة تسمية لعملية Sphinx، وتستخدم أسلوب الابتزاز المزدوج.",
+      "why_it_matters": "الهجوم يُظهر قابلية سلاسل الإمداد الغذائية للتعطل الكامل جراء الفدية، مع خطر تسريب بيانات تجارية سرية تضر بالسمعة والعمليات معاً.",
+      "who_is_affected": "شركات التصنيع الغذائي والاستهلاكي، وأي مؤسسة تعتمد على أطراف ثالثة في إدارة أنظمتها التشغيلية",
+      "source": "BleepingComputer / SecurityWeek / Cybersecurity Dive"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A Samsung smartphone at the center of a dark background with a glowing crack spreading across its screen from a Bixby microphone icon",
+        "An abstract chain of three interlocking exploit rings glowing in orange against a dark circuit board texture, centered in the frame",
+        "A digital key turning inside a phone-shaped vault, with the lock mechanism visibly circumvented by a layered attack chain diagram"
+      ],
+      "image_title": "سلسلة ثغرات بـ50,000$ تُحوّل Bixby أداةً للاختراق",
+      "hook_title": "📱 تحذير لمستخدمي Samsung: ثغرات في Bixby وSamsung Members تُتيح اختراق الهواتف بزاوية مُحكمة",
+      "image_summary": "باحثون يكشفون سلسلة ثغرات في تطبيقات Samsung تُمكّن من اختراق أجهزة Galaxy عن بُعد بخطوات محدودة.",
+      "summary": "كشف باحثون من Microsoft وMobile Hacking Lab خلال مؤتمر Black Hat USA 2026 عن سلسلة استغلال تجمع ثغرات في تطبيقي Samsung Members وSamsung Account، مُمكِّنةً المهاجم من توجيه الضحية إلى رابط خبيث يُؤدي إلى سيطرة كاملة على الجهاز. وقد استُخدمت هذه الثغرات في مسابقة Pwn2Own Ireland في أكتوبر 2025، حيث حصد الفريق 50,000 دولار جائزة.",
+      "why_it_matters": "أجهزة Samsung Galaxy من بين الأكثر انتشاراً في المنطقة العربية والخليج، مما يجعل هذه الثغرات مصدر خطر مباشر لملايين المستخدمين ما لم تُطبَّق التحديثات الأمنية.",
+      "who_is_affected": "مستخدمو أجهزة Samsung Galaxy التي تحتوي على Samsung Members وSamsung Account بإصدارات غير مُحدَّثة",
+      "source": "SecurityWeek / Black Hat USA 2026"
+    },
+    {
+      "classification": "تسريب بيانات",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A fintech mobile app icon at the center cracking open with streams of CSV file icons spilling outward into a dark digital void",
+        "An abstract vault door partially open in the center of a dark green background, with 75 million small glowing dots representing user records escaping",
+        "A payment card icon surrounded by concentric circles of data labels dissolving into a dark cybercrime forum aesthetic background"
+      ],
+      "image_title": "ادعاء ببيع 75 مليون سجل من مستخدمي Revolut",
+      "hook_title": "💳 تحذير للمستخدمين الماليين: ادعاءات ببيع قاعدة بيانات 75 مليون عميل Revolut في الدارك ويب",
+      "image_summary": "جهة تهديد تدّعي بيع بيانات 75 مليون عميل Revolut تشمل تفاصيل بطاقات وأرقام هواتف وبيانات حسابات.",
+      "summary": "ادّعى ممثل تهديد في يوليو 2026 عرض قاعدة بيانات تضمّ أكثر من 75 مليون سجل مزعوم لعملاء Revolut، تشمل بيانات جزئية للبطاقات والبريد الإلكتروني والعناوين وبيانات الأجهزة. وقد نفت Revolut وجود أي اختراق جديد، فيما أبدى الباحثون تشككاً في الأصالة استناداً إلى انخفاض سعر البيع (500 دولار فقط) واحتمال كون البيانات مُجمَّعة من مصادر متعددة. لا تزال التحقيقات جارية.",
+      "why_it_matters": "حتى لو كانت البيانات مُجمَّعة أو قديمة، فإن مزج معلومات الاتصال مع بيانات البطاقات يُشكّل بيئة خصبة لحملات تصيد احتيالي وهندسة اجتماعية موجّهة تستهدف مستخدمي الخدمات المالية الرقمية.",
+      "who_is_affected": "عملاء Revolut المحتملون في جميع أنحاء العالم، ومستخدمو تطبيقات الدفع الرقمي والبنوك الرقمية بشكل عام",
+      "source": "Cybernews / CybersecurityNews / Cybernews Research"
+    },
+    {
+      "classification": "تسريب بيانات",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An insurance policy document icon at the center being shattered into fragments by a hacking symbol, on a deep red and black background",
+        "A Japanese torii gate silhouette at the center with digital data streams bleeding out from its base, representing the Aflac Japan breach",
+        "A customer portal login screen cracked from the inside with 4.38 million small file icons streaming out from the center breach point"
+      ],
+      "image_title": "اختراق بوابة Aflac اليابان يكشف بيانات 4.38 مليون عميل",
+      "hook_title": "🏦 قطاع التأمين تحت الهجوم: Aflac اليابان تُفصح عن سرقة بيانات 4.38 مليون عميل ووكيل",
+      "image_summary": "اختراق استمر 10 أيام في بوابة عملاء Aflac اليابان يكشف بيانات شخصية ومصرفية لـ4.38 مليون شخص.",
+      "summary": "أفصحت Aflac Life Insurance Japan في 30 يونيو 2026 عن اختراق ممتد 10 أيام (من 15 إلى 25 يونيو) استهدف بوابة حاملي وثائق التأمين، وأسفر عن تسريب بيانات شخصية ومصرفية تخص 4.38 مليون عميل ووكيل، تشمل الأسماء والعناوين وأرقام الهواتف وتواريخ الميلاد ومعلومات الحسابات المصرفية لنحو 230,000 شخص. وهذا الاختراق هو الثاني الكبير الذي يطال مجموعة Aflac خلال عام واحد.",
+      "why_it_matters": "قطاع التأمين يُعدّ هدفاً بالغ الحساسية لأن بياناته تجمع بين المعلومات الصحية والمالية والشخصية، مما يُيسّر الاحتيال والانتحال ويستوجب رقابة مُشددة على بوابات العملاء.",
+      "who_is_affected": "شركات التأمين وقطاعات الخدمات المالية في آسيا وعالمياً، لا سيما تلك التي تعتمد بوابات إلكترونية لخدمة العملاء",
+      "source": "SecurityWeek / BleepingComputer / Security Affairs"
+    },
+    {
+      "classification": "تقرير استخباراتي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A global map centered on a stylized ransomware skull icon with glowing red attack lines radiating outward to multiple continents",
+        "A bar chart of rising attack volumes rendered as stacked lock icons in the center of a dark analytical dashboard background",
+        "A Hydra-like multi-headed monster silhouette centered on a dark background, each head labeled with a different ransomware group symbol"
+      ],
+      "image_title": "ارتفاع هجمات الفدية 74% في الشركات الكبرى خلال 2026",
+      "hook_title": "📊 تقرير استخباراتي: هجمات الفدية على الشركات الكبرى قفزت 74% والرعاية الصحية الأعلى استهدافاً",
+      "image_summary": "تقارير استخباراتية تُؤكد ارتفاع هجمات الفدية 74% على المؤسسات الكبرى مع تصاعد نشاط LockBit 5 وQilin.",
+      "summary": "كشفت تقارير BlackFog وGuidePoint Security لمنتصف 2026 أن هجمات الفدية على الشركات المليارية قفزت 74% ربعاً على ربع، وسجّل يوليو 2026 وحده 111 هجوماً معلناً بزيادة 6.7% عن العام الماضي، فيما استأثر القطاع الصحي بـ35% من الضحايا. وتصدّرت LockBit 5 وQilin المشهد بأكبر عدد من الضحايا، فيما يستهدف DragonForce قطاع السياحة والسفر.",
+      "why_it_matters": "الارتفاع الحاد في هجمات الفدية ضد المؤسسات الكبرى يعني أن المنظمات في منطقة الخليج — لا سيما في قطاعي الصحة والخدمات اللوجستية — باتت في مرمى التهديدات بشكل متصاعد ويستوجب مراجعة استراتيجيات الاسترداد.",
+      "who_is_affected": "المؤسسات الكبرى في قطاعات الرعاية الصحية والتصنيع والخدمات والحكومات، خاصةً تلك التي تفتقر لخطط استمرارية الأعمال وعزل الشبكات",
+      "source": "BlackFog / GuidePoint Security"
+    }
+  ]
+}
