@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A compliance officer in a crisp white shirt sits at a wide desk reviewing a checklist titled 'AI Transparency Obligations' under warm cream and navy lighting; a large wall clock in the background shows the date August 2nd; documents and a laptop display EU regulatory pages; calm, centred composition",
+        "A mid-shot of a small team in a modern conference room with ivory walls and navy accents; one person annotates a printed timeline showing 'Article 50 – Enforceable Now' highlighted in gold; colleagues discuss calmly around a round table; soft overhead light",
+        "A close-up of a compliance checklist on a light desk — three items checked: chatbot disclosure, synthetic content marking, deepfake labelling — beside a gold EU stars emblem (not branded); calm cream and slate-blue tones; centred, uncluttered frame"
+      ],
+      "image_title": "قانون الذكاء الاصطناعي الأوروبي: الشفافية مُلزِمة الآن",
+      "hook_title": "2 أغسطس 2026: التزامات الشفافية في قانون الذكاء الاصطناعي الأوروبي باتت نافذة رسمياً",
+      "image_summary": "المادة 50 من قانون الذكاء الاصطناعي الأوروبي أصبحت قابلة للتنفيذ — الإفصاح عن الذكاء الاصطناعي إلزامي.",
+      "summary": "اعتباراً من 2 أغسطس 2026، باتت التزامات الشفافية المنصوص عليها في المادة 50 من قانون الذكاء الاصطناعي الأوروبي قابلة للتطبيق الفعلي؛ إذ يُلزَم المشغّلون بالإفصاح للمستخدمين عن تفاعلهم مع أنظمة ذكاء اصطناعي، وتضمين علامات رقمية في المحتوى الاصطناعي، والإشارة الواضحة لمحتوى التزييف العميق. في الوقت ذاته، اكتسب مكتب الذكاء الاصطناعي الأوروبي صلاحيات كاملة لفرض الغرامات على مزودي نماذج الذكاء الاصطناعي للأغراض العامة. الغرامات قد تبلغ 15 مليون يورو أو 3% من الإيرادات السنوية العالمية.",
+      "why_it_matters": "يُعرّض عدم الامتثال الفوري المنظمات لغرامات مادية ضخمة؛ ومسؤولو الامتثال مطالَبون بمراجعة كل نقطة تفاعل تعتمد على الذكاء الاصطناعي وتوثيق آليات الإفصاح قبل إجراء أي تدقيق.",
+      "who_is_affected": "كل جهة تُشغّل أنظمة ذكاء اصطناعي تتفاعل مع مستخدمين داخل الاتحاد الأوروبي، بما فيها المنصات الرقمية والمؤسسات المالية وخدمات العملاء.",
+      "source": "WSGR / TechTimes / DataProtectionReport"
+    },
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A cybersecurity incident response team in a dimly lit but calm operations centre — three analysts in business attire gather around screens showing alert notifications; warm navy and cream palette; centred medium shot; no specific logos; documents labelled 'SEC Form 8-K' visible on one desk",
+        "A split-panel illustration: on the left, a cloud infrastructure diagram with a red lock icon indicating breach; on the right, a compliance officer drafting a patient notification letter at a cream-coloured desk under soft golden light; centred, balanced composition",
+        "A close-up overhead view of a risk register spreadsheet on a light desk with a 'Third-Party Cloud Risk' row highlighted in amber; a pen rests beside it; soft ivory and gold tones; calm, uncluttered, centred frame"
+      ],
+      "image_title": "اختراق أمجن: بيانات مرضى من خوادم سحابية خارجية",
+      "hook_title": "أمجن تُخطر هيئة الأوراق المالية: اختراق مادي يطال بيانات المرضى والملكية الفكرية",
+      "image_summary": "شركة أمجن الدوائية أبلغت SEC عن اختراق لبيانات مرضى ومعلومات أبحاث حساسة من بيئات سحابية تديرها أطراف ثالثة.",
+      "summary": "كشفت شركة أمجن للتقنية الحيوية في 31 يوليو 2026 عبر نموذج 8-K المقدَّم لهيئة الأوراق المالية الأمريكية عن اختراق إلكتروني جوهري، تمكّن فيه المهاجمون من اختراق بيئات سحابية تديرها جهات خارجية وسرقة بيانات المرضى المحمية، والملكية الفكرية، ومعطيات أبحاث وتطوير سرية. يندرج هذا الحادث ضمن موجة هجمات متصاعدة استهدفت شركات أدوية وتقنيات طبية بارزة. يتزامن الإشعار مع التزامات HIPAA لإخطار المرضى والمتطلبات التنظيمية لـ SEC.",
+      "why_it_matters": "يُجسّد هذا الحادث المخاطر المتصاعدة لاعتماد التخزين السحابي لدى أطراف ثالثة في قطاع الرعاية الصحية، ويُذكّر مسؤولي الامتثال بضرورة مراجعة ضمانات عقود الجهات الخارجية وضوابط الوصول السحابي.",
+      "who_is_affected": "مسؤولو الامتثال في القطاع الصحي والدوائي، ومدراء مخاطر الأطراف الثالثة، والشركات الملزَمة بمتطلبات الإشعار المزدوج وفق HIPAA وSEC.",
+      "source": "HIPAA Journal / BankInfoSecurity / TheRecord / TechTimes"
+    },
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A utility control room with a calm ivory-and-navy colour scheme; two technicians in safety vests review a SCADA screen displaying a water infrastructure map; several workstations are visible with control system monitors; centred wide shot; no specific logos",
+        "An illustrated grant announcement scene: a government official in business attire hands over a symbolic oversized cheque to a utility manager in front of a water treatment facility illustration; cream and gold palette; centred, clean composition",
+        "A close-up of an OT risk checklist on a clipboard against a blurred industrial background — items include 'PLC internet exposure', 'access control', 'incident response plan'; warm ivory tones with navy text; centred frame"
+      ],
+      "image_title": "هجمات على منشآت المياه: 9 ملايين دولار للحماية",
+      "hook_title": "FBI وEPA يُحذّران من هجمات متصاعدة على شبكات المياه — نيويورك تستجيب بمنح سيبرانية طارئة",
+      "image_summary": "هجمات إلكترونية طالت منظومات المياه في 7 ولايات أمريكية؛ نيويورك تُسرّع منح 9 ملايين دولار لحماية 153 محطة.",
+      "summary": "في 30 يوليو 2026، أصدر مكتب التحقيقات الفيدرالي (FBI) ووكالة حماية البيئة (EPA) تحذيراً مشتركاً عاجلاً بشأن هجمات إلكترونية استهدفت وحدات التحكم المبرمجة (PLC) في شبكات المياه والصرف الصحي عبر ولايات أمريكية متعددة. قام المهاجمون بالوصول عن بُعد عبر واجهات الإنترنت وتغيير كلمات المرور وعناوين IP، مما أفقد المشغّلين القدرة على المراقبة والتحكم. رداً على ذلك، أعلنت نيويورك تسريع صرف 9 ملايين دولار لـ 153 مشروعاً حكومياً محلياً عبر برنامج SECURE.",
+      "why_it_matters": "يكشف هذا الحادث الهشاشة البالغة لأنظمة التشغيل التقني (OT) في البنية التحتية الحيوية؛ ويُذكّر مسؤولي الحوكمة والمخاطر بأهمية إزالة الأجهزة المكشوفة على الإنترنت وتطبيق معايير التحكم بالوصول.",
+      "who_is_affected": "مشغّلو البنية التحتية الحيوية، ومدراء أمن أنظمة OT/SCADA، والجهات الحكومية المسؤولة عن قطاع المياه والمرافق.",
+      "source": "SecurityWeek / GovInfoSecurity / FBI-EPA Joint Advisory"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A federal procurement officer in a suit sits at a government-style desk reviewing a printed document titled 'IoT Cybersecurity Requirements'; beside the desk, small connected device icons (smart sensor, router) are displayed on a light board; cream and navy palette; centred composition",
+        "A product security team in a modern open-plan office gathers around a whiteboard mapping 'IoT lifecycle security controls'; one person writes 'SP 800-213r1' at the top; calm ivory walls, natural light, gold accents; medium wide shot; centred",
+        "A close-up of an IoT device — a small industrial sensor — resting on a compliance checklist document on a clean cream desk; a pen points to a row labelled 'Secure Software Development'; soft navy and ivory tones; centred, uncluttered"
+      ],
+      "image_title": "NIST يُحدّث إرشادات الأمن السيبراني لمنتجات إنترنت الأشياء",
+      "hook_title": "NIST يطرح مسودة SP 800-213r1 لإرساء متطلبات أمن منتجات IoT الحكومية — التعليقات مفتوحة حتى 24 أغسطس",
+      "image_summary": "NIST يطرح مسودة SP 800-213r1 لتحديد متطلبات الأمن السيبراني لمنتجات إنترنت الأشياء المُشتراة حكومياً.",
+      "summary": "أصدر معهد NIST في 24 يونيو 2026 المسودة الأولية من المراجعة الأولى للمنشور الخاص SP 800-213، التي تُعيد صياغة كيفية تحديد الوكالات الفيدرالية لمتطلبات الأمن السيبراني عند شراء منتجات إنترنت الأشياء. تُعالج المسودة IoT باعتبارها مشكلة منتج ومخاطر نشر شاملة، لا مجرد قائمة تحقق لخصائص الأجهزة. باب التعليق العام مفتوح حتى 24 أغسطس 2026.",
+      "why_it_matters": "ستُحدد هذه الإرشادات في نهاية المطاف أي منتجات IoT يمكن للجهات الفيدرالية شراؤها، وكيف يُثبت الموردون قدراتهم الأمنية — مما يُؤثر بشكل مباشر على استراتيجيات الامتثال لدى المورّدين والشركاء.",
+      "who_is_affected": "مصنّعو منتجات IoT، ومسؤولو المشتريات الحكومية، ومدراء مخاطر سلاسل التوريد في القطاعين العام والخاص.",
+      "source": "NIST CSRC / Security Boulevard / Secure-by-Design Handbook"
+    },
+    {
+      "classification": "أفضل ممارسات حوكمة",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A risk manager in a modern office holds a printed document labelled 'Ransomware Risk Management Profile' while standing before a whiteboard showing the six CSF 2.0 functions (Govern, Identify, Protect, Detect, Respond, Recover) written in clean navy text; cream walls, natural light; centred",
+        "A small IT security team around a conference table reviews a gap analysis spreadsheet; a laptop screen shows a CSF 2.0 framework diagram; calm ivory and gold tones; medium shot; no logos; centred composition",
+        "A close-up of a two-column table on a light desk — left column: CSF 2.0 subcategories, right column: ransomware risk actions — with a gold bookmark tab; warm cream tones; centred, clean frame"
+      ],
+      "image_title": "NIST يُصدر ملف CSF 2.0 النهائي لإدارة مخاطر برامج الفدية",
+      "hook_title": "NIST IR 8374r1 نهائياً: دليل عملي لإدارة مخاطر برامج الفدية وفق إطار CSF 2.0",
+      "image_summary": "NIST يُصدر النسخة النهائية من ملف إدارة مخاطر برامج الفدية المُحدَّث وفق إطار CSF 2.0.",
+      "summary": "نشر المركز الوطني لتميّز الأمن السيبراني (NCCoE) في 11 يونيو 2026 النسخة النهائية من تقرير NIST IR 8374r1، وهو ملف مجتمعي لإطار CSF 2.0 يُترجم الإطار إلى إجراءات عملية لمكافحة برامج الفدية. يُغطي الملف الوظائف الست: GOVERN وIDENTIFY وPROTECT وDETECT وRESPOND وRECOVER، ويُساعد المنظمات على تقييم وضعها الحالي وتحديد الفجوات وتحديد أولويات التحسين. يُعدّ هذا المورد مفيداً بشكل خاص للمنظمات الصغيرة ومتوسطة الحجم.",
+      "why_it_matters": "يُوفّر الملف للمنظمات نقطة انطلاق منظّمة ومرتكزة على المخاطر لتطوير استراتيجيات التصدي لبرامج الفدية، مما يُسهّل على مسؤولي الامتثال تبرير الاستثمارات الأمنية أمام الإدارة العليا.",
+      "who_is_affected": "مسؤولو الأمن السيبراني وإدارة المخاطر في المنظمات الحكومية والخاصة، ولا سيما الجهات التي لم تضع بعد خطة استجابة موثّقة لبرامج الفدية.",
+      "source": "NIST NCCoE / NIST CSRC / InsideCybersecurity"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A government IT security architect in a formal suit reviews a dual-panel diagram on a large monitor — left side shows classical PIV credentials, right side shows quantum-resistant PQC credentials with an arrow bridging both; calm navy and cream palette; centred medium shot; no logos",
+        "A close-up of a smart card (PIV credential) resting on a technical specification document on a clean cream desk; behind it, a whiteboard shows the labels 'ML-DSA' and 'ML-KEM' in navy; warm golden light; centred, uncluttered",
+        "A compliance team in an open modern office debates around a whiteboard showing a migration timeline with phases labelled 'Classical Keys', 'Dual Stack', 'PQC Ready'; calm ivory walls, natural window light; medium wide shot; centred"
+      ],
+      "image_title": "NIST يُعِدّ بطاقة PIV الهوياتية لحقبة ما بعد الكَم",
+      "hook_title": "NIST يُطلق مسودات عمل لتحديث معايير PIV بتشفير مقاوم للحوسبة الكمومية",
+      "image_summary": "NIST يطرح نموذج التكديس المزدوج لترقية بطاقات PIV بخوارزميات تشفير مقاومة للكَم مع الحفاظ على التوافقية.",
+      "summary": "أصدر معهد NIST في يونيو 2026 مسودات عمل أولية لتحديث معايير التحقق من الهوية الشخصية (PIV) بما يدعم التشفير ما بعد الكَم (PQC). يعتمد النهج نموذج التكديس المزدوج الذي يُبقي مفاتيح PIV الكلاسيكية قيد الاستخدام مع إضافة مراجع مفاتيح وحاويات شهادات جديدة لبيانات اعتماد PQC، مما يُتيح النشر التدريجي دون استبدال كامل للبنية التحتية. المسودات تستخدم خوارزميتَي ML-DSA وML-KEM.",
+      "why_it_matters": "تُمثّل هوية المستخدمين وصلاحيات الوصول ركيزة محورية في حوكمة الأمن المؤسسي؛ وهذا التحديث يُعلن بدء مرحلة الانتقال الفعلي نحو الهوية المقاومة للكَم التي ستؤثر على استراتيجيات IAM في الجهات الحكومية وشركائها.",
+      "who_is_affected": "مدراء إدارة الهوية والوصول (IAM)، والجهات الحكومية ومزودو الأنظمة المعتمدة على PIV، ومسؤولو إدارة المخاطر التقنية.",
+      "source": "NIST CSRC / QuantumZeitgeist / Schutz IT"
+    },
+    {
+      "classification": "فعالية وتدريب",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A wide-angle view of a professional conference hall filled with GRC practitioners in business attire; a speaker stands at a podium before a large screen displaying the title 'Agentic AI in GRC'; warm ivory walls, soft overhead lighting, navy accents; centred stage composition; no specific logos or names",
+        "A pre-conference workshop scene: a group of eight auditors in a bright training room review workbooks on a table; a facilitator writes 'Auditing Generative AI at Scale' on a whiteboard; cream walls, natural light, gold stationery on the table; centred mid-shot",
+        "A networking moment between sessions: two compliance professionals exchange business cards in a modern convention centre foyer with ivory and navy decor; a conference badge visible but without readable names; warm soft lighting; centred, calm composition"
+      ],
+      "image_title": "مؤتمر ISACA/IIA للحوكمة والمخاطر 2026 ينطلق في سان دييغو",
+      "hook_title": "مؤتمر GRC 2026: ISACA والـ IIA يجمعان كبار المتخصصين في سان دييغو 17-19 أغسطس",
+      "image_summary": "ISACA وIIA يعقدان مؤتمر الحوكمة والمخاطر والرقابة السنوي الـ 13 في سان دييغو الأسبوع القادم.",
+      "summary": "يُقدّم ISACA ومعهد المدققين الداخليين (IIA) نسختهما الثالثة عشرة من مؤتمر GRC خلال الفترة 17-19 أغسطس 2026 في سان دييغو، وبشكل افتراضي. يضم المؤتمر أكثر من 40 جلسة تشمل: حوكمة الذكاء الاصطناعي المؤسسي، والذكاء الاصطناعي العاملي (Agentic AI) في GRC، وإدارة مخاطر الموردين، وأمن السحابة، والحوسبة الكمومية. تُقام ورشتا عمل قبيل المؤتمر تتضمنان تدقيق الذكاء الاصطناعي التوليدي وتكامل الأمن السيبراني في GRC.",
+      "why_it_matters": "يُعدّ هذا المؤتمر المنصة المرجعية لمتخصصي GRC للاطلاع على أحدث التوجيهات العملية بشأن حوكمة الذكاء الاصطناعي والتعامل مع اللوائح التنظيمية المتسارعة — خاصة مع قُرب التسجيل للحضور الشخصي من الإغلاق.",
+      "who_is_affected": "مسؤولو الحوكمة والمخاطر والامتثال، والمدققون الداخليون، والمتخصصون في حوكمة تقنية المعلومات على مستوى عالمي.",
+      "source": "ISACA / The IIA / LegalTech Events"
+    },
+    {
+      "classification": "تقرير وأبحاث",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A privacy professional — a woman in formal attire — sits at a clean cream desk reviewing a printed 'State of Privacy 2026' report; her expression shows concentration; a small stack of regulations documents is beside her; warm ivory and navy tones; centred mid-shot; no logos",
+        "An infographic-style scene: a compliance manager presents bar charts to two colleagues in a small meeting room; the charts show declining team sizes and rising stress indicators; warm cream walls, gold data bars, navy text; centred medium shot",
+        "A close-up overhead of a survey report spread open on a light desk, with sticky notes marking key findings — 'Median team: 5 people', 'Budget underfunded: 43%'; a cup of tea nearby; ivory and navy palette; centred, calm frame"
+      ],
+      "image_title": "ISACA: فرق الخصوصية تتقلص رغم تصاعد الضغوط التنظيمية",
+      "hook_title": "تقرير ISACA حول الخصوصية 2026: الفرق تتضاءل والضغط يتصاعد — أزمة بشرية في قلب الامتثال",
+      "image_summary": "تقرير ISACA 2026: متوسط فريق الخصوصية تقلّص إلى 5 أفراد فقط، و43% من الميزانيات غير كافية.",
+      "summary": "كشف تقرير \"حالة الخصوصية 2026\" الصادر عن ISACA، المستند إلى استطلاع شارك فيه أكثر من 1800 متخصص في الخصوصية، عن تقلّص متوسط حجم فريق الخصوصية من 8 إلى 5 أفراد خلال عام واحد فقط، مع ندرة حادة في الأدوار التقنية. أفاد 65% من المشاركين بأن مستوى التوتر في عملهم ارتفع مقارنة بخمس سنوات مضت، فيما توقّع 43% أن ميزانيات الخصوصية ستنخفض في العام المقبل. كما رصد التقرير ارتفاع ملحوظ في استخدام أدوات الذكاء الاصطناعي كوسيلة لسد الفجوة.",
+      "why_it_matters": "يُظهر التقرير أن مهنة الامتثال بالخصوصية تشهد ضغطاً منهجياً في وقت تتصاعد فيه المتطلبات التنظيمية — مما يستوجب من قيادات GRC إعادة تقييم الموارد البشرية المخصصة لوظيفة الخصوصية.",
+      "who_is_affected": "مسؤولو حماية البيانات (DPO)، وفرق الخصوصية والامتثال، وقيادات الحوكمة المؤسسية في القطاعين العام والخاص.",
+      "source": "ISACA / Infosecurity Magazine"
+    },
+    {
+      "classification": "تدقيق وامتثال",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A certified risk professional in formal attire studies a printed CRISC exam study guide at a tidy desk; a laptop beside them displays an AI risk scenario; warm cream walls, navy book spine visible, soft natural light; centred close-medium shot; no logos",
+        "A training room scene: an instructor writes 'AI/ML Risk in Enterprise GRC' on a whiteboard in front of a small group of auditors with notebooks open; cream walls, neat rows of tables with ivory stationery; calm, centred composition",
+        "A close-up of a professional certification card (no specific branding, generic design) resting on an open risk register document; beside it, a sticky note reads 'AI Risk — Domain Update'; ivory and gold tones; centred, clean frame"
+      ],
+      "image_title": "ISACA تُحدّث امتحان CRISC ليشمل مخاطر الذكاء الاصطناعي",
+      "hook_title": "تحديث امتحان CRISC: مخاطر الذكاء الاصطناعي والتعلم الآلي أصبحت محوراً رسمياً في شهادة إدارة المخاطر",
+      "image_summary": "امتحان CRISC المحدَّث يُضمّن رسمياً مخاطر الذكاء الاصطناعي والتعلم الآلي ضمن محتواه القياسي.",
+      "summary": "أدرجت ISACA في تحديث امتحان CRISC (نوفمبر 2025) مخاطر الذكاء الاصطناعي والتعلم الآلي كمحتوى أساسي وليس ثانوياً، مما يُعكس التحولات الجوهرية في بيئة المخاطر المؤسسية. يُتيح هذا التحديث للمتخصصين اكتساب المعرفة اللازمة لتكييف أطر إدارة المخاطر وسجلات المخاطر وطبقات الامتثال مع متطلبات الذكاء الاصطناعي. كما أطلقت ISACA شهادة \"Advanced in AI Risk\" (AAIR) الجديدة للمتخصصين ذوي الخبرة.",
+      "why_it_matters": "يعني هذا التحديث أن مدققي المخاطر المعتمَدين ومسؤولي الامتثال باتوا أمام معيار جديد للكفاءة المهنية يشمل الذكاء الاصطناعي — وهو أمر جوهري لأي مؤسسة تسعى لبناء برامج حوكمة ذكاء اصطناعي فعّالة.",
+      "who_is_affected": "حاملو شهادة CRISC ومن يسعون للحصول عليها، ومسؤولو الحوكمة والمخاطر، ومدراء الامتثال في المؤسسات التي تعتمد أنظمة ذكاء اصطناعي.",
+      "source": "ISACA / CBT Nuggets / TechJackSolutions"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A legal and compliance team in a European-style meeting room reviews a printed amendment document with a highlighted section reading 'High-Risk AI: Delayed to December 2027'; calm cream and navy decor; centred medium shot; no logos or flags",
+        "A compliance manager updates a regulatory timeline board on the wall; the board shows the original date '2 August 2026' crossed out with a new date '2027-2028' in gold; a team member observes calmly; ivory office background; centred composition",
+        "A close-up of a risk register on a clean desk showing an updated row: 'AI High-Risk Systems Compliance' — Status column: 'Timeline Extended'; a pencil and sticky notes beside it; warm cream and slate-blue tones; centred frame"
+      ],
+      "image_title": "AI Omnibus يُؤجّل متطلبات الذكاء الاصطناعي عالي المخاطر حتى 2027-2028",
+      "hook_title": "البرلمان الأوروبي يُقرّ تأجيل الالتزامات الكاملة للأنظمة عالية المخاطر في قانون الذكاء الاصطناعي",
+      "image_summary": "AI Omnibus يُرجئ متطلبات الأنظمة عالية المخاطر إلى ديسمبر 2027 وأغسطس 2028 — لكن ليس الشفافية.",
+      "summary": "في 16 يونيو 2026، صادق البرلمان الأوروبي بأغلبية 423 صوتاً على تعديلات \"Digital Omnibus\" التي تُؤجّل الالتزامات الكاملة للأنظمة عالية المخاطر المدرجة في المرفق الثالث من قانون الذكاء الاصطناعي إلى ديسمبر 2027 وأغسطس 2028. غير أن المنظمات التي قرأت الخبر على عجل وخلصت إلى أن كل شيء مؤجَّل تقع في خطأ جوهري، إذ تظل التزامات الشفافية (المادة 50) وصلاحيات المفوضية الأوروبية على النماذج العامة نافذةً تماماً اعتباراً من 2 أغسطس 2026.",
+      "why_it_matters": "يُشكّل هذا التأجيل فرصة إضافية للمنظمات لاستكمال برامج الامتثال للذكاء الاصطناعي عالي المخاطر — لكنه يُخفّف في الوقت ذاته من إلحاحية بعض الاستثمارات، مما يستوجب إعادة تحديد الأولويات في خارطة طريق GRC الخاصة بالذكاء الاصطناعي.",
+      "who_is_affected": "شركات التقنية ومزودو أنظمة الذكاء الاصطناعي في الاتحاد الأوروبي، ومسؤولو الامتثال في قطاعات التوظيف والتعليم والائتمان وإنفاذ القانون.",
+      "source": "DigitalApplied / DataProtectionReport / TechTimes"
+    }
+  ]
+}
