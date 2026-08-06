@@ -4,4 +4,4 @@
    [deploy]
    startCommand = "python clear_posts.py"
    restartPolicyType = "NEVER"
-# trigger redeploy
+# trigger redeploy 2
