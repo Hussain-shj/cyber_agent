@@ -1,12 +1,8 @@
-name: اقتراح مواضيع سيبرانية مرشحة
+name: اقتراح مواضيع GRC مرشحة
 
-# يعمل فقط عند الاستدعاء اليدوي (زر "جلب مواضيع جديدة" في صفحة المراجعة، أو
-# من تبويب Actions على GitHub مباشرة) — لا جدولة تلقائية هنا، لأن propose_topics
-# يُشغَّل عند الطلب فقط لتوفير التكلفة.
 on:
   workflow_dispatch:
 
-# صلاحية كتابة على المستودع مطلوبة لرفع ملف المواضيع المرشحة الناتج.
 permissions:
   contents: write
 
@@ -25,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run propose_topics.py
+      - name: Run propose_topics_grc.py
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_REPO: ${{ github.repository }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_BRANCH: ${{ github.ref_name }}
-        run: python propose_topics.py
+        run: python propose_topics_grc.py
