@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A clean white institutional document sheet with a bold red CRITICAL ALERT stamp centered, surrounded by minimalist lock and warning shield icons on a light grey background",
+        "A formal white compliance checklist with a centered countdown timer graphic and a red urgency badge, framed by thin grey borders on a light background",
+        "An official white certificate-style layout with a centered CVE identification label, flanked by gear and chain-link icons representing CI/CD pipeline risk, on a pale grey surface"
+      ],
+      "image_title": "تحذير عاجل: ثغرة TeamCity تُستغل فعلياً",
+      "hook_title": "⚠️ CISA تُصدر تحذيراً عاجلاً: ثغرة حرجة في JetBrains TeamCity قيد الاستغلال الآن",
+      "image_summary": "ثغرة CVSS 9.8 تتيح تنفيذ أوامر عشوائية دون مصادقة وتُهدد خطوط DevOps.",
+      "summary": "أضافت CISA بتاريخ 5 أغسطس 2026 الثغرة CVE-2026-63077 في JetBrains TeamCity إلى قائمة الثغرات المستغلة فعلياً، وأعطت الجهات الفيدرالية مهلة إصلاح حتى 8 أغسطس 2026 فقط. تُعدّ هذه الثغرة بالغة الخطورة إذ تُمكّن مهاجماً غير موثَّق من تجاوز آليات المصادقة وتنفيذ أوامر نظام تشغيل بامتيازات الخادم عبر بروتوكول Agent Polling. يشمل الخطر تسريب الإعدادات وبيانات الاعتماد وتلويث بنية CI/CD بأكملها.",
+      "why_it_matters": "أي اختراق لخادم TeamCity يمنح المهاجمين مفاتيح خطوط نشر البرمجيات بالكامل، مما يحوّل ثغرة واحدة إلى هجوم سلسلة توريد يطال مئات الأنظمة النهائية. على فرق GRC إدراجها فوراً في سجل المخاطر الحرجة وضمان تطبيق الإصلاح.",
+      "who_is_affected": "جميع مشغّلي TeamCity On-Premises قبل الإصدارين 2025.11.7 و2026.1.3 — شركات تقنية، بنوك، مؤسسات حكومية تستخدم بيئات CI/CD.",
+      "source": "CISA KEV / The Hacker News / SecurityWeek / BleepingComputer"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A white formal regulatory document with a centered EU emblem outline and '2 August 2026' enforcement date stamp, surrounded by AI circuit-node icons on a light grey background",
+        "A clean white balance-scale graphic centered on a pale surface, with 'AI Transparency' and 'Enforcement' labels on each pan, framed by thin institutional borders",
+        "An official white compliance timeline chart centered on a light background, showing phased enforcement milestones marked with minimalist checkboxes and calendar icons"
+      ],
+      "image_title": "قانون الذكاء الاصطناعي الأوروبي: التطبيق بدأ",
+      "hook_title": "📋 2 أغسطس 2026: القفزة التنظيمية الكبرى — تبدأ المفوضية الأوروبية تطبيق قانون الذكاء الاصطناعي رسمياً",
+      "image_summary": "واجبات الشفافية والنماذج العامة للذكاء الاصطناعي باتت خاضعة للتنفيذ القانوني الفعلي.",
+      "summary": "اعتباراً من 2 أغسطس 2026، أطلق مكتب الذكاء الاصطناعي الأوروبي آلياته التنفيذية الكاملة بما تشمل طلبات المعلومات وصلاحيات سحب النماذج. تشمل الالتزامات المفعَّلة حالياً الإفصاح عن التفاعلات مع الذكاء الاصطناعي، وتصنيف المحتوى الاصطناعي، والكشف عن التزييف العميق وفق المادة 50. وبينما تأجّل تطبيق متطلبات الأنظمة عالية الخطورة حتى ديسمبر 2027 بموجب حزمة Digital Omnibus، تبقى متطلبات نماذج GPAI سارية فوراً.",
+      "why_it_matters": "تعمل كثير من المؤسسات الخليجية مع موردين أوروبيين أو تستخدم نماذج ذكاء اصطناعي أوروبية، مما يعرّضها لمتطلبات الامتثال غير المباشرة. على مسؤولي GRC إجراء جرد عاجل لأصول الذكاء الاصطناعي وتصنيفها.",
+      "who_is_affected": "مزوّدو أنظمة الذكاء الاصطناعي ومنتشرو النماذج في القطاعات المنظَّمة — القطاع المالي والرعاية الصحية والبنية التحتية الحيوية داخل الاتحاد الأوروبي والشركات التي تتعامل معه.",
+      "source": "European Commission / Help Net Security / DLA Piper GENIE"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A white institutional document page with a centered IoT device ecosystem diagram using simple geometric shapes (no logos), framed by thin grey borders on a light background",
+        "A formal white risk assessment matrix centered on a pale grey surface, with IoT product icons (router, sensor, camera outlines) arranged around it without text or branding",
+        "A clean white procurement checklist graphic centered on a light background, with minimalist checkbox rows and a federal seal outline, representing government acquisition standards"
+      ],
+      "image_title": "NIST SP 800-213r1: حوكمة أمن إنترنت الأشياء",
+      "hook_title": "🔒 NIST يُوسّع نطاق حوكمة IoT: مسودة جديدة تُعيد تعريف متطلبات أمن منتجات الأجهزة المتصلة",
+      "image_summary": "المسودة الجديدة تُعامل منتج IoT كمنظومة متكاملة لا مجرد جهاز معزول في إطار إدارة المخاطر.",
+      "summary": "أصدر NIST بتاريخ 24 يونيو 2026 المسودة العامة الأولى للمراجعة الأولى من SP 800-213، ويُقبل عليها تعليقات الجمهور حتى 24 أغسطس 2026. تتبنّى المسودة مصطلح «منتج IoT» بدلاً من «جهاز IoT» لتعكس طبيعة المنظومة المتكاملة الشاملة للأجهزة والبرمجيات والخدمات السحابية وآليات التحديث. وتُلزم الوكالات الفيدرالية بتقييم أثر أي منتج متصل على ملف مخاطر النظام قبل الشراء.",
+      "why_it_matters": "تُشكّل هذه المسودة نموذجاً مرجعياً يتجاوز القطاع الحكومي الأمريكي، وستتبنّاه فرق المشتريات والامتثال في كل مؤسسة تستخدم أجهزة IoT ضمن بنيتها التحتية الحيوية.",
+      "who_is_affected": "فرق المشتريات والامتثال في الجهات الحكومية والقطاعات المنظَّمة، وصانعو ومورّدو منتجات IoT المرتبطة بالعقود الفيدرالية.",
+      "source": "NIST CSRC / Security Boulevard"
+    },
+    {
+      "classification": "أفضل ممارسات حوكمة",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A white institutional document with a centered CSF 2.0 hexagonal framework diagram using six labeled sections (no text visible), on a light grey professional background",
+        "A clean white compliance shield graphic centered on a pale background, with ransomware-related risk management icons (lock, recover arrows, detect radar) arranged symmetrically",
+        "A formal white organizational playbook cover design centered on a light surface, with minimalist milestone arrows and recovery timeline icons, representing an incident response roadmap"
+      ],
+      "image_title": "NIST IR 8374r1: دليل مكافحة الفدية بـ CSF 2.0",
+      "hook_title": "📘 NIST يُصدر الدليل النهائي لإدارة مخاطر برامج الفدية المُحدَّث وفق CSF 2.0",
+      "image_summary": "دليل عملي يُترجم إطار CSF 2.0 إلى إجراءات محددة لمنع هجمات الفدية والتعافي منها.",
+      "summary": "نشر مركز NCCoE بتاريخ 11 يونيو 2026 النسخة النهائية من NIST IR 8374r1، وهو دليل مجتمعي مُحدَّث يُرشد المؤسسات إلى الربط المنهجي بين وظائف CSF 2.0 الست ومتطلبات مكافحة برامج الفدية. يُغطّي الدليل التحكّم في المخاطر، والكشف المبكر، والاستجابة الفورية، والتعافي الكامل، مع التأكيد على وظيفة GOVERN الجديدة باعتبارها ركيزة الاستراتيجية.",
+      "why_it_matters": "يُقدّم هذا الدليل أداة تقييم استعداد جاهزة يمكن لمسؤولي GRC استخدامها فوراً لقياس ناضج برامج مكافحة الفدية ومقارنتها بالمعيار الدولي المحدَّث.",
+      "who_is_affected": "جميع المؤسسات في القطاعات كافة — من المستشفيات والبنوك إلى الجهات الحكومية — المعرّضة لتهديد برامج الفدية المتصاعد.",
+      "source": "NIST CSRC / NCCoE"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A white formal identity card design centered on a pale background, showing a PIV credential outline with a quantum shield icon overlay, no text or photos, on a light grey surface",
+        "A clean white dual-stack architecture diagram centered on a light institutional background, showing two parallel key columns (classical and quantum-resistant) with minimalist lock icons",
+        "A formal white compliance transition roadmap centered on a pale grey surface, featuring two overlapping timeline arrows representing legacy and post-quantum credential migration phases"
+      ],
+      "image_title": "NIST: تحديث بطاقات الهوية لمقاومة الحوسبة الكمية",
+      "hook_title": "🔐 NIST يُطلق مسودات تحديث معايير هوية PIV لدعم التشفير ما بعد الكمي",
+      "image_summary": "نموذج ثنائي المسار يحافظ على بيانات اعتماد PIV الكلاسيكية مع إضافة طبقة كمية مقاومة.",
+      "summary": "أصدر NIST في يونيو 2026 مسودات عمل لتحديث معايير بطاقات التعريف الشخصية PIV (SP 800-73 و800-78) لاستيعاب خوارزميات ML-DSA وML-KEM المقاومة للحواسيب الكمومية. يعتمد النهج المقترح نموذجاً ثنائي المسار يتيح نشراً تدريجياً يحافظ على التوافق مع الأنظمة القائمة دون الحاجة إلى استبدال كامل فوري.",
+      "why_it_matters": "على مسؤولي حوكمة الهوية والوصول في المؤسسات الحكومية والقطاع المالي استيعاب هذا التحوّل في تخطيطهم الاستراتيجي للامتثال، لا سيما مع تصاعد ضغوط هجمات «احصد الآن وافكّ لاحقاً».",
+      "who_is_affected": "الجهات الحكومية ومزوّدو البطاقات الذكية وفرق IAM في القطاعات المنظَّمة التي تعتمد على بيانات اعتماد PIV فيدرالية.",
+      "source": "NIST CSRC / Quantum Zeitgeist"
+    },
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A white formal court document layout centered on a light grey background, with a gavel icon and a '16 Years' verdict stamp, surrounded by minimalist lock and cybercrime chain icons",
+        "A clean white institutional certificate design centered on a pale surface, with a DOJ-style seal outline and ransomware disruption icons (broken chain, shield) arranged symmetrically",
+        "A formal white law enforcement award plaque aesthetic centered on a light background, featuring balanced scales and handcuff silhouette icons, representing cybercrime deterrence"
+      ],
+      "image_title": "16 عاماً سجناً لمؤسس Ransom Cartel",
+      "hook_title": "⚖️ حكم تاريخي: السجن 16 عاماً لمبتكر عملية Ransom Cartel في سابقة ردع دولية بارزة",
+      "image_summary": "محكمة أمريكية تُصدر أقسى أحكام تاريخ برامج الفدية على مشغّل خدمة RaaS بيلاروسي.",
+      "summary": "صدر بتاريخ 5 أغسطس 2026 حكم بسجن ماكسيم سيلنيكاو 16 عاماً في محكمة المنطقة الشرقية لفيرجينيا، وذلك لإدارته عملية Ransom Cartel التي استهدفت ما لا يقل عن 18 مؤسسة بين 2021 و2023. بنى سيلنيكاو عملية RaaS متكاملة تضمّنت لوحة تحكم خفية، وتوزيع بيانات اعتماد مسرَّقة، وغسيل مدفوعات الفدية عبر مزيج العملات المشفّرة.",
+      "why_it_matters": "يُرسي هذا الحكم سابقة رادعة تؤكد أن بناء بنية تحتية لبرامج الفدية—حتى دون تنفيذ الهجمات شخصياً—يُعرّض صاحبه للملاحقة الجنائية الدولية. يجب على مسؤولي المخاطر تحديث تقييمات النماذج المهددة (RaaS) في سجلاتهم.",
+      "who_is_affected": "جميع المؤسسات المعرّضة لبرامج الفدية — القطاع المالي والصحي والبنية التحتية الحيوية التي تُعدّ أهدافاً تقليدية.",
+      "source": "BleepingComputer / SecurityWeek / The Hacker News"
+    },
+    {
+      "classification": "فعالية وتدريب",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A white formal conference badge and program booklet design centered on a light grey background, with minimalist GRC hexagonal icons and a calendar date marker for August 17-19",
+        "A clean white institutional event agenda layout centered on a pale surface, showing session track icons (AI governance, audit, cloud, quantum) arranged in a grid without text",
+        "A formal white award trophy and diploma design centered on a light background, with CPE credit badge icons and organizational seal outlines, representing professional certification advancement"
+      ],
+      "image_title": "مؤتمر GRC 2026: أجندة حوكمة الذكاء الاصطناعي الوكيل",
+      "hook_title": "🏛️ مؤتمر GRC 2026 من ISACA والـ IIA: 17-19 أغسطس — أجندة تكشف مستقبل حوكمة الذكاء الاصطناعي الوكيل",
+      "image_summary": "أكثر من 40 جلسة تغطّي حوكمة الذكاء الاصطناعي الوكيل والمخاطر الكمية وإدارة بائعي الطرف الثالث.",
+      "summary": "تنعقد النسخة الثالثة عشرة من مؤتمر Governance, Risk and Control بين 17 و19 أغسطس 2026 في سان دييغو وافتراضياً بالشراكة بين ISACA والـ IIA. تضمّ الأجندة ورشاً قبل مؤتمرية تشمل «مراجعة وحوكمة الذكاء التوليدي بالحجم»، وجلسات حول الذكاء الاصطناعي الوكيل في GRC، والمقاومة الكمية، وإدارة مخاطر الخصوصية.",
+      "why_it_matters": "يُمثّل هذا المؤتمر البوصلة العالمية لأولويات GRC للسنة المقبلة، ومشاركته أو متابعة مخرجاته ضرورة مهنية لكل متخصص في الحوكمة والمخاطر والامتثال.",
+      "who_is_affected": "مدققو الأنظمة، مسؤولو المخاطر والامتثال، متخصصو حوكمة الذكاء الاصطناعي، والقادة التنفيذيون في مجال GRC على مستوى العالم.",
+      "source": "ISACA / The IIA"
+    },
+    {
+      "classification": "تقرير وأبحاث",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A white formal research report cover centered on a light grey background, with a minimalist bar chart showing declining team size metrics, framed by thin institutional borders",
+        "A clean white organizational structure diagram centered on a pale surface, showing shrinking team nodes with stress indicators represented as abstract load arrows, no text visible",
+        "A formal white budget allocation pie chart centered on a light background, with minimalist currency and document icons representing underfunded privacy programs in institutional style"
+      ],
+      "image_title": "ISACA: فرق الخصوصية تتقلّص وسط تصاعد التنظيم",
+      "hook_title": "📊 تقرير ISACA لحالة الخصوصية 2026: الفرق تتقلّص، الميزانيات مهدَّدة، والضغط التنظيمي يتضاعف",
+      "image_summary": "متوسط حجم فريق الخصوصية تراجع من ثمانية إلى خمسة موظفين بينما تتصاعد التزامات الامتثال.",
+      "summary": "كشف تقرير ISACA لحالة الخصوصية 2026، المستند إلى آراء أكثر من 1800 متخصص عالمياً، عن تراجع متوسط حجم فرق الخصوصية من ثمانية إلى خمسة موظفين. أفاد 65% من المستطلَعين بأن أدوارهم باتت أكثر إجهاداً مقارنة بخمس سنوات مضت، فيما يُصنّف 43% الميزانيات بأنها غير كافية. يُضاف إلى ذلك ضعف التجهّز لمتطلبات NIS2 وDORA وقانون الذكاء الاصطناعي الأوروبي.",
+      "why_it_matters": "النقص البشري في فرق الخصوصية مع تصاعد التزامات الامتثال التنظيمي هو وصفة لمخاطر امتثال غير مُدارة. يحتاج مسؤولو GRC إلى هذا التقرير حجةً قاطعة أمام الإدارة لزيادة الاستثمار في كفاءات الخصوصية.",
+      "who_is_affected": "مسؤولو الخصوصية وحماية البيانات، مدراء المخاطر والامتثال، ومجالس الإدارة في المؤسسات التي تتعامل مع بيانات شخصية.",
+      "source": "ISACA / Infosecurity Magazine"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A white formal vendor ecosystem map centered on a light grey background, showing interconnected supply chain nodes as abstract geometric shapes without logos or names",
+        "A clean white risk tiering matrix centered on a pale institutional surface, with concentric circles representing vendor risk levels and minimalist shield icons at each tier",
+        "A formal white continuous monitoring dashboard layout centered on a light background, with abstract gauge and timeline icons arranged symmetrically to represent real-time vendor oversight"
+      ],
+      "image_title": "إدارة مخاطر الأطراف الثالثة: الانتقال إلى المراقبة المستمرة",
+      "hook_title": "🔗 إدارة مخاطر الأطراف الثالثة 2026: ثلاثون بالمئة من الاختراقات عبر موردين — هل برنامجك جاهز؟",
+      "image_summary": "ثلث الاختراقات تمرّ عبر الموردين فيما تُلزم DORA و NIS2 بمراقبة مستمرة لا مراجعة دورية.",
+      "summary": "ترصد تحليلات 2026 تضاعف نسبة الاختراقات المرتبطة بأطراف ثالثة لتصل إلى 30%، في حين لم يُصلح 23% من الموردين الثغرات الأمنية الحرجة المتعلقة بالمصادقة متعددة العوامل. تُلزم لوائح DORA وNIS2 بانتقال المؤسسات من المراجعة الدورية السنوية إلى المراقبة الاستخباراتية الفورية المستمرة لسلاسل الموردين بما يشمل المستويات الرابعة والخامسة.",
+      "why_it_matters": "في ظل التوسّع التنظيمي والاعتماد المتزايد على الموردين التقنيين، أصبح برنامج TPRM الناضج شرطاً تنظيمياً لا اختياراً استراتيجياً، لا سيما في القطاع المالي والبنية التحتية الحيوية بمنطقة الخليج.",
+      "who_is_affected": "فرق المشتريات وإدارة العقود، مسؤولو المخاطر التشغيلية، ومسؤولو الامتثال في القطاعات المالية والصحية والحكومية.",
+      "source": "Security Boulevard / Compyl / Mitratech"
+    },
+    {
+      "classification": "تدقيق وامتثال",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A white formal compliance checklist document centered on a light grey background, with Apple platform device outlines (laptop, phone) represented as simple geometric shapes with security baseline icons",
+        "A clean white automated audit report layout centered on a pale institutional surface, showing script execution flow diagrams with checkmark and flag icons representing pass/fail compliance rules",
+        "A formal white regulatory mapping diagram centered on a light background, showing SP 800-53 control categories linked to macOS/iOS platform configurations via minimalist connector lines"
+      ],
+      "image_title": "NIST SP 800-219r2: التهيئة الآمنة التلقائية لمنصات Apple",
+      "hook_title": "🖥️ NIST يطرح للتعليق مسودة SP 800-219r2: إرشادات التهيئة الآمنة التلقائية لـ macOS وiOS وvisionOS",
+      "image_summary": "المسودة الجديدة تُوسّع نطاق إرشادات mSCP لتشمل الأجهزة المحمولة ومنصة visionOS لأول مرة.",
+      "summary": "فتح NIST بتاريخ 22 يونيو 2026 باب التعليق على المسودة الثانية من SP 800-219 حتى 14 أغسطس 2026. تُحدّث المسودة إرشادات مشروع macOS Security Compliance لتشمل منصات macOS وiOS وvisionOS ضمن فرع موحّد، مع تبسيط آلية إدارة الإصدارات والقواعد. توفّر الإرشادات خطوط الأساس الأمنية المرتبطة بضوابط SP 800-53 القابلة للتحقق التلقائي.",
+      "why_it_matters": "تعتمد أجهزة Apple على نطاق واسع في بيئات العمل المؤسسية الخليجية، ويُزوّد هذا الإطار المدققين بمنهجية موحّدة قابلة للأتمتة للتحقق من الامتثال الأمني دون الاعتماد على مراجعات يدوية مكلفة.",
+      "who_is_affected": "مدراء تقنية المعلومات ومسؤولو أمن الأنظمة، مدققو الامتثال التقني، وفرق InfoSec في المؤسسات التي تُوظّف بيئات Apple في قطاعاتها الحكومية والمالية.",
+      "source": "NIST CSRC"
+    }
+  ]
+}
