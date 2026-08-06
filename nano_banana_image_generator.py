@@ -29,11 +29,12 @@ DEFAULT_MODEL = "gemini-2.5-flash-image"
 
 
 def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", keywords: str = "") -> str:
-    """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بهوية GRC الهادئة/
-    الفاتحة الرسمية. يبدأ دائماً بتوجيه "المصمم المحترف" الثابت (DESIGNER_BRIEF)
-    ثم يسمح بمشاهد تعبيرية سردية (واقعية أو مرسومة، قد تتضمن أشخاصاً عامين
-    غير محددي الهوية) وليس فقط عناصر رمزية مجردة — بناءً على وصف المشهد الذي
-    كتبه Claude خصيصاً لهذا الخبر بعد فهم تفاصيله."""
+    """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بأسلوب بطاقات UI
+    عائمة حديثة (مستوحى من مرجع صورة زوّدنا بها المستخدم)، بهوية GRC الهادئة/
+    الفاتحة الرسمية بدل الأزرق النيون الأصلي في المرجع. يبدأ دائماً بتوجيه
+    "المصمم المحترف" الثابت (DESIGNER_BRIEF) ثم مشهد مبني على تفاصيل الخبر —
+    والبطاقات نفسها فارغة من أي نص عمداً، لأن Pillow يضيف النص العربي لاحقاً
+    بدقة كاملة فوق هذه الخلفية."""
     mood = "warm gold and soft red accent tones over a calm, muted, soft-lit palette" \
         if urgent else \
         "soft navy and gold accents over a calm, muted, soft-lit palette"
@@ -48,10 +49,17 @@ def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", k
     base = (
         f"{DESIGNER_BRIEF_PREFIX}"
         f"{subject}"
-        "Rendered as a modern editorial illustration or soft realistic photo-style image, "
-        f"{mood}, gentle natural or studio lighting, calm and composed mood, high-end "
-        "business/institutional magazine style, 4k quality, tall portrait orientation "
-        "composition, generous empty space near the center for text overlay later. "
+        "Rendered in a modern SaaS/tech UI aesthetic: one or two floating "
+        "glassmorphic card panels with soft rounded corners, subtle drop "
+        "shadows, and gentle depth layering — like a premium product feature "
+        "showcase. Each card contains ONLY a single centered icon relevant to "
+        "the story (no text, no labels, no numbers inside the cards — text "
+        "will be added separately with precise typography afterward). "
+        f"Background: a soft gradient with a subtle interconnected hexagonal "
+        f"wireframe/network-line pattern for depth, in {mood} (not neon blue "
+        "or high-contrast tech colors). Leave clear open space around and "
+        "below the card(s) for text overlay afterward. Elegant, premium, "
+        "editorial — not cluttered. Tall portrait orientation composition, 4k quality. "
         f"{BRAND_GUIDANCE}"
         "If people are shown, they must be generic, non-identifiable, fictional-looking "
         "individuals (e.g. a compliance officer, an auditor, a boardroom) — never a real, "
