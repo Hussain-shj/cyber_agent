@@ -20,6 +20,8 @@ from io import BytesIO
 from google import genai
 from PIL import Image
 
+from design_brief import BRAND_GUIDANCE, DESIGNER_BRIEF_PREFIX
+
 # النموذج الافتراضي (يُعرف مجتمعياً باسم Nano Banana). يمكن تبديله بنموذج أحدث
 # عبر متغير البيئة NANO_BANANA_MODEL دون تعديل الكود، لأن أسماء نماذج Google
 # تتغيّر بمرور الوقت (مثل الجيل الأحدث "Nano Banana Pro"/"Nano Banana 2").
@@ -28,9 +30,10 @@ DEFAULT_MODEL = "gemini-2.5-flash-image"
 
 def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", keywords: str = "") -> str:
     """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بهوية GRC الهادئة/
-    الفاتحة الرسمية. يسمح بمشاهد تعبيرية سردية (واقعية أو مرسومة، قد تتضمن
-    أشخاصاً عامين غير محددي الهوية) وليس فقط عناصر رمزية مجردة — بناءً على
-    وصف المشهد الذي كتبه Claude خصيصاً لهذا الخبر بعد فهم تفاصيله."""
+    الفاتحة الرسمية. يبدأ دائماً بتوجيه "المصمم المحترف" الثابت (DESIGNER_BRIEF)
+    ثم يسمح بمشاهد تعبيرية سردية (واقعية أو مرسومة، قد تتضمن أشخاصاً عامين
+    غير محددي الهوية) وليس فقط عناصر رمزية مجردة — بناءً على وصف المشهد الذي
+    كتبه Claude خصيصاً لهذا الخبر بعد فهم تفاصيله."""
     mood = "warm gold and soft red accent tones over a calm, muted, soft-lit palette" \
         if urgent else \
         "soft navy and gold accents over a calm, muted, soft-lit palette"
@@ -43,14 +46,16 @@ def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", k
         subject = "A calm, professional governance/compliance office scene. "
 
     base = (
+        f"{DESIGNER_BRIEF_PREFIX}"
         f"{subject}"
         "Rendered as a modern editorial illustration or soft realistic photo-style image, "
         f"{mood}, gentle natural or studio lighting, calm and composed mood, high-end "
         "business/institutional magazine style, 4k quality, tall portrait orientation "
         "composition, generous empty space near the center for text overlay later. "
+        f"{BRAND_GUIDANCE}"
         "If people are shown, they must be generic, non-identifiable, fictional-looking "
         "individuals (e.g. a compliance officer, an auditor, a boardroom) — never a real, "
-        "named, or recognizable public figure, and never any real brand logo or trademark. "
+        "named, or recognizable public figure. "
         "IMPORTANT: absolutely no text, no letters, no numbers, no words, no logos, "
         "no watermarks anywhere in the image."
     )

@@ -15,18 +15,20 @@ from io import BytesIO
 from openai import OpenAI
 from PIL import Image
 
+from design_brief import BRAND_GUIDANCE, DESIGNER_BRIEF_PREFIX
+
 # أقرب مقاس مدعوم من OpenAI لنسبة 1080x1350 (4:5) هو الوضع الرأسي 1024x1536
 GEN_SIZE = "1024x1536"
 
 
 def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", keywords: str = "") -> str:
     """يبني برومبت إنجليزياً لخلفية فنية فقط (بدون أي نص) بهوية سيبرانية داكنة،
-    يمنع صراحة أي كتابة أو أشخاص حقيقيين في الصورة. عند توفر visual_concept
-    (وصف كتبه Claude خصيصاً لهذا الخبر بعد فهمه)، يصبح هو محور الصورة الرئيسي
-    بدل وصف عام يعتمد فقط على التصنيف — هذا ما يجعل التصميم فعلياً 'مبنياً
-    على تحليل Anthropic API للخبر' وليس قالباً ثابتاً لكل الأخبار من نفس النوع."""
-    mood = "dramatic red and dark tones, alarming urgent atmosphere" if urgent else \
-           "cyan and deep blue tones, professional and calm atmosphere"
+    يمنع صراحة أي كتابة أو أشخاص حقيقيين معروفين بالاسم في الصورة. يبدأ دائماً
+    بتوجيه التصميم الموحّد (design_brief.py) قبل أي شيء آخر. عند توفر
+    visual_concept (وصف كتبه Claude خصيصاً لهذا الخبر بعد فهمه)، يصبح هو محور
+    الصورة الرئيسي بدل وصف عام يعتمد فقط على التصنيف."""
+    mood = "deeper red accent tones over a calm, muted dark palette, serious composed atmosphere" if urgent else \
+           "cyan and deep blue accent tones over a calm, muted dark palette, professional atmosphere"
 
     if visual_concept:
         subject = visual_concept.strip().rstrip(".") + ". "
@@ -36,15 +38,18 @@ def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", k
         subject = "An abstract cybersecurity network and data-protection motif. "
 
     base = (
+        f"{DESIGNER_BRIEF_PREFIX}"
         f"{subject}"
         "Rendered as a modern minimalist digital illustration background, "
         f"{mood}, dark navy and black gradient background, glowing neon accent lines, "
         "abstract digital network nodes, circuit patterns, subtle particle sparkles, "
         "high-end tech magazine style, cinematic lighting, 4k quality. "
-        "IMPORTANT: absolutely no text, no letters, no numbers, no words, no logos, "
-        "no watermarks anywhere in the image. No real human faces or realistic people; "
-        "any figure, if present at all, must be a fully abstract/geometric silhouette only. "
-        "Pure abstract/illustrative background only."
+        f"{BRAND_GUIDANCE}"
+        "IMPORTANT: absolutely no text, no letters, no numbers, no words, no "
+        "watermarks anywhere in the image. If people are shown, they must be "
+        "generic, non-identifiable, fictional-looking individuals — never a "
+        "real, named, or recognizable public figure. "
+        "Pure illustrative background only."
     )
     return base
 
