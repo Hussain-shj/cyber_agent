@@ -15,6 +15,7 @@ nano_banana_image_generator.py
 """
 
 import os
+import time
 from io import BytesIO
 
 from google import genai
@@ -72,17 +73,30 @@ def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", k
 
 def generate_background(classification: str, urgent: bool, visual_concept: str = "",
                          keywords: str = "", api_key: str | None = None,
-                         model: str | None = None) -> Image.Image:
+                         model: str | None = None, _retry_on_429: bool = True) -> Image.Image:
     """يولّد صورة خلفية (PIL Image) عبر Gemini Image API. يرمي استثناءً عند
     الفشل ليتمكن المستدعي من الرجوع لخلفية Pillow المحلية كحل احتياطي.
 
     visual_concept: وصف بصري محدد كتبه Claude لهذا الموضوع تحديداً (حقل
-    visual_concepts من content_generator_grc.py) — يُفضَّل دائماً عند توفره."""
+    visual_concepts من content_generator_grc.py) — يُفضَّل دائماً عند توفره.
+
+    عند خطأ 429 (تجاوز حد الطلبات في الدقيقة — شائع في الفئة المجانية)، يعيد
+    المحاولة تلقائياً مرة واحدة بعد انتظار قصير قبل الاستسلام."""
     client = genai.Client(api_key=api_key or os.environ["GOOGLE_API_KEY"])
     prompt = _build_prompt(classification, urgent, visual_concept, keywords)
     model_name = model or os.environ.get("NANO_BANANA_MODEL", DEFAULT_MODEL)
 
-    response = client.models.generate_content(model=model_name, contents=[prompt])
+    try:
+        response = client.models.generate_content(model=model_name, contents=[prompt])
+    except Exception as exc:  # noqa: BLE001
+        is_rate_limit = "429" in str(exc) or "RESOURCE_EXHAUSTED" in str(exc).upper()
+        if is_rate_limit and _retry_on_429:
+            time.sleep(20)  # فاصل انتظار قبل إعادة المحاولة الوحيدة
+            return generate_background(
+                classification, urgent, visual_concept, keywords, api_key, model,
+                _retry_on_429=False,
+            )
+        raise
 
     for part in response.candidates[0].content.parts:
         inline_data = getattr(part, "inline_data", None)
@@ -99,10 +113,14 @@ def generate_background(classification: str, urgent: bool, visual_concept: str =
 
 def generate_backgrounds(visual_concepts: list[str], classification: str, urgent: bool,
                           api_key: str | None = None, model: str | None = None) -> list:
-    """يولّد خلفية فنية منفصلة لكل فكرة بصرية في القائمة (حتى 3 عادةً). عند
-    فشل توليد فكرة معيّنة، يُدرَج None في مكانها بدل رفع استثناء يوقف البقية."""
+    """يولّد خلفية فنية منفصلة لكل فكرة بصرية في القائمة (حتى 3 عادةً)، بفاصل
+    زمني قصير بين كل استدعاء والآخر لتفادي حد الطلبات في الدقيقة (RPM) في
+    الفئة المجانية. عند فشل توليد فكرة معيّنة (حتى بعد إعادة المحاولة الداخلية
+    عند 429)، يُدرَج None في مكانها بدل رفع استثناء يوقف البقية."""
     results = []
-    for concept in visual_concepts:
+    for i, concept in enumerate(visual_concepts):
+        if i > 0:
+            time.sleep(3)  # فاصل بسيط بين كل صورة والتالية
         try:
             results.append(generate_background(
                 classification, urgent, visual_concept=concept, api_key=api_key, model=model,
