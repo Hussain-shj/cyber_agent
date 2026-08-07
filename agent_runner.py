@@ -157,10 +157,24 @@ def run() -> None:
                 ok = sum(1 for b in ai_backgrounds if b is not None)
                 log.info("تم توليد %d من %d خلفيات فنية بنجاح.", ok, len(concepts))
             else:
-                log.warning("لا توجد visual_concepts في المحتوى — سيُستخدم التصميم المحلي بالكامل.")
+                log.error("لا توجد visual_concepts في المحتوى — لا يمكن توليد صور بالذكاء الاصطناعي.")
         except Exception as exc:  # noqa: BLE001
-            log.warning("فشل توليد الخلفيات الفنية (%s) — سيُستخدم التصميم المحلي بديلاً.", exc)
+            log.error("فشل توليد الخلفيات الفنية (%s).", exc)
             ai_backgrounds = []
+
+    # بناءً على تفضيل المستخدم: لا يوجد رسم محلي بديل بعد الآن للصور "التعبيرية"
+    # — إن لم تنجح كل الخلفيات الثلاث عبر الذكاء الاصطناعي، يتوقف التشغيل هنا
+    # تماماً بدل نشر تصاميم Pillow المجردة كبديل صامت.
+    expected = len(content.get("visual_concepts") or [])
+    succeeded = sum(1 for b in ai_backgrounds if b is not None)
+    if expected == 0 or succeeded < expected:
+        log.error(
+            "توليد الصور عبر الذكاء الاصطناعي لم يكتمل (%d من %d) — تم إيقاف "
+            "التشغيل بالكامل بدل استخدام رسم محلي بديل (حسب إعدادك). تحقق من "
+            "OPENAI_API_KEY ثم أعد المحاولة.",
+            succeeded, expected,
+        )
+        return
 
     image_paths = generate_designs(content, out_dir, ai_backgrounds=ai_backgrounds)
     log.info("تم حفظ التصاميم محلياً في: %s (لن تبقى بعد انتهاء الحاوية)", out_dir)
