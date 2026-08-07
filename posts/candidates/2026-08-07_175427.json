@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A glowing water pipeline network rendered in dark blue tones with red warning pulses spreading outward from multiple nodes, centered on a dark background",
+        "A digital map of US states highlighted in red with warning icons over water tower silhouettes, interconnected by dashed lines of intrusion signals",
+        "A stylized industrial control panel with dials and gauges morphing into a cracked circuit board, surrounded by cascading red alert symbols"
+      ],
+      "image_title": "هجوم إيراني يطال شبكات المياه في 12 ولاية",
+      "hook_title": "المياه تحت النار: هجمات إلكترونية منسّقة تضرب البنية التحتية الحيوية في أمريكا",
+      "image_summary": "هجمات مرتبطة بإيران تستهدف أجهزة التحكم في محطات المياه بـ12 ولاية أمريكية.",
+      "summary": "رصد مكتب التحقيقات الفيدرالي (FBI) وكالة حماية البيئة (EPA) هجمات إلكترونية منسّقة استهدفت أجهزة التحكم الصناعية (PLCs) من نوع Rockwell/Allen-Bradley في شبكات المياه والصرف الصحي بأكثر من 12 ولاية أمريكية منذ 27 يوليو 2026. إيران مشتبه بها رئيسياً وفق مصادر متعددة، وقد تمكّن المهاجمون من تغيير كلمات المرور وتعطيل المنبّهات في بعض المحطات. في مينيسوتا وحدها تأثّرت 30 شبكة مياه مجتمعية، وفي جورجيا أُصدر تحذير بغلي المياه لفترة مؤقتة.",
+      "why_it_matters": "الهجمات على البنية التحتية للمياه تمثّل تهديداً مباشراً للصحة العامة والأمن القومي، وتكشف هشاشة أنظمة التحكم الصناعي المتصلة بالإنترنت في قطاعات حيوية مشابهة بالمنطقة.",
+      "who_is_affected": "شبكات المياه والصرف الصحي الحكومية، وكالات الطوارئ، ومشغّلو أنظمة SCADA/OT في البنية التحتية الحيوية",
+      "source": "FBI / SecurityWeek / The Record (Recorded Future)"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A fractured gear icon representing CI/CD pipeline with glowing red cracks and a keyhole at the center emitting a warning glow, on a dark background",
+        "Streams of binary code flowing through a broken chain link, with a padlock icon shattered in the middle, surrounded by circuit board patterns",
+        "A stylized build pipeline diagram with stages represented as nodes, one node highlighted in red showing an explosion effect breaking the connection chain"
+      ],
+      "image_title": "ثغرة حرجة في JetBrains TeamCity تُستغَل فعلياً",
+      "hook_title": "CVE-2026-63077: خطر بلا مصادقة يهدد خطوط تطوير البرمجيات في مؤسستك",
+      "image_summary": "ثغرة CVSS 9.8 تتيح تنفيذ أوامر عن بُعد دون أي بيانات اعتماد على خوادم TeamCity.",
+      "summary": "أضافت وكالة CISA في 5 أغسطس 2026 الثغرة CVE-2026-63077 إلى قائمة الثغرات المستغَلة فعلياً (KEV)، وحدّدت موعداً استثنائياً للمعالجة بتاريخ 8 أغسطس. الثغرة تُصنَّف بمعيار CWE-502 (إلغاء تسلسل بيانات غير موثوقة) وتؤثر على جميع إصدارات TeamCity On-Premises. يستطيع المهاجم عبر HTTP/S تجاوز آليات المصادقة وتنفيذ أوامر نظام التشغيل بامتيازات الخادم، مما يفتح الباب لسرقة بيانات الاعتماد وزرع أكواد خبيثة في خطوط التسليم البرمجي CI/CD.",
+      "why_it_matters": "TeamCity يُستخدم على نطاق واسع في المؤسسات لبناء ونشر البرمجيات، وأي اختراق لخادمه يعني خطر سلسلة توريد برمجية يطال جميع المنتجات والعملاء.",
+      "who_is_affected": "فرق تطوير البرمجيات والمؤسسات التي تشغّل TeamCity On-Premises، خاصةً الجهات التي تعرّض الخوادم على الإنترنت مباشرةً",
+      "source": "CISA / The Hacker News / SecurityWeek"
+    },
+    {
+      "classification": "تسريب بيانات",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A medical data file icon wrapped in a broken cloud shape with data streams leaking out from the cracks, glowing on a dark background",
+        "A stylized DNA helix partially dissolving into floating data fragments and shield icons with warning marks, centered composition",
+        "A secure vault door slightly ajar with pharmaceutical molecule icons and patient record silhouettes drifting out as glowing particles"
+      ],
+      "image_title": "Amgen: سرقة بيانات مرضى من سحابة طرف ثالث",
+      "hook_title": "عملاق الأدوية Amgen يُقرّ بتسريب بيانات المرضى السرية عبر مزودي السحابة الخارجيين",
+      "image_summary": "مهاجمون سرقوا بيانات صحية سرية لمرضى وملكية فكرية من بيئات سحابية يديرها مزودون خارجيون.",
+      "summary": "أعلنت شركة Amgen للتكنولوجيا الحيوية في تقرير رسمي لهيئة SEC أن مهاجمين غير معروفين اخترقوا في يوليو 2026 أنظمة سحابية تديرها جهات خارجية وسرقوا بيانات المرضى المحمية صحياً (PHI) إلى جانب ملكية فكرية خاصة بالشركة. رصدت الشركة النشاط غير المصرح به وطعّلت خطة الاستجابة، واستعانت بخبراء جنائيين مستقلين. لم تُفصح Amgen عن هوية المهاجمين ولا عن عدد المرضى المتضررين حتى اللحظة.",
+      "why_it_matters": "الحادثة تُسلّط الضوء على مخاطر الاعتماد على مزودي السحابة الخارجيين لتخزين البيانات الصحية الحساسة، وهو نموذج شائع في قطاع الرعاية الصحية والمؤسسات الحيوية بالخليج.",
+      "who_is_affected": "شركات الأدوية والتكنولوجيا الحيوية، مزودو الخدمات السحابية الخارجية (Third-party Cloud), المرضى الذين تتعامل معهم Amgen",
+      "source": "The Record (Recorded Future) / BleepingComputer / HIPAA Journal"
+    },
+    {
+      "classification": "خبر سيبراني",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A stylized cargo port aerial view with shipping containers rendered in blue and red tones, connected by a broken network grid with a central warning icon",
+        "A digital ship at a port with its communication antennas replaced by broken circuit board traces, surrounded by glowing red disruption waves",
+        "A lock icon placed over a logistics flow diagram with trucks, ships, and cranes, where the lock is cracked and emitting red alert signals"
+      ],
+      "image_title": "هجوم إلكتروني يُشلّ ثلاثة موانئ في ولاية نورث كارولاينا",
+      "hook_title": "البنية اللوجستية في مرمى المهاجمين: هجوم يوقف عمليات ثلاثة موانئ أمريكية",
+      "image_summary": "هجوم إلكتروني يعطّل بوابات الشحن في موانئ ويلمينغتون وموريهيد سيتي وشارلوت الداخلي.",
+      "summary": "في 4 أغسطس 2026، تعرّضت سلطة موانئ نورث كارولاينا لهجوم إلكتروني أوقف أنظمة تكنولوجيا المعلومات وعطّل عمليات الشحن والبوابات في ثلاث منشآت تتعامل مع أكثر من 4.4 مليون طن من البضائع سنوياً. طُبّق مخطط الطوارئ السيبراني فوراً، وانخرطت خفر السواحل الأمريكية ووكالات الدولة في التحقيق. احتوي الاختراق صباح 5 أغسطس لكن العمليات استُكملت يدوياً لفترة، ولم تُكشف هوية الجهة المهاجمة.",
+      "why_it_matters": "الهجمات على الموانئ تمثّل تهديداً مباشراً لسلاسل الإمداد الدولية؛ درس مهم لموانئ ومنشآت النقل البحري في الإمارات والخليج التي تستخدم بنى تحتية مماثلة.",
+      "who_is_affected": "سلطات إدارة الموانئ، شركات الشحن والخدمات اللوجستية، قطاع النقل البحري",
+      "source": "BleepingComputer / The Record (Recorded Future) / CyberScoop"
+    },
+    {
+      "classification": "حملة تصيد",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A stylized fishing hook catching a glowing Microsoft 365 logo token, with MFA shield icons shattering in the background, dark blue tones",
+        "A relay proxy diagram showing a transparent ghost page between a user icon and a cloud service icon, with session tokens being silently intercepted in the middle",
+        "A Telegram bot icon in the center emitting outward connections to multiple corporate email icons, representing a distributed phishing-as-a-service network"
+      ],
+      "image_title": "Greatness PhaaS يتجاوز MFA ويخترق Microsoft 365",
+      "hook_title": "المصادقة الثنائية لم تعد كافية: منصة Greatness تسرق جلساتك بعد تجاوز كل الحواجز",
+      "image_summary": "منصة تصيد تُؤجَر بـ289 دولاراً شهرياً تسرق رموز جلسة Microsoft 365 وتتجاوز MFA بالكامل.",
+      "summary": "كشف باحثو ZeroBEC في أغسطس 2026 عن حملة نشطة تستخدم منصة Greatness PhaaS، تنتحل هوية RingCentral لإرسال رسائل بريد إلكتروني احتيالية تتجاوز فلاتر SPF/DKIM/DMARC عبر استغلال قوائم المُرسلين الموثوقين. تعمل المنصة بأسلوب وسيط (Adversary-in-the-Middle) وتضيف الآن ميزة Device Code Phishing لسرقة رموز OAuth دون تدخّل المستخدم. تستهدف المنصة Microsoft 365 وiCloud وGoogle Workspace وتُباع بـ289 دولاراً شهرياً عبر Telegram.",
+      "why_it_matters": "هذه الأداة تُظهر أن MFA التقليدي لم يعد ضماناً كافياً لحماية الحسابات المؤسسية، مما يستوجب تبنّي سياسات الوصول الشرطي ومراقبة جلسات المصادقة بشكل مستمر.",
+      "who_is_affected": "مستخدمو Microsoft 365 وGoogle Workspace وiCloud في المؤسسات والشركات وجهات الأعمال الكبرى",
+      "source": "The Hacker News / BleepingComputer / Cybersecurity News"
+    },
+    {
+      "classification": "تقرير استخباراتي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A neural network diagram where each node represents a threat actor icon, with AI chip symbols embedded at connection points and red attack vectors flowing between them",
+        "A robotic eye scanning lines of code with adversarial attack graphs overlaid in red and gold tones, centered on a dark background",
+        "An hourglass filled with binary data flowing at machine speed, with the bottom half showing shattered security shields and credential icons"
+      ],
+      "image_title": "CrowdStrike: الذكاء الاصطناعي بات سلاحاً رئيسياً لدى المهاجمين",
+      "hook_title": "تقرير صيد التهديدات 2026: المهاجمون يستخدمون الذكاء الاصطناعي لاستغلال الثغرات خلال ساعات",
+      "image_summary": "88% من الاستغلالات المرتبطة بـ PoC منشور تحدث خلال 48 ساعة فقط وفق CrowdStrike 2026.",
+      "summary": "كشف تقرير CrowdStrike للتهديدات 2026 الصادر في 3 أغسطس أن الذكاء الاصطناعي بات مدمجاً في عمليات المهاجمين بشكل منهجي؛ إذ تستغل مجموعات مرتبطة بكوريا الشمالية وغيرها الثغرات خلال 48 ساعة من نشر كود الاستغلال (PoC). كما زرعت مجموعة STARDUST CHOLLIMA (كوريا الشمالية) حزمة npm خبيثة في 131 إطار عمل Mastra AI، فيما اخترق ALTERED SPIDER أكثر من 300 تبعية برمجية في يوم واحد لسرقة بيانات الاعتماد.",
+      "why_it_matters": "سرعة الاستغلال التي باتت تُقاس بالساعات بدلاً من الأيام تعني أن نوافذ التصحيح تضيق بشكل حاد، مما يستلزم تحديثات فورية وأنظمة كشف تعتمد على الذكاء الاصطناعي.",
+      "who_is_affected": "المؤسسات التي تعتمد على بيئات التطوير البرمجي وسلاسل التوريد الرقمية والأنظمة السحابية",
+      "source": "CrowdStrike / The Register"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "Three interconnected broken shields representing Langflow, Apache Tomcat, and N-central, each emitting red warning pulses on a dark circuit board background",
+        "A server stack icon with three glowing red fault lines cutting through different layers, surrounded by scanning radar waves indicating active exploitation",
+        "A CISA badge icon in the center with three branching vulnerability nodes around it, each marked with a critical warning triangle and countdown timer"
+      ],
+      "image_title": "CISA: ثغرات Langflow وTomcat وN-central تُستغَل فعلياً",
+      "hook_title": "تحذير CISA العاجل: ثلاث ثغرات حرجة مستغَلة في البيئات الحية — الترقيع الفوري واجب",
+      "image_summary": "CISA تُدرج ثلاث ثغرات حرجة في قائمة الاستغلال الفعلي وتُحدد 7 أغسطس موعداً للمعالجة.",
+      "summary": "في 4-5 أغسطس 2026 أضافت CISA ثلاث ثغرات إلى قائمة KEV: CVE-2026-9198 في IBM Langflow (حقن كود يتيح RCE كامل بمعدل CVSS 9.8)، وCVE-2026-34486 في Apache Tomcat (تجاوز تشفير EncryptInterceptor)، وCVE-2026-18556 في N-able N-central (تجاوز مصادقة بمسار بديل CVSS 8.2). حُدّد 7 أغسطس موعداً للمعالجة للوكالات الحكومية الفيدرالية. ووفق Palo Alto Unit42 استُخدمت ثغرة Langflow في حملة مرتبطة بوكيل قرصنة يعمل بـ DeepSeek.",
+      "why_it_matters": "هذه الأدوات تُستخدم على نطاق واسع في بيئات المؤسسات والحكومات؛ استغلالها يمكن أن يمنح المهاجمين تحكماً كاملاً في الخوادم وسرقة البيانات.",
+      "who_is_affected": "مؤسسات تستخدم IBM Langflow لتطبيقات AI، وخوادم Apache Tomcat في البيئات الإنتاجية، وبيئات إدارة الشبكات بـ N-able N-central",
+      "source": "CISA / The Hacker News"
+    },
+    {
+      "classification": "ثغرة أمنية",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A SharePoint logo-inspired geometric shape cracked in two halves, with glowing red circuitry flowing through the gap and ransomware lock icons beneath",
+        "A JWT token card being forged by a shadowed hacker silhouette, with authentication checkmarks turning into red crosses, on a dark blue background",
+        "A chain made of two broken links, one representing authentication bypass and the other remote code execution, floating above a glowing server icon"
+      ],
+      "image_title": "سلسلة هجوم SharePoint: تجاوز المصادقة + تنفيذ أكواد عن بُعد",
+      "hook_title": "خادم SharePoint المكشوف = بوابة مفتوحة: ثغرة مزدوجة تهدد جميع من لم يُحدّث بعد يوليو",
+      "image_summary": "ثغرة JWT في SharePoint تسمح لمهاجم غير مصادَق بانتحال هوية مسؤول وتنفيذ أكواد على الخادم.",
+      "summary": "كشف تقرير Byteiota المنشور في أغسطس 2026 عن سلسلة هجوم مكتملة تستهدف SharePoint On-Premises: تبدأ بـ CVE-2026-55040 (تجاوز JWT بـCVSS 9.1) لانتحال هوية أي مستخدم حتى المسؤول، ثم ثغرة RCE مُكمِّلة أُصدر تصحيحها مع Patch Tuesday أغسطس لتحويل الانتحال إلى تنفيذ كود عشوائي. المجموعة Storm-2603 تستهدف هذه الخوادم بنشر Warlock Ransomware. لا تتأثر إصدارات SharePoint Online (Microsoft 365).",
+      "why_it_matters": "كثير من المؤسسات والحكومات في المنطقة تعمل بـ SharePoint On-Premises؛ السلسلة الهجومية لا تستلزم أي اعتمادات مما يجعل أي خادم مكشوف هدفاً فورياً.",
+      "who_is_affected": "المؤسسات التي تشغّل SharePoint Server 2016/2019/Subscription Edition على بيئاتها الخاصة دون تحديثات يوليو وأغسطس 2026",
+      "source": "Byteiota / Help Net Security"
+    },
+    {
+      "classification": "Ransomware",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A factory gear icon made of metal, with digital chains wrapping around it and a glowing ransomware lock at the center, industrial dark tones",
+        "A world map with multiple red flame icons scattered across Europe and Americas, each connected to a central LockBit-style skull icon by red threat lines",
+        "Stacked cargo containers transformed into data blocks with padlocks on them, surrounded by warning triangles in industrial yellow and red"
+      ],
+      "image_title": "LockBit 5.0 وQilin يشنّان موجة هجمات على الصناعة",
+      "hook_title": "موجة Ransomware متصاعدة: LockBit 5.0 وQilin يضربان مصانع وشركات تأمين في أيام متتالية",
+      "image_summary": "مجموعتا LockBit 5.0 وQilin تستهدفان بالتوازي قطاعات التصنيع والتأمين في أوروبا وأمريكا.",
+      "summary": "في الفترة 3-4 أغسطس 2026 تعرّضت عدة مؤسسات صناعية لهجمات فدية متزامنة: استهدف LockBit 5.0 شركة Setic Pourtier الفرنسية للآلات الصناعية، ومصنع الألواح العازلة Pioneer Coldstore في الهند، وشركة Microphase Electronics الأمريكية. في المقابل استهدفت مجموعة Qilin شركة Freedom Claims Management للتأمين الأمريكية. ووفق بيانات MyDatapath، ارتفعت هجمات الفدية على الشركات الكبرى 74% في النصف الأول من 2026 مقارنةً بالنصف السابق.",
+      "why_it_matters": "تكاثر مجموعات الفدية المتخصصة في القطاعات الصناعية يُنبّه المصانع وشركات التأمين والبنية التحتية في الخليج لضرورة تعزيز الحماية ووضع خطط تعافٍ فعّالة.",
+      "who_is_affected": "قطاعات التصنيع، شركات التأمين، البنية التحتية اللوجستية والصناعية",
+      "source": "Dexpose.io / MyDatapath"
+    },
+    {
+      "classification": "حملة تصيد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A stylized bank building with email envelopes flowing into it carrying hidden hook icons, built on a dark background with financial data streams",
+        "A SendGrid API key icon transformed into a master key unlocking multiple email inboxes, surrounded by scattered credential badges on a dark background",
+        "A leaderboard scoreboard with hacker team icons and stolen credential counts, rendered as a neon arcade-style graphic on dark background"
+      ],
+      "image_title": "912 ضحية في حملة تصيد مصرفي تنتحل هوية Crédit Agricole",
+      "hook_title": "احتيال مصرفي منظّم: مهاجمون يستغلون 149 مفتاح SendGrid مسروقاً لسرقة بيانات عملاء بنكيين",
+      "image_summary": "عصابة تصيد تستخدم بنية SendGrid وAWS المسروقة لخداع 912 ضحية بانتحال هوية بنك Crédit Agricole.",
+      "summary": "كشف باحثو Cybernews في 5 أغسطس 2026 عن شبكة احتيال مصرفي منظّمة تنتحل هوية بنك Crédit Agricole الفرنسي. استغلّ المهاجمون 149 مفتاح SendGrid مسروقاً وثلاثة حسابات AWS لإرسال رسائل تصيّد عبر بنية موثوقة تتجاوز فلاتر البريد. جمعت العملية بيانات تفصيلية عن الضحايا شملت الرصيد واسم المستشار وفرع البنك لتعزيز مصداقية المكالمات الاحتيالية اللاحقة. وثّق الباحثون 912 حالة بيانات اعتماد مُسلَّمة، مع وجود نظام مكافآت تنافسي (Leaderboard) بين المشغّلين.",
+      "why_it_matters": "استغلال البنية التحتية المشروعة كـSendGrid وAWS لتمرير رسائل التصيد يجعل الكشف التقليدي عبر فلاتر البريد قاصراً، مما يُهدد عملاء البنوك في كل مكان بما فيها دول الخليج.",
+      "who_is_affected": "عملاء المؤسسات المالية والبنوك، فرق أمن البريد الإلكتروني المؤسسي، مزودو خدمات البريد الإلكتروني التسويقي",
+      "source": "Cybernews"
+    }
+  ]
+}
