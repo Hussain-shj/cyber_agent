@@ -41,9 +41,11 @@ log = logging.getLogger("grc-agent")
 CANDIDATES_DIR = "posts_grc/candidates"
 
 
-def _load_selected_grc_candidate(repo: str, branch: str, token: str) -> dict | None:
+def _load_selected_grc_candidate(repo: str, branch: str, token: str) -> tuple[dict | None, bool]:
     """نفس منطق _load_selected_candidate في agent_runner.py، لكن على مجلد
-    posts_grc/candidates/ ومتغير SELECTED_TOPIC_INDEX_GRC."""
+    posts_grc/candidates/ ومتغير SELECTED_TOPIC_INDEX_GRC. يعيد (الموضوع أو
+    None، هل استُخدم ملف الاختيار المحفوظ) — الحذف يحدث لاحقاً في run() فقط
+    بعد نجاح التوليد الكامل."""
     selected_marker = None
     try:
         selected_marker = download_file_json(repo, branch, token, f"{CANDIDATES_DIR}/selected.json")
@@ -58,15 +60,7 @@ def _load_selected_grc_candidate(repo: str, branch: str, token: str) -> dict | N
             data = download_file_json(repo, branch, token, source_file)
             candidates = data.get("candidates") or []
             if candidates and idx < len(candidates):
-                chosen = candidates[idx]
-                try:
-                    sha = get_file_sha(repo, branch, token, f"{CANDIDATES_DIR}/selected.json")
-                    if sha:
-                        delete_file(repo, branch, token, f"{CANDIDATES_DIR}/selected.json", sha)
-                        log.info("تم حذف ملف الاختيار المحفوظ (GRC) بعد الاستخدام.")
-                except Exception as exc:  # noqa: BLE001
-                    log.warning("تعذّر حذف ملف الاختيار المحفوظ (%s) — لن يمنع المتابعة.", exc)
-                return chosen
+                return candidates[idx], True
             log.warning("الاختيار المحفوظ غير صالح — سيُتجاهَل.")
         except Exception as exc:  # noqa: BLE001
             log.warning("تعذّرت قراءة ملف الاختيار المحفوظ (%s) — سيُتجاهَل.", exc)
@@ -75,7 +69,7 @@ def _load_selected_grc_candidate(repo: str, branch: str, token: str) -> dict | N
     files = [e for e in entries if e["type"] == "file" and e["name"].endswith(".json")
              and e["name"] != "selected.json"]
     if not files:
-        return None
+        return None, False
     files.sort(key=lambda e: e["name"], reverse=True)
     latest = files[0]
     log.info("وُجد ملف مواضيع GRC مرشحة: %s", latest["path"])
@@ -83,14 +77,14 @@ def _load_selected_grc_candidate(repo: str, branch: str, token: str) -> dict | N
     data = download_file_json(repo, branch, token, latest["path"])
     candidates = data.get("candidates") or []
     if not candidates:
-        return None
+        return None, False
 
     idx = int(os.environ.get("SELECTED_TOPIC_INDEX_GRC", "0"))
     if idx >= len(candidates):
         log.warning("SELECTED_TOPIC_INDEX_GRC=%d خارج النطاق (يوجد %d) — استخدام 0.", idx, len(candidates))
         idx = 0
     log.info("تم اختيار موضوع GRC رقم %d من %d.", idx, len(candidates))
-    return candidates[idx]
+    return candidates[idx], False
 
 
 def run() -> None:
@@ -102,12 +96,13 @@ def run() -> None:
     branch = os.environ.get("GITHUB_BRANCH", "main")
 
     content = None
+    used_marker_selection = False
     if repo and gh_token:
         try:
-            content = _load_selected_grc_candidate(repo, branch, gh_token)
+            content, used_marker_selection = _load_selected_grc_candidate(repo, branch, gh_token)
         except Exception as exc:  # noqa: BLE001
             log.warning("تعذّرت قراءة ملف المواضيع المرشحة (%s) — سيُبحث مباشرة بدلاً منه.", exc)
-            content = None
+            content, used_marker_selection = None, False
 
     if content is not None:
         log.info("1/4 — تم استخدام موضوع GRC مُختار مسبقاً (بدون بحث جديد).")
@@ -171,10 +166,20 @@ def run() -> None:
         log.error(
             "توليد الصور عبر الذكاء الاصطناعي لم يكتمل (%d من %d) — تم إيقاف "
             "التشغيل بالكامل بدل استخدام رسم محلي بديل (حسب إعدادك). تحقق من "
-            "GOOGLE_API_KEY أو OPENAI_API_KEY ثم أعد المحاولة.",
+            "GOOGLE_API_KEY أو OPENAI_API_KEY ثم أعد المحاولة. اختيارك من صفحة "
+            "المراجعة لا يزال محفوظاً — لا حاجة لإعادة اختياره.",
             succeeded, expected,
         )
         return
+
+    if used_marker_selection and repo and gh_token:
+        try:
+            sha = get_file_sha(repo, branch, gh_token, f"{CANDIDATES_DIR}/selected.json")
+            if sha:
+                delete_file(repo, branch, gh_token, f"{CANDIDATES_DIR}/selected.json", sha)
+                log.info("تم حذف ملف الاختيار المحفوظ (GRC) بعد اكتمال التوليد بنجاح.")
+        except Exception as exc:  # noqa: BLE001
+            log.warning("تعذّر حذف ملف الاختيار المحفوظ (%s) — لن يمنع المتابعة.", exc)
 
     image_paths = generate_grc_designs(content, out_dir, ai_backgrounds=ai_backgrounds)
     log.info("تم حفظ تصاميم GRC محلياً في: %s", out_dir)

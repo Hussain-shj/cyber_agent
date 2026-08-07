@@ -44,12 +44,14 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(me
 log = logging.getLogger("cyber-agent")
 
 
-def _load_selected_candidate(repo: str, branch: str, token: str) -> dict | None:
+def _load_selected_candidate(repo: str, branch: str, token: str) -> tuple[dict | None, bool]:
     """يحدد الموضوع المختار بترتيب أولوية:
     1) ملف posts/candidates/selected.json (يكتبه زر "اختر هذا الموضوع" في
        صفحة المراجعة) — يحدد بدقة أي ملف مرشحين وأي فهرس بالضبط.
     2) إن لم يوجد، يُستخدم أحدث ملف مرشحين + SELECTED_TOPIC_INDEX (افتراضياً 0).
-    يعيد None إن لم يوجد أي ملف مرشحين على الإطلاق."""
+    يعيد (الموضوع أو None، هل استُخدم ملف الاختيار المحفوظ). لا يحذف ملف
+    الاختيار هنا — الحذف يحدث لاحقاً في run() فقط بعد نجاح التوليد الكامل،
+    حتى لا يُفقَد الاختيار إن فشل التوليد (مثلاً لغياب مفتاح API)."""
     selected_marker = None
     try:
         selected_marker = download_file_json(repo, branch, token, "posts/candidates/selected.json")
@@ -64,18 +66,7 @@ def _load_selected_candidate(repo: str, branch: str, token: str) -> dict | None:
             data = download_file_json(repo, branch, token, source_file)
             candidates = data.get("candidates") or []
             if candidates and idx < len(candidates):
-                chosen = candidates[idx]
-                # نحذف ملف الاختيار فوراً بعد استخدامه بنجاح، حتى لا يُعاد
-                # استخدامه خطأً في التشغيل التالي (اليوم القادم) إن نسي
-                # المستخدم اختيار موضوع جديد.
-                try:
-                    sha = get_file_sha(repo, branch, token, "posts/candidates/selected.json")
-                    if sha:
-                        delete_file(repo, branch, token, "posts/candidates/selected.json", sha)
-                        log.info("تم حذف ملف الاختيار المحفوظ (استُهلك بنجاح).")
-                except Exception as exc:  # noqa: BLE001
-                    log.warning("تعذّر حذف ملف الاختيار المحفوظ (%s) — لن يمنع المتابعة.", exc)
-                return chosen
+                return candidates[idx], True
             log.warning("الاختيار المحفوظ غير صالح (فهرس خارج النطاق أو ملف فارغ) — سيُتجاهَل.")
         except Exception as exc:  # noqa: BLE001
             log.warning("تعذّرت قراءة ملف الاختيار المحفوظ (%s) — سيُتجاهَل.", exc)
@@ -84,7 +75,7 @@ def _load_selected_candidate(repo: str, branch: str, token: str) -> dict | None:
     files = [e for e in entries if e["type"] == "file" and e["name"].endswith(".json")
              and e["name"] != "selected.json"]
     if not files:
-        return None
+        return None, False
     files.sort(key=lambda e: e["name"], reverse=True)
     latest = files[0]
     log.info("وُجد ملف مواضيع مرشحة: %s", latest["path"])
@@ -92,14 +83,14 @@ def _load_selected_candidate(repo: str, branch: str, token: str) -> dict | None:
     data = download_file_json(repo, branch, token, latest["path"])
     candidates = data.get("candidates") or []
     if not candidates:
-        return None
+        return None, False
 
     idx = int(os.environ.get("SELECTED_TOPIC_INDEX", "0"))
     if idx >= len(candidates):
         log.warning("SELECTED_TOPIC_INDEX=%d خارج النطاق (يوجد %d مواضيع) — استخدام 0.", idx, len(candidates))
         idx = 0
     log.info("تم اختيار الموضوع رقم %d من %d.", idx, len(candidates))
-    return candidates[idx]
+    return candidates[idx], False
 
 
 def run() -> None:
@@ -111,12 +102,13 @@ def run() -> None:
     branch = os.environ.get("GITHUB_BRANCH", "main")
 
     content = None
+    used_marker_selection = False
     if repo and gh_token:
         try:
-            content = _load_selected_candidate(repo, branch, gh_token)
+            content, used_marker_selection = _load_selected_candidate(repo, branch, gh_token)
         except Exception as exc:  # noqa: BLE001
             log.warning("تعذّرت قراءة ملف المواضيع المرشحة (%s) — سيُبحث مباشرة بدلاً منه.", exc)
-            content = None
+            content, used_marker_selection = None, False
 
     if content is not None:
         log.info("1/4 — تم استخدام موضوع مُختار مسبقاً من posts/candidates/ (بدون بحث جديد).")
@@ -171,10 +163,23 @@ def run() -> None:
         log.error(
             "توليد الصور عبر الذكاء الاصطناعي لم يكتمل (%d من %d) — تم إيقاف "
             "التشغيل بالكامل بدل استخدام رسم محلي بديل (حسب إعدادك). تحقق من "
-            "OPENAI_API_KEY ثم أعد المحاولة.",
+            "OPENAI_API_KEY ثم أعد المحاولة. اختيارك من صفحة المراجعة لا يزال "
+            "محفوظاً — لا حاجة لإعادة اختياره.",
             succeeded, expected,
         )
         return
+
+    # نجح توليد الصور بالكامل الآن — إن كان هذا الموضوع جاء من اختيار محفوظ
+    # (زر "اختر هذا الموضوع")، نحذفه الآن فقط (وليس عند القراءة) حتى لا
+    # يُفقَد الاختيار في حال فشل التوليد لاحقاً (مثلاً لغياب مفتاح API).
+    if used_marker_selection and repo and gh_token:
+        try:
+            sha = get_file_sha(repo, branch, gh_token, "posts/candidates/selected.json")
+            if sha:
+                delete_file(repo, branch, gh_token, "posts/candidates/selected.json", sha)
+                log.info("تم حذف ملف الاختيار المحفوظ (استُهلك بنجاح بعد اكتمال التوليد).")
+        except Exception as exc:  # noqa: BLE001
+            log.warning("تعذّر حذف ملف الاختيار المحفوظ (%s) — لن يمنع المتابعة.", exc)
 
     image_paths = generate_designs(content, out_dir, ai_backgrounds=ai_backgrounds)
     log.info("تم حفظ التصاميم محلياً في: %s (لن تبقى بعد انتهاء الحاوية)", out_dir)
