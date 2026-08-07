@@ -21,7 +21,7 @@ from io import BytesIO
 from google import genai
 from PIL import Image
 
-from design_brief import BRAND_GUIDANCE, DESIGNER_BRIEF_PREFIX
+from design_brief import BRAND_GUIDANCE, DESIGNER_BRIEF_PREFIX, NO_TEXT_WARNING
 
 # النموذج الافتراضي (يُعرف مجتمعياً باسم Nano Banana). يمكن تبديله بنموذج أحدث
 # عبر متغير البيئة NANO_BANANA_MODEL دون تعديل الكود، لأن أسماء نماذج Google
@@ -49,17 +49,20 @@ def _build_prompt(classification: str, urgent: bool, visual_concept: str = "", k
 
     base = (
         f"{DESIGNER_BRIEF_PREFIX}"
+        f"{NO_TEXT_WARNING}"
         f"{subject}"
-        "Rendered in a modern SaaS/tech UI aesthetic: one or two floating "
-        "glassmorphic card panels with soft rounded corners, subtle drop "
+        "Rendered in a modern SaaS/tech UI aesthetic: exactly ONE floating "
+        "glassmorphic card panel with soft rounded corners, subtle drop "
         "shadows, and gentle depth layering — like a premium product feature "
-        "showcase. Each card contains ONLY a single centered icon relevant to "
-        "the story (no text, no labels, no numbers inside the cards — text "
-        "will be added separately with precise typography afterward). "
+        "showcase. The card is a plain empty glass panel containing ONLY a "
+        "single centered icon relevant to the story — the card surface itself "
+        "must be entirely blank otherwise, with no other cards, no dashboard "
+        "layout, no list of items, no small icons around it, and absolutely no "
+        "writing of any kind on or near it. "
         f"Background: a soft gradient with a subtle interconnected hexagonal "
         f"wireframe/network-line pattern for depth, in {mood} (not neon blue "
         "or high-contrast tech colors). Leave clear open space around and "
-        "below the card(s) for text overlay afterward. Elegant, premium, "
+        "below the card for text overlay afterward. Elegant, premium, "
         "editorial — not cluttered. Tall portrait orientation composition, 4k quality. "
         f"{BRAND_GUIDANCE}"
         "If people are shown, they must be generic, non-identifiable, fictional-looking "

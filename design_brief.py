@@ -20,6 +20,23 @@ DESIGNER_BRIEF_PREFIX = (
     "unrelated motif. "
 )
 
+# تحذير صارم منفصل ضد النص داخل الصورة — مضاف بعد ملاحظات فعلية بأن نماذج
+# الصور تتجاهل أحياناً تعليمة "no text" العامة عندما يتضمن وصف المشهد عناصر
+# UI أو بطاقات تلمّح لتصنيفات/فئات محددة (مثل "بطاقات تعرض: كذا وكذا")،
+# فيكتب النموذج تلك الأسماء كتسميات فعلية داخل الصورة، وغالباً بتهجئة خاطئة.
+NO_TEXT_WARNING = (
+    "CRITICAL constraint, follow exactly: the image must contain ZERO text of "
+    "any kind — no words, no labels, no captions, no category names, no numbers, "
+    "no acronyms, not even single letters, anywhere in the image, including "
+    "inside or beside any card, panel, icon, or UI element. If your scene "
+    "concept involves cards, panels, or dashboard-style elements, render them "
+    "completely empty of any label or caption — represent each concept through "
+    "pure visual symbolism (shape, icon, color) only, never through a written "
+    "word. Do not attempt to spell out any term related to the story. All real "
+    "text (headline, details, source) will be added afterward with precise "
+    "typography — your job is the image only. "
+)
+
 # ملاحظة حقوق ملكية فكرية: لا نطلب من النموذج رسم شعار شركة حقيقي حرفياً (غالباً
 # ما تُرسَم الشعارات المسجَّلة بشكل مشوّه وغير دقيق من نماذج الصور الحالية، وقد
 # يُنسب خطأً للشركة المعنية إن نُشر). بدلاً من ذلك نطلب إشارة بصرية للهوية
