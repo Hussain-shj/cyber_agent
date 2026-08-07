@@ -129,7 +129,25 @@ def run() -> None:
 
     ai_backgrounds = []
     concepts = content.get("visual_concepts") or []
-    if concepts and os.environ.get("GOOGLE_API_KEY"):
+    if concepts and os.environ.get("OPENAI_API_KEY"):
+        try:
+            from openai_image_generator import generate_backgrounds as oa_generate_backgrounds
+            log.info("توليد خلفيات فنية عبر OpenAI — أفكار Claude: %s", concepts)
+            ai_backgrounds = oa_generate_backgrounds(
+                concepts, content["classification"], content.get("urgency") == "عاجل",
+                quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"), theme="grc",
+            )
+            ok = sum(1 for b in ai_backgrounds if b is not None)
+            log.info("تم توليد %d من %d خلفيات فنية بنجاح عبر OpenAI.", ok, len(concepts))
+        except Exception as exc:  # noqa: BLE001
+            log.warning("فشل توليد الخلفيات عبر OpenAI (%s) — سيُجرَّب Nano Banana إن توفر.", exc)
+            ai_backgrounds = []
+
+    # Nano Banana احتياطي فقط الآن (وليس الخيار الأول): نماذج Gemini مُحسَّنة
+    # تحديداً لدقة كتابة النص داخل الصور، ما يجعلها أكثر ميلاً لإضافة نص غير
+    # مرغوب رغم منعه صراحة في البرومبت — OpenAI أثبت موثوقية أعلى هنا.
+    if not (concepts and len(ai_backgrounds) == len(concepts) and all(ai_backgrounds)) \
+            and concepts and os.environ.get("GOOGLE_API_KEY"):
         try:
             from nano_banana_image_generator import generate_backgrounds as nb_generate_backgrounds
             log.info("توليد خلفيات فنية عبر Nano Banana (Gemini) — أفكار Claude: %s", concepts)
@@ -139,22 +157,7 @@ def run() -> None:
             ok = sum(1 for b in ai_backgrounds if b is not None)
             log.info("تم توليد %d من %d خلفيات فنية بنجاح عبر Nano Banana.", ok, len(concepts))
         except Exception as exc:  # noqa: BLE001
-            log.warning("فشل توليد الخلفيات عبر Nano Banana (%s) — سيُجرَّب OpenAI إن توفر.", exc)
-            ai_backgrounds = []
-
-    if not (concepts and len(ai_backgrounds) == len(concepts) and all(ai_backgrounds)) \
-            and concepts and os.environ.get("OPENAI_API_KEY"):
-        try:
-            from openai_image_generator import generate_backgrounds as oa_generate_backgrounds
-            log.info("توليد خلفيات فنية عبر OpenAI — أفكار Claude: %s", concepts)
-            ai_backgrounds = oa_generate_backgrounds(
-                concepts, content["classification"], content.get("urgency") == "عاجل",
-                quality=os.environ.get("OPENAI_IMAGE_QUALITY", "medium"),
-            )
-            ok = sum(1 for b in ai_backgrounds if b is not None)
-            log.info("تم توليد %d من %d خلفيات فنية بنجاح عبر OpenAI.", ok, len(concepts))
-        except Exception as exc:  # noqa: BLE001
-            log.error("فشل توليد الخلفيات الفنية عبر OpenAI أيضاً (%s).", exc)
+            log.error("فشل توليد الخلفيات الفنية عبر Nano Banana أيضاً (%s).", exc)
             ai_backgrounds = []
 
     # بناءً على تفضيل المستخدم: لا يوجد رسم محلي بديل بعد الآن للصور "التعبيرية"
