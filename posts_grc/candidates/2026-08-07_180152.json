@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A compliance officer in a modern office reviews a large printed timeline pinned to a cream-colored wall, showing EU AI Act phase dates in navy and gold. The mood is focused, calm natural light from a wide window.",
+        "A close-up of a professional's hands annotating a legal document at a clean desk, with a clock on the wall and a sticky note reading 'Dec 2027'. Soft warm tones, organized setting.",
+        "A small boardroom meeting: three professionals around a round table reviewing a projected slide showing two diverging deadline paths — August 2026 vs December 2027 — on a light background with navy accents."
+      ],
+      "image_title": "تأجيل الذكاء الاصطناعي عالي المخاطر: ماذا تبقّى؟",
+      "hook_title": "قانون الذكاء الاصطناعي الأوروبي يُعيد رسم خريطة الامتثال — التأجيل لا يعني التوقف",
+      "image_summary": "الاتحاد الأوروبي يؤجّل الالتزامات عالية المخاطر للذكاء الاصطناعي إلى ديسمبر 2027، لكن التزامات الشفافية لا تزال سارية.",
+      "summary": "بموجب حزمة 'Omnibus الرقمي' التي تمّ التوصل إليها سياسياً في مايو 2026، جرى تأجيل اشتراطات أنظمة الذكاء الاصطناعي عالية المخاطر المصنّفة ضمن الملحق الثالث من قانون الذكاء الاصطناعي الأوروبي من أغسطس 2026 إلى ديسمبر 2027، وأنظمة المنتجات المُدمجة إلى أغسطس 2028. غير أن التزامات الشفافية المنصوص عليها في المادة 50 وواجب محو الأمية بالذكاء الاصطناعي (المادة 4) ظلّت على جدولها الزمني الأصلي، ما يعني أن المؤسسات لا تزال ملزمة بالامتثال لها فوراً. كما جرى تمديد إلزام وضع العلامات المائية لمخرجات النماذج التوليدية حتى ديسمبر 2026.",
+      "why_it_matters": "يمنح التأجيل مسؤولي الامتثال فرصة لإعادة ترتيب خرائط الطريق، لكنه لا يُلغي الإجراءات التحضيرية؛ فتصنيف الأنظمة وإعداد الوثائق التقنية وتصميم الرقابة البشرية ينبغي أن تستمر الآن لتفادي الضغط عند اقتراب الموعد الجديد.",
+      "who_is_affected": "مزودو أنظمة الذكاء الاصطناعي عالية المخاطر في الاتحاد الأوروبي وخارجه، مسؤولو الامتثال والمستشارون القانونيون، الجهات الرقابية الوطنية، وكذلك الشركات الخليجية التي تصدّر حلول ذكاء اصطناعي إلى الأسواق الأوروبية.",
+      "source": "Pinsent Masons / Gibson Dunn / European Commission"
+    },
+    {
+      "classification": "فعالية وتدريب",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An overhead view of a conference hall filled with rows of professionals attending sessions, large screens showing GRC and AI governance slides in navy and gold tones, calm ambient lighting, no identifiable faces.",
+        "Two professionals in business attire walking through a convention corridor, carrying conference name badges, discussing near a display board labeled 'Agentic AI & Governance'. Cream and navy color palette, bright natural-feeling light.",
+        "A speaker at a podium in front of a packed auditorium, presenting a slide with the words 'Auditing Generative AI at Scale'. The audience listens attentively; warm, professional lighting, soft-focus background."
+      ],
+      "image_title": "مؤتمر GRC السنوي 2026: الذكاء الاصطناعي محوراً رئيسياً",
+      "hook_title": "ISACA وIIA يجمعان خبراء GRC العالميين في سان دييغو لمواجهة تحديات الذكاء الاصطناعي العامل",
+      "image_summary": "المؤتمر السنوي الثالث عشر لحوكمة المخاطر والرقابة ينعقد 17-19 أغسطس 2026 حضورياً وافتراضياً.",
+      "summary": "تستضيف ISACA والمعهد الدولي للمدققين الداخليين (IIA) المؤتمر السنوي الثالث عشر للحوكمة والمخاطر والرقابة بين 17-19 أغسطس 2026 في سان دييغو وعبر الإنترنت. يتمحور البرنامج حول حوكمة الذكاء الاصطناعي المؤسسي، والذكاء الاصطناعي العامل (Agentic AI) في بيئات GRC، وإدارة مخاطر البائعين، والحوسبة الكمومية. تتضمن ورش عمل ما قبل المؤتمر دورة 'تدقيق الذكاء الاصطناعي التوليدي على نطاق واسع'، ودمج الأمن السيبراني في GRC المؤسسي، مع ما يزيد على 40 جلسة لخبراء متخصصين.",
+      "why_it_matters": "يُعدّ هذا المؤتمر المنصة المهنية الأبرز لمسؤولي GRC لمواكبة المعايير الناشئة للتدقيق على أنظمة الذكاء الاصطناعي، واكتساب ساعات التطوير المهني المستمر CPE في مجالات التقاطع الحيوي بين الذكاء الاصطناعي والتدقيق والامتثال.",
+      "who_is_affected": "مدققو تقنية المعلومات الداخليون والخارجيون، مسؤولو الامتثال ومديرو المخاطر، متخصصو حوكمة الذكاء الاصطناعي في المؤسسات الحكومية والخاصة.",
+      "source": "ISACA / The IIA"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A government cybersecurity analyst at a government facility sits at a workstation surrounded by network diagrams of IoT sensors, reviewing a printed NIST draft document. Soft cream and navy tones, calm focused environment.",
+        "A close-up of a connected device ecosystem diagram on a desk — sensors, routers, embedded systems — with a professional's hand underlining the words 'IoT Product Lifecycle Security' on a printed page. Clean, minimal workspace.",
+        "A procurement officer in a meeting room presents a slide titled 'IoT Procurement Requirements' to colleagues around a table. Documents visible, natural light, no identifiable logos or faces, gold and navy accent colors."
+      ],
+      "image_title": "NIST يُحدّث معيار أمن منتجات إنترنت الأشياء",
+      "hook_title": "NIST يفتح باب التعليق على مسوّدة SP 800-213r1 لأمن منتجات إنترنت الأشياء الحكومي",
+      "image_summary": "مسوّدة NIST SP 800-213r1 المحدّثة توسّع نطاق الأمان من 'الأجهزة' إلى 'المنتجات' الكاملة مع دورة حياتها.",
+      "summary": "أصدر برنامج NIST لأمن إنترنت الأشياء في يونيو 2026 المسوّدة الأولى لتحديث المعيار SP 800-213 (المراجعة الأولى)، التي توسّع نطاق الإرشادات من مفهوم 'الأجهزة' إلى مفهوم 'المنتجات' الشاملة لكامل نظام إنترنت الأشياء وضمن السياق المؤسسي لإدارة المخاطر. يتوافق التحديث مع قانون تحسين الأمن السيبراني لإنترنت الأشياء لعام 2020 والأمر التنفيذي 14028. باب التعليق العام مفتوح حتى 24 أغسطس 2026.",
+      "why_it_matters": "يحدد هذا المعيار المشتريات الحكومية من منتجات إنترنت الأشياء، مما يؤثر مباشرة على سياسات الشراء وإدارة مخاطر الموردين ومتطلبات دورة حياة المنتج في المؤسسات المورّدة للقطاع الحكومي.",
+      "who_is_affected": "مسؤولو مشتريات تقنية المعلومات في الجهات الحكومية، مُصنّعو منتجات إنترنت الأشياء، مدراء أمن المعلومات، ومسؤولو الامتثال في شركات البنية التحتية الرقمية.",
+      "source": "NIST CSRC / Security Boulevard"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A risk manager in a professional office leans over a printed NIST ransomware profile document spread on a table, with sticky notes marking key sections. Calm cream and gold tones, morning light, focused atmosphere.",
+        "A compliance team of three professionals gathered around a monitor displaying a CSF 2.0 functions dashboard — Govern, Identify, Protect, Detect, Respond, Recover — reviewing readiness metrics. Clean navy and white interface.",
+        "An abstract representation of a ransomware incident response timeline pinned on a physical board, with colored threads connecting action cards labeled 'Identify', 'Protect', 'Recover'. A professional stands reviewing it, back to viewer, in a calm office setting."
+      ],
+      "image_title": "NIST يُصدر الدليل النهائي لإدارة مخاطر الفدية",
+      "hook_title": "NIST IR 8374r1: إطار عملي محدّث لمواجهة برامج الفدية وفق معيار CSF 2.0",
+      "image_summary": "NIST يُنهي دليل إدارة مخاطر برامج الفدية المحدّث ليتوافق مع الوظائف الست لإطار CSF 2.0.",
+      "summary": "أصدر المركز الوطني للتميز في الأمن السيبراني (NCCoE) التابع لـ NIST في يونيو 2026 النسخة النهائية من التقرير IR 8374r1 'إدارة مخاطر برامج الفدية: ملف مجتمع CSF 2.0'. يُترجم الملف الإطار المفاهيمي CSF 2.0 إلى خطوات عملية قابلة للتطبيق لحماية المؤسسات من هجمات الفدية والتعافي منها، مع مراعاة الوظيفة السادسة الجديدة 'الحوكمة'. يشمل الملف تقييم جاهزية المؤسسة وبناء دفتر تشغيل مضاد للفدية.",
+      "why_it_matters": "يُعدّ هذا الملف أداة أساسية لمسؤولي GRC في المؤسسات متوسطة وكبيرة الحجم لقياس مستوى الجاهزية لمواجهة برامج الفدية وترجمة متطلبات الامتثال إلى ضوابط تشغيلية فعلية.",
+      "who_is_affected": "مدراء أمن المعلومات، فرق إدارة الحوادث، مسؤولو استمرارية الأعمال، والمؤسسات العاملة في البنية التحتية الحيوية.",
+      "source": "NIST CSRC / NCCoE"
+    },
+    {
+      "classification": "أفضل ممارسات حوكمة",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An infrastructure security engineer in a control room reviews multiple monitors showing OT network diagrams for a water treatment facility. The room has calm blue-gray lighting, real-time dashboards visible, no identifiable logos.",
+        "A field technician in a hard hat and safety vest connects a tablet to an operational technology panel at a water pumping station, with the facility visible in the background. Neutral tones, safe industrial environment feel.",
+        "A group of IT and OT professionals seated around a conference table reviewing a printed architecture diagram labeled 'Secure Remote Access — Water Sector'. Natural light, calm professional atmosphere, navy and cream palette."
+      ],
+      "image_title": "NIST يُصدر دليل أمن التكنولوجيا التشغيلية لقطاع المياه",
+      "hook_title": "SP 1800-45: كيف يُؤمّن NIST الوصول عن بُعد لشبكات البنية التحتية للمياه؟",
+      "image_summary": "NIST يُصدر المعيار النهائي SP 1800-45 لتأمين الوصول عن بُعد إلى أنظمة التشغيل في قطاع المياه.",
+      "summary": "أصدر المركز الوطني للتميز في الأمن السيبراني (NCCoE) التابع لـ NIST في يونيو 2026 النسخة النهائية من SP 1800-45 'الأمن السيبراني لقطاع المياه والصرف الصحي: بناء البنية التحتية'. يوضح المعيار ثلاثة نماذج مرجعية للوصول الآمن عن بُعد إلى أنظمة التكنولوجيا التشغيلية، مع مراعاة الفروق بين المرافق الصغيرة والمتوسطة والكبيرة. المعيار نتاج تعاون مع موردي التقنية ومرافق المياه والخبراء المتخصصين.",
+      "why_it_matters": "يُعالج هذا الإصدار ثغرة تشغيلية حرجة في قطاع البنية التحتية الحيوية، إذ يُترجم متطلبات الأمن السيبراني إلى بنى تقنية جاهزة للتطبيق في بيئات التكنولوجيا التشغيلية.",
+      "who_is_affected": "مشغلو البنية التحتية الحيوية في قطاع المياه والطاقة والبلديات، مستشارو أمن التكنولوجيا التشغيلية، مدراء مخاطر القطاع الحكومي.",
+      "source": "NIST NCCoE / Industrial Cyber"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A quality management professional sits at a large desk reviewing a side-by-side comparison document of ISO 9001:2015 vs ISO 9001:2026 clauses, with color-coded annotations. Warm cream office, focused lighting, organized bookshelves in background.",
+        "A certification auditor reviews a checklist on a tablet during an on-site audit of a manufacturing facility. The facility floor is visible through a glass wall. Navy and gold color tones, calm professional scene.",
+        "A senior executive and a compliance lead stand before a projected timeline showing ISO transition milestones from 2026 to 2029. The boardroom is bright, minimal, and professional, with no identifiable faces or logos."
+      ],
+      "image_title": "ISO 9001:2026 يُعيد تعريف الحوكمة والجودة المؤسسية",
+      "hook_title": "ISO 9001:2026 في طريقه للنشر: ما الذي يتغير في متطلبات الحوكمة والمخاطر؟",
+      "image_summary": "إصدار ISO 9001:2026 المتوقع في سبتمبر يُدمج الاستدامة والمناخ والأخلاقيات ضمن متطلبات الجودة الأساسية.",
+      "summary": "يُنتظر نشر النسخة النهائية من ISO 9001:2026 في سبتمبر/أكتوبر 2026، وهي تحديث تطوري لمعيار نظام إدارة الجودة يُدمج تعديل تغير المناخ (2024) رسمياً في البند 4.1، ويُعزز متطلبات مساءلة القيادة والسلوك الأخلاقي وسلاسل التوريد. تبقى الهيكل المرن Annex SL دون تغيير، مما يخفف عبء الانتقال. فترة الانتقال ثلاث سنوات حتى نهاية 2029، وأولى الشهادات المتوقعة لن تُصدر قبل أغسطس 2027.",
+      "why_it_matters": "يُلزم هذا التحديث متخصصي الحوكمة بمراجعة إطار إدارة الجودة المؤسسي لاستيعاب متطلبات الاستدامة ومخاطر المناخ، مما يُقرّب فجوة الدمج بين أنظمة ISO 9001 وISO 14001 وISO 31000.",
+      "who_is_affected": "مدققو الجودة والشهادات المعتمدة، مدراء أنظمة الجودة المؤسسية، مسؤولو الامتثال في المؤسسات الصناعية والخدمية الحاصلة على شهادة ISO 9001:2015.",
+      "source": "DNV / Risk Training Professionals / isoTracker"
+    },
+    {
+      "classification": "تدقيق وامتثال",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A cybersecurity auditor reviews a printed OWASP Top 10 chart at a desk, marking software supply chain failure risks with a red pen. Clean minimal office, cream and navy palette, focused natural light.",
+        "A DevSecOps team of two professionals analyzes a software dependency graph on a large monitor, with supply chain nodes highlighted in amber warning color. Calm, tech-focused environment, no identifiable logos.",
+        "A compliance manager presents updated application security audit requirements to a developer team in a bright open-plan office. The screen behind shows a risk ranking list. Professional, collaborative atmosphere, navy accents."
+      ],
+      "image_title": "OWASP 2026: فشل سلاسل التوريد خطر من الفئة الأولى",
+      "hook_title": "OWASP يُصدر قائمة المخاطر 2025/2026: إخفاقات سلسلة التوريد البرمجية تدخل التصنيف",
+      "image_summary": "OWASP يُضيف 'إخفاقات سلسلة التوريد البرمجية' كفئة حرجة جديدة في التصنيف الثامن للمخاطر.",
+      "summary": "أصدر مشروع OWASP في يناير 2026 الطبعة الثامنة من قائمة أبرز 10 مخاطر أمنية للتطبيقات، إذ أضاف فئتين جديدتين هما 'إخفاقات سلسلة التوريد البرمجية' في المرتبة الثالثة و'إساءة التعامل مع الحالات الاستثنائية'. اعتمد التحليل على 589 نوع ضعف معروف (CWE) عبر 248 فئة وما يقارب 175,000 سجل ثغرات من قاعدة بيانات الثغرات الوطنية. انخفض تصنيف الإخفاقات التشفيرية من المرتبة الثانية إلى الرابعة.",
+      "why_it_matters": "يُوجب هذا التحديث على مدققي تقنية المعلومات مراجعة قوائم التحقق الحالية لإدراج ضوابط سلامة التبعيات البرمجية وسلسلة التوريد الرقمية، وهي فجوة موثّقة في كثير من برامج تدقيق التطبيقات.",
+      "who_is_affected": "مدققو تطبيقات الويب وواجهات API، مسؤولو DevSecOps، فرق إدارة مخاطر البائعين، ومتخصصو الامتثال في مجالات PCI DSS وISO 27001 وSOC 2.",
+      "source": "OWASP / GBHackers / CyberPress"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A government identity card specialist reviews side-by-side diagrams of classical PIV credentials and new quantum-resistant PIV credentials on a drafting table. Cream and navy tones, technical yet calm setting, no logos.",
+        "An abstract visualization of a dual-stack cryptographic model: two parallel credential 'lanes' — one classical, one quantum-resistant — converging into a secure government entry point. Clean vector-style illustration, navy and gold.",
+        "A federal IT security officer presents a migration roadmap timeline on a whiteboard to a small team in a government conference room. Focus on the whiteboard showing 'PQC PIV Transition Phase 1 / Phase 2'. Professional, calm atmosphere."
+      ],
+      "image_title": "NIST يُحدّث معايير هوية PIV لمرحلة ما بعد الكم",
+      "hook_title": "نقلة نوعية في الهوية الرقمية الحكومية: NIST يُطلق مسوّدات دمج التشفير الكمومي في PIV",
+      "image_summary": "NIST يُصدر مسوّدات عمل تُدمج خوارزميات ML-DSA وML-KEM في بطاقات الهوية الحكومية PIV.",
+      "summary": "أعلن NIST في يونيو 2026 عن إصدار مسوّدات عمل أوّلية لتحديث معيار التحقق من الهوية الشخصية (PIV) لدعم التشفير ما بعد الكمي. تعتمد المسوّدات نموذج 'مزدوج المسار' الذي يحافظ على بيانات اعتماد PIV الكلاسيكية الحالية مع إضافة مسار جديد مقاوم للحوسبة الكمية باستخدام خوارزمية ML-DSA للتوقيع الرقمي وآلية ML-KEM لتبادل المفاتيح، مما يتيح انتقالاً تدريجياً دون تعطيل الأنظمة القائمة.",
+      "why_it_matters": "تُشكّل هذه التحديثات المرحلة التمهيدية العملية لتأهيل بنية الهوية الرقمية الحكومية لمواجهة تهديدات 'الحصاد الآني والفك المستقبلي'، وتُحدد المسار الذي ستتبعه المؤسسات في إدارة هوياتها الرقمية على المدى البعيد.",
+      "who_is_affected": "مدراء هوية الأنظمة الحكومية والمؤسسية، مسؤولو أمن البنية التحتية للمفاتيح العامة PKI، ومتخصصو الامتثال في المؤسسات الحكومية والمالية.",
+      "source": "NIST CSRC / Schutz IT"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A risk governance professional at a clean desk reviews a draft document labeled 'ISO 31000 Committee Draft' with sticky flags marking key clauses about risk ownership and strategic decision-making. Soft cream tones, morning light.",
+        "A chief risk officer presents to a board of directors in a formal boardroom setting, pointing to a projected slide showing revised risk management integration pillars — Governance, Strategy, Accountability. No identifiable faces, navy and gold.",
+        "A small international working group of diverse professionals around a conference table with printed draft standards documents, laptops, and discussion notes. The atmosphere is deliberate and collaborative, neutral color palette."
+      ],
+      "image_title": "مراجعة ISO 31000 لإدارة المخاطر قيد التطوير",
+      "hook_title": "ISO 31000 في طريق المراجعة: تعزيز ملكية المخاطر والتكامل الاستراتيجي يتصدران الأولويات",
+      "image_summary": "معيار ISO 31000 لإدارة المخاطر يبلغ مرحلة مسوّدة اللجنة مع تركيز أعمق على الحوكمة والمساءلة.",
+      "summary": "أفاد المعهد الدولي للتوحيد القياسي أن مراجعة معيار ISO 31000 لإدارة المخاطر قد بلغت مرحلة 'مسوّدة اللجنة' (Committee Draft)، وهي مرحلة متقدمة في مسار التطوير وإن لم يُحدَّد موعد نشر بعد. تُشير المناقشات الأولية إلى تعزيز التكامل بين إدارة المخاطر والحوكمة المؤسسية، وتوضيح أدوار الملكية، وتقوية الربط مع صنع القرار الاستراتيجي. يبقى المعيار الحالي ISO 31000:2018 ساري المفعول ومعتمداً حتى 2028.",
+      "why_it_matters": "يُنبّه التطور في مراجعة ISO 31000 مسؤولي حوكمة المخاطر إلى ضرورة مراقبة تحولات مفاهيمية قادمة قد تُعيد تشكيل العلاقة بين إطار إدارة المخاطر والخطط الاستراتيجية والمتطلبات التنظيمية.",
+      "who_is_affected": "مدراء المخاطر المؤسسية، متخصصو حوكمة الشركات، مستشارو إدارة المخاطر، والمؤسسات التي تعتمد ISO 31000 كإطار مرجعي رئيسي.",
+      "source": "Risk Training Professionals / ISO"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A GRC analyst at a desk works on a laptop showing an AI risk register integrated into a compliance platform, with cards showing risk categories like 'Model Drift', 'Data Poisoning', and 'Audit Trail Gaps'. Calm cream and navy workspace.",
+        "Two compliance professionals stand before a large wall-mounted framework diagram mapping AI-specific controls to NIST AI RMF, CMMC 2.0, and ISO 27001 with connecting lines. Professional boardroom setting, focused atmosphere.",
+        "An internal auditor reviews an AI system's technical documentation printout, marking sections related to human oversight and adversarial robustness. Quiet office setting, organized files visible in background, warm neutral tones."
+      ],
+      "image_title": "دمج مخاطر الذكاء الاصطناعي في برامج GRC المؤسسية",
+      "hook_title": "إدارة مخاطر الذكاء الاصطناعي في 2026: من سجلات المخاطر المنفصلة إلى الحوكمة المتكاملة",
+      "image_summary": "المؤسسات تواجه ضغطاً متصاعداً لدمج ضوابط مخاطر الذكاء الاصطناعي في منصات GRC وفق NIST AI RMF.",
+      "summary": "في ظل تسارع تبني الذكاء الاصطناعي وتصاعد التدقيق التنظيمي، باتت المؤسسات في 2026 مُلزمة بدمج ضوابط مخاطر الذكاء الاصطناعي في أطر GRC القائمة. يبرز نموذج الدمج عبر ربط سجلات مخاطر الذكاء الاصطناعي (من انحراف النماذج إلى تسميم البيانات وثغرات مسارات التدقيق) مباشرةً بمعيار NIST AI RMF 1.0 وISO 42001 ومتطلبات CMMC 2.0. التحدي الأكبر يكمن في منع عزل بيانات المخاطر وتحقيق الرقابة الفعلية على قرارات الأنظمة الذكية.",
+      "why_it_matters": "يُمثّل هذا المجال الفجوة الحرجة الأوسع في برامج GRC الحالية، إذ تظل معظم المؤسسات دون سياسة واضحة لتصنيف مخاطر الذكاء الاصطناعي أو تحديد ملكيتها التشغيلية، مما يُعرّضها لثغرات تنظيمية وتدقيقية متزايدة.",
+      "who_is_affected": "مدراء المخاطر ومسؤولو الامتثال في المؤسسات المستخدمة لأنظمة الذكاء الاصطناعي، مدراء أمن المعلومات CISOs، مدققو تقنية المعلومات، ومسؤولو حوكمة البيانات.",
+      "source": "Security Boulevard / Continuum GRC"
+    }
+  ]
+}
