@@ -1,0 +1,34 @@
+{
+  "classification": "أفضل ممارسات حوكمة",
+  "urgency": "عادي",
+  "visual_concepts": [
+    "A compliance team leader stands at a whiteboard in a modern office, drawing a simple flow diagram on paper pinned to the wall representing a Zero Trust access verification model — calm cream and navy color scheme, realistic corporate photography",
+    "An identity and access management specialist reviews a printed zero-trust architecture assessment report at a clean desk, red pen marking critical gaps — soft warm office lighting, documentary editorial style",
+    "A CIO and CISO walk side by side through a modern enterprise office corridor, discussing a folded printed Zero Trust maturity roadmap document — warm cream hallway with natural light, candid professional photography style"
+  ],
+  "image_title": "Zero Trust 2026: من مفهوم إلى ضرورة تشغيلية",
+  "hook_title": "Zero Trust في 2026: لم تعد استراتيجية مستقبلية بل متطلب تشغيلي أساسي لأُطر GRC",
+  "image_summary": "تشير تقديرات Gartner إلى أن 10% من المؤسسات الكبرى ستمتلك برامج Zero Trust ناضجة بنهاية 2026.",
+  "summary": "أصبح نموذج Zero Trust في 2026 إلزاماً عملياً لا خياراً استراتيجياً، مع تصاعد متطلبات الامتثال التنظيمي وتوسّع مساحات الهجوم في البيئات السحابية والهجينة. وثّقت NSA ووزارة الدفاع الأمريكية إرشادات تنفيذية جديدة (ZIGs) خلال يناير 2026 لمواءمة التطبيق مع إطار NIST SP 800-207. تُقدّر Forrester أن المؤسسات ذات البرامج الناضجة تُسجّل نسبة اختراق أقل بـ50% وتخفيضاً بـ43% في تكاليف الحوادث.",
+  "why_it_matters": "مسؤولو GRC ملزمون بربط تحقّق Zero Trust بضوابط الامتثال الموثّقة، خاصة في قطاعات المالية والبنية التحتية الحيوية التي تشترطه جهات التنظيم.",
+  "who_is_affected": "CISOs، معماريو الأمن، مسؤولو الامتثال في المؤسسات الكبرى والحيوية، مدققو الأنظمة",
+  "source": "Dark Reading / NSA / Exabeam",
+  "recommended_actions": [
+    "مراجعة خارطة طريق Zero Trust الحالية ومقارنتها بإرشادات NSA التنفيذية (ZIGs 2026) وإطار NIST SP 800-207، وتحديد الفجوات الجوهرية في التطبيق",
+    "ربط ضوابط Zero Trust بمتطلبات الامتثال التنظيمي القطاعية ضمن سجل المخاطر وإطار GRC المؤسسي، مع توثيق الأدلة اللازمة للتدقيق",
+    "تحديد مستوى النضج الحالي للبرنامج عبر نماذج قياس معتمدة (CISA ZTM)، وتحديد الأولويات بناءً على مساحات الهجوم الأعلى خطورة في البيئات السحابية والهجينة"
+  ],
+  "key_takeaway": "Zero Trust في 2026 لم يعد إطاراً طموحاً بل التزاماً تشغيلياً قابلاً للقياس والتدقيق، ومسؤولو GRC مطالبون بتوثيق مستوى تطبيقه ضمن منظومة الامتثال لا خارجها.",
+  "cta": "هل تمتلك مؤسستك خارطة طريق Zero Trust مرتبطة فعلياً بمتطلبات الامتثال؟ شاركنا في أي مرحلة من مراحل التطبيق أنتم الآن.",
+  "hashtags": [
+    "#ZeroTrust",
+    "#حوكمة_المخاطر",
+    "#GRC",
+    "#أمن_المعلومات",
+    "#الامتثال_التنظيمي",
+    "#NIST",
+    "#الأمن_السيبراني",
+    "#البنية_التحتية_الحيوية"
+  ],
+  "full_caption": "Zero Trust في 2026: متطلب تشغيلي لا خيار استراتيجي\n\nبات نموذج Zero Trust في 2026 إلزاماً عملياً موثّقاً، لا مجرد توجّه مستقبلي. مع تصاعد متطلبات الامتثال وتوسّع مساحات الهجوم في البيئات السحابية والهجينة، أصدرت NSA ووزارة الدفاع الأمريكية خلال يناير 2026 إرشادات تنفيذية محدّثة (ZIGs) لمواءمة التطبيق مع NIST SP 800-207.\n\nالأرقام تتحدث بوضوح:\n• المؤسسات ذات البرامج الناضجة تُسجّل نسبة اختراق أقل بـ 50%\n• تخفيض يصل إلى 43% في تكاليف الحوادث الأمنية\n\nما الذي يعنيه هذا لمسؤولي GRC؟\nلم يعد كافياً تبنّي مبادئ Zero Trust على مستوى المعمارية التقنية. المطلوب اليوم ربط ضوابط التطبيق الفعلي بسجلات الامتثال، وتوفير الأدلة الموثّقة للمدققين، خاصة في قطاعات المالية والبنية التحتية الحيوية حيث بات اشتراطاً تنظيمياً صريحاً.\n\nإجراءات ذات أولوية:\n① مقارنة خارطة الطريق الحالية بإرشادات ZIGs 2026 وتحديد الفجوات\n② توثيق ضوابط Zero Trust ضمن إطار GRC المؤسسي وربطها بمتطلبات التدقيق\n③ قياس مستوى النضج عبر نموذج CISA ZTM وتحديد الأولويات وفق أعلى مساحات الخطر\n\nالخلاصة: مسؤولو GRC مطالبون اليوم بإثبات تطبيق Zero Trust بأدلة قابلة للتدقيق، لا الاكتفاء بالإعلان عنه سياسةً.\n\nالمصدر: Dark Reading / NSA / Exabeam\n\n#ZeroTrust #حوكمة_المخاطر #GRC #أمن_المعلومات #الامتثال_التنظيمي #NIST #الأمن_السيبراني #البنية_التحتية_الحيوية"
+}
