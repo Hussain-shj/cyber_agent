@@ -1,0 +1,35 @@
+{
+  "classification": "أفضل ممارسات حوكمة",
+  "urgency": "عادي",
+  "visual_concepts": [
+    "A compliance team leader stands at a whiteboard in a modern office, drawing a simple flow diagram on paper pinned to the wall representing a Zero Trust access verification model — calm cream and navy color scheme, realistic corporate photography",
+    "An identity and access management specialist reviews a printed zero-trust architecture assessment report at a clean desk, red pen marking critical gaps — soft warm office lighting, documentary editorial style",
+    "A CIO and CISO walk side by side through a modern enterprise office corridor, discussing a folded printed Zero Trust maturity roadmap document — warm cream hallway with natural light, candid professional photography style"
+  ],
+  "image_title": "Zero Trust 2026: من مفهوم إلى ضرورة تشغيلية",
+  "hook_title": "Zero Trust في 2026: لم تعد استراتيجية مستقبلية بل متطلب تشغيلي أساسي لأُطر GRC",
+  "image_summary": "تشير تقديرات Gartner إلى أن 10% من المؤسسات الكبرى ستمتلك برامج Zero Trust ناضجة بنهاية 2026.",
+  "summary": "أصبح نموذج Zero Trust في 2026 إلزاماً عملياً لا خياراً استراتيجياً، مع تصاعد متطلبات الامتثال التنظيمي وتوسّع مساحات الهجوم في البيئات السحابية والهجينة. وثّقت NSA ووزارة الدفاع الأمريكية إرشادات تنفيذية جديدة (ZIGs) خلال يناير 2026 لمواءمة التطبيق مع إطار NIST SP 800-207. تُقدّر Forrester أن المؤسسات ذات البرامج الناضجة تُسجّل نسبة اختراق أقل بـ50% وتخفيضاً بـ43% في تكاليف الحوادث.",
+  "why_it_matters": "مسؤولو GRC ملزمون بربط تحقّق Zero Trust بضوابط الامتثال الموثّقة، خاصة في قطاعات المالية والبنية التحتية الحيوية التي تشترطه جهات التنظيم.",
+  "who_is_affected": "CISOs، معماريو الأمن، مسؤولو الامتثال في المؤسسات الكبرى والحيوية، مدققو الأنظمة",
+  "source": "Dark Reading / NSA / Exabeam",
+  "recommended_actions": [
+    "مراجعة خارطة طريق Zero Trust الحالية ومواءمتها مع إرشادات NSA التنفيذية ZIGs وإطار NIST SP 800-207 بحلول نهاية الربع الثالث من 2026",
+    "ربط ضوابط Zero Trust بمتطلبات الامتثال التنظيمي بشكل موثّق وقابل للتدقيق، مع تحديد الفجوات وتحديد أولويات المعالجة",
+    "قياس نضج برنامج Zero Trust عبر مؤشرات أداء كمية (نسب الاختراق، تكاليف الحوادث، زمن الاستجابة) وإدراجها في تقارير المجلس والجهات الرقابية"
+  ],
+  "key_takeaway": "Zero Trust في 2026 لم يعد برنامجاً طموحاً بل معياراً تشغيلياً إلزامياً تقيسه الجهات الرقابية وتتحقق منه المدققون، والتأخر في التطبيق الناضج يُفاقم التعرّض للمخاطر والتكاليف معاً.",
+  "cta": "هل ربطت مؤسستك ضوابط Zero Trust بإطار الامتثال الموثّق لديك؟ شارك تجربتك أو تحدّياتك في التطبيق.",
+  "hashtags": [
+    "#ZeroTrust",
+    "#حوكمة_المعلومات",
+    "#GRC",
+    "#الأمن_السيبراني",
+    "#امتثال_تنظيمي",
+    "#NIST",
+    "#CISO",
+    "#بنية_تحتية_حيوية",
+    "#إدارة_المخاطر"
+  ],
+  "full_caption": "🔐 Zero Trust 2026: من مفهوم إلى ضرورة تشغيلية\n\nلم يعد نموذج Zero Trust خياراً استراتيجياً تتداوله ورش العمل؛ بات في 2026 متطلباً تشغيلياً فعلياً تفرضه الجهات التنظيمية وتتحقق منه لجان التدقيق.\n\n📌 السياق التنفيذي:\nأصدرت NSA ووزارة الدفاع الأمريكية في يناير 2026 إرشادات تنفيذية جديدة (ZIGs) لمواءمة التطبيق مع NIST SP 800-207، في ظل تصاعد متطلبات الامتثال وتوسّع مساحات الهجوم بالبيئات السحابية والهجينة.\n\n📊 ما تقوله البيانات:\nتُسجّل المؤسسات ذات برامج Zero Trust الناضجة:\n• انخفاضاً بنسبة 50% في معدلات الاختراق\n• تخفيضاً بنسبة 43% في تكاليف الحوادث الأمنية\n(Forrester)\n\n⚠️ الأثر على GRC:\nمسؤولو الامتثال ملزمون اليوم بربط تحقّق Zero Trust بضوابط موثّقة وقابلة للتدقيق، لا سيما في قطاعات المالية والبنية التحتية الحيوية التي باتت جهات تنظيمها تشترطه صراحةً.\n\n✅ الإجراءات الموصى بها:\n1️⃣ مواءمة خارطة طريق Zero Trust مع إرشادات NSA (ZIGs) وإطار NIST SP 800-207\n2️⃣ توثيق ربط الضوابط الأمنية بمتطلبات الامتثال بصورة قابلة للتدقيق\n3️⃣ قياس نضج البرنامج بمؤشرات كمية وإدراجها في تقارير المجلس والجهات الرقابية\n\n💡 الخلاصة: التأخر في التطبيق الناضج لـZero Trust لم يعد مجرد ثغرة أمنية، بل مخاطرة امتثالية موثّقة تُثقل تقارير المخاطر المؤسسية.\n\nهل ربطت مؤسستك ضوابط Zero Trust بإطار الامتثال الموثّق لديك؟ شارك تجربتك أو تحدّياتك في التطبيق.\n\nالمصادر: Dark Reading | NSA | Exabeam\n\n#ZeroTrust #حوكمة_المعلومات #GRC #الأمن_السيبراني #امتثال_تنظيمي #NIST #CISO #بنية_تحتية_حيوية #إدارة_المخاطر"
+}
