@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A focused IT security officer in a dimly lit operations room, leaning over a printed vulnerability advisory report spread across a wooden desk, circling critical lines with a red pen — soft cream and navy tones, overhead warm light casting gentle shadows.",
+        "A close-up of a server rack in a clean data center corridor, with a technician's gloved hands disconnecting a network cable from a clustered node — calm navy and white lighting, no screens visible, only physical hardware and cables.",
+        "Two compliance engineers sitting side by side at a large conference table, reviewing a printed patch checklist together, one pointing at a line item while the other takes handwritten notes — quiet, neutral office lighting, beige and charcoal tones."
+      ],
+      "image_title": "تنبيه عاجل: ثلاث ثغرات مستغَلة فعلياً",
+      "hook_title": "CISA تُضيف ثلاث ثغرات حرجة إلى قائمة الثغرات المستغَلة — والمهلة انتهت",
+      "image_summary": "CISA أضافت ثغرات في Apache Tomcat وLangflow وN-central إلى كتالوج الثغرات المستغَلة فعلياً.",
+      "summary": "أضافت وكالة CISA الأمريكية في 4 أغسطس 2026 ثلاث ثغرات حرجة إلى كتالوج الثغرات المستغَلة فعلياً (KEV)، وهي: ثغرة حقن الكود في IBM Langflow (CVE-2026-9198 بدرجة CVSS 9.8)، وثغرة تجاوز المصادقة في N-able N-central، وثغرة تشفير البيانات في Apache Tomcat (CVE-2026-34486). وقد ربط باحثو Unit 42 ثغرة Tomcat بحملة هجوم يشغّلها وكيل ذكاء اصطناعي مستقل مرتبط بجهة تهديد صينية اللغة. ووضعت الوكالة مهلة 7 أغسطس 2026 للوكالات الفيدرالية لتطبيق الإصلاحات.",
+      "why_it_matters": "ارتباط ثغرة Tomcat بحملة هجوم يديرها ذكاء اصطناعي مستقل يُنبّه مسؤولي GRC إلى أن دورة استغلال الثغرات باتت شبه آنية، مما يتطلب إعادة النظر في سياسات إدارة الترقيعات وتقليص نوافذ الاستجابة.",
+      "who_is_affected": "جميع المؤسسات التي تشغّل Apache Tomcat في بيئات مُجمَّعة (versions 11.0.20 / 10.1.53 / 9.0.116)، ومستخدمو IBM Langflow وN-able N-central — وبصفة خاصة القطاعات الحكومية والمالية والبنية التحتية الحيوية.",
+      "source": "CISA / BleepingComputer / Security Affairs"
+    },
+    {
+      "classification": "تقرير وأبحاث",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A compliance officer seated alone at a large round table in a boardroom, reading a thick printed quarterly threat report, a single architectural floor lamp casting warm golden light on the document — cream walls, navy folder, quiet corporate atmosphere.",
+        "A risk analyst standing in front of a large printed bar chart mounted on a white wall, using a laser pointer to highlight the tallest bar representing undisclosed attacks — professional attire, neutral grey and gold room tones, no digital screens.",
+        "A small team of auditors in a glass-walled meeting room, each holding printed data summaries and discussing findings in hushed tones — morning light streaming through frosted glass panels, calm and methodical atmosphere, muted navy and white palette."
+      ],
+      "image_title": "تقرير Q2 2026: هجمات الفدية غير المُعلَنة تقفز 40%",
+      "hook_title": "لكل هجوم فدية تسمع عنه، هناك 6 هجمات تحدث في الصمت — تقرير BlackFog Q2 2026",
+      "image_summary": "2,027 هجوم فدية غير مُعلَن رُصد في الربع الثاني من 2026، مقابل 306 هجوم معلن فقط.",
+      "summary": "كشف تقرير BlackFog للربع الثاني من 2026 أن الهجمات غير المُفصَح عنها ارتفعت بنسبة 40% مقارنةً بالفترة ذاتها من 2025، لتبلغ 2,027 هجوماً مقابل 306 هجوماً معلناً فقط. وبلغت نسبة اختراق البيانات في الهجمات 97%، مع متوسط 508 غيغابايت مسروقة لكل حادثة غير مُعلَنة. ظهر 28 مجموعة هجوم جديدة خلال الربع، ضعف ما شهده الربع الأول.",
+      "why_it_matters": "الهوّة الضخمة بين الهجمات المُعلَنة وغير المُعلَنة تُقوّض برامج إدارة مخاطر الطرف الثالث وتُعيق التقييم الدقيق لمستوى التهديد القطاعي — وهو تحدٍّ مباشر لمسؤولي الامتثال وإعداد تقارير مجالس الإدارة.",
+      "who_is_affected": "جميع القطاعات، مع تركّز الهجمات غير المُعلَنة في قطاع التصنيع، وتصدّر قطاع الرعاية الصحية في الهجمات المُعلَنة — يخص مسؤولي GRC والمدققين في كل القطاعات.",
+      "source": "BlackFog / BusinessWire"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A senior legal compliance officer in a tailored suit sitting at a minimalist oak desk, comparing two printed regulatory timeline documents side by side — one stamped 'August 2026' and another marked 'December 2027', soft natural window light, cream and navy tones.",
+        "A governance committee of four professionals seated around a rectangular table in a formal boardroom, each reviewing a printed amendment document — warm overhead lighting, wooden table surface, calm deliberate atmosphere, no digital devices visible.",
+        "A compliance calendar mounted on an office wall, with a professional hand carefully writing a new date in bold ink over an existing date — close-up framing, neutral beige tones, quiet focused moment."
+      ],
+      "image_title": "EU AI Act: تأجيل الالتزامات عالية الخطورة حتى 2027",
+      "hook_title": "الاتحاد الأوروبي يُعيد ضبط ساعة الامتثال للذكاء الاصطناعي — لكن الراحة مؤقتة",
+      "image_summary": "Digital Omnibus يؤجل التزامات الأنظمة عالية الخطورة من أغسطس 2026 إلى ديسمبر 2027.",
+      "summary": "في 29 يونيو 2026، منح مجلس الاتحاد الأوروبي موافقته النهائية على Digital Omnibus، مُؤجِّلاً تطبيق التزامات الأنظمة عالية الخطورة المستقلة (Annex III) من 2 أغسطس 2026 إلى 2 ديسمبر 2027، وللأنظمة المدمجة في المنتجات الخاضعة للتنظيم إلى أغسطس 2028. غير أن التزامات الشفافية (Article 50) تظل سارية في 2 أغسطس 2026 دون تأجيل. التمديد ثابت وليس مشروطاً باكتمال المعايير.",
+      "why_it_matters": "التأجيل يُعطي مهلة إضافية لبناء بنية حوكمة AI راسخة، لكنه لا يُعفي المؤسسات من الاستعداد — إذ أن الموعد الجديد ثابت بتاريخ محدد لا يقبل التأويل، وهو ما يستوجب إعادة معايرة خارطة طريق الامتثال فوراً.",
+      "who_is_affected": "المؤسسات المالية والتعليمية وشركات التوظيف والقطاعات الخدمية الأساسية التي تعتمد أنظمة AI مصنّفة عالية الخطورة وفق Annex III — بما يشمل المؤسسات العاملة في الإمارات والخليج ذات الامتدادات الأوروبية.",
+      "source": "Council of the EU / Gibson Dunn / Secure Privacy / ComplianceHub.Wiki"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A federal procurement officer in business attire carefully reviewing a thick printed draft publication document at a wide wooden desk, making annotations in the margins with a pencil — warm desk lamp light, clean government-style office setting, ivory and navy tones.",
+        "A group of IoT device manufacturers gathered around a large oval table, reviewing printed security requirement checklists — one person holding a small physical router device while others annotate documents, quiet professional setting, soft daylight through window blinds.",
+        "A government compliance auditor in a structured office environment, comparing a physical industrial sensor device on the desk against a printed specifications checklist — calm, methodical setting, muted grey and gold tones, no screens in frame."
+      ],
+      "image_title": "NIST يُحدّث إرشادات أمن منتجات إنترنت الأشياء",
+      "hook_title": "NIST SP 800-213r1: إعادة تعريف متطلبات أمن الحكومة الفيدرالية لمنتجات إنترنت الأشياء",
+      "image_summary": "NIST نشر مسودة محدَّثة لإرشادات أمن منتجات IoT الحكومية — التعليقات مفتوحة حتى 24 أغسطس 2026.",
+      "summary": "في 24 يونيو 2026، أصدر برنامج NIST للأمن السيبراني في إنترنت الأشياء المسودة الأولية العلنية للنشرة SP 800-213r1، التي توسّع نطاق الإرشادات من \"الأجهزة\" إلى مفهوم أشمل وهو \"المنتجات\"، مُدركاً أن منتج IoT هو عنصر نظامي يُؤثّر في تقييم المخاطر الكلي عند دمجه. تنفّذ هذه المسودة متطلبات قانون تحسين الأمن السيبراني لإنترنت الأشياء 2020 والأمر التنفيذي 14028. التعليقات العامة مفتوحة حتى 24 أغسطس 2026.",
+      "why_it_matters": "الإرشادات الجديدة ستُحدد معايير الشراء الحكومي الفيدرالي لمنتجات IoT وتُرسّخ توقعات الجهات التنظيمية حول دورة حياة الأمن — مما يمسّ سياسات المشتريات وعقود الموردين لكل جهة تتعامل مع قطاع حكومي.",
+      "who_is_affected": "الوكالات الحكومية الفيدرالية الأمريكية، والشركات المورّدة لها، وبصفة غير مباشرة كل منظمة تعتمد معايير NIST في برامج إدارة مخاطر إنترنت الأشياء — يُعنى به مدققو الأنظمة ومسؤولو المشتريات.",
+      "source": "NIST CSRC / Security Boulevard"
+    },
+    {
+      "classification": "فعالية وتدريب",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A wide-angle view of a professional conference hall with rows of seated GRC practitioners listening attentively to a keynote presentation, backlit by soft stage lighting in cream and navy — no screens visible on stage, only a podium and a focused speaker in business attire.",
+        "A small workshop group of five compliance professionals seated in a semicircle on upholstered chairs, engaged in animated discussion with printed session materials on their laps — natural California coastal light through large frosted windows, warm neutral tones.",
+        "Two governance professionals shaking hands during a networking break in a sunlit corridor, each holding printed name badges and conference folders — calm, professional atmosphere, soft gold and white tones, architectural California resort setting."
+      ],
+      "image_title": "مؤتمر GRC 2026: الحوكمة والمخاطر في سان دييغو",
+      "hook_title": "المؤتمر السنوي الـ 13 لـ ISACA وIIA: حوكمة AI الوكيلي في صدارة جدول أعمال 2026",
+      "image_summary": "مؤتمر GRC 2026 يجمع كبرى العقول في سان دييغو من 17 إلى 19 أغسطس لمناقشة أبرز التحولات.",
+      "summary": "تنظّم ISACA والمعهد الدولي للمدققين الداخليين (IIA) نسختهما الـ 13 من مؤتمر GRC السنوي في سان دييغو بكاليفورنيا من 17 إلى 19 أغسطس 2026. يُقدّم المؤتمر أكثر من 40 جلسة متخصصة تتناول حوكمة AI الوكيلي، وإدارة مخاطر الموردين، والحوسبة الكمية، وحماية الخصوصية، وتكامل الأمن السيبراني مع الحوكمة. تشمل ورش العمل قبل المؤتمر: تدقيق الذكاء الاصطناعي التوليدي على نطاق واسع، واختبار إجهاد إطار عمل GRC.",
+      "why_it_matters": "يُمثّل هذا الحدث الفرصة السنوية الرائدة لمحترفي GRC لاكتساب رؤى عملية حول أبرز التحديات الناشئة، واكتساب ما يصل إلى 28 ساعة تعليم مهني مستمر (CPE) — فرصة استثمارية مباشرة لمسؤولي الامتثال والمدققين.",
+      "who_is_affected": "مسؤولو الامتثال والمخاطر، ومدققو الأنظمة، وقادة الحوكمة في المؤسسات الحكومية والخاصة — حضور شخصي أو عن بُعد متاح.",
+      "source": "ISACA / The IIA"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A corporate compliance manager sitting across from an external auditor at a formal meeting table, presenting a printed transition gap assessment document — warm wood-paneled room, natural light, leather-bound folders on the table, no digital devices visible.",
+        "A close-up of a certification wall in a corporate office showing two framed ISO certificates side by side — one dated 2016 and one dated 2025 — with a professional hand pointing at the newer certificate, soft cream and gold office tones.",
+        "A board of directors meeting in a formal governance room — five executives seated around an oval table reviewing printed anti-bribery policy documents, one person at the head of the table leading the discussion — authoritative setting, deep navy and walnut tones."
+      ],
+      "image_title": "ISO 37001:2025 — نهاية شهادات النسخة القديمة في أغسطس",
+      "hook_title": "31 أغسطس 2026: آخر يوم للتصديق وفق ISO 37001:2016 — هل مؤسستك مستعدة؟",
+      "image_summary": "بعد 31 أغسطس 2026، لن تُقبل أي شهادات أو إعادة تصديق وفق نسخة ISO 37001:2016 القديمة.",
+      "summary": "يُمثّل 31 أغسطس 2026 موعداً فاصلاً في تحوّل معيار نظم إدارة مكافحة الرشوة ISO 37001؛ إذ لن تُسمح بعده أي عمليات تصديق أو إعادة تصديق وفق نسخة 2016. تُضيف نسخة 2025 متطلبات ثقافة مكافحة الرشوة، وتُوسّع نطاق تقييم مخاطر الفساد ليشمل الاستدامة والمناخ، وتُعيد تسمية عملية تقييم مخاطر الرشوة إلى \"إدارة مخاطر الفساد\" (Corruption Risk Management). جميع الشهادات القديمة تنتهي صلاحيتها في فبراير 2027.",
+      "why_it_matters": "يُعيد هذا التحديث تأطير مكافحة الرشوة كوظيفة حوكمة مُدمجة بمنظومة ESG ومساءلة مجلس الإدارة — وليس مجرد التزام قانوني — وهو ما يعني مراجعة شاملة لسياسات النزاهة ومخرجات التدقيق.",
+      "who_is_affected": "جميع المؤسسات الحاصلة على شهادة ISO 37001:2016 في القطاعين الحكومي والخاص — بخاصة في بيئات التعاملات الحكومية والعطاءات وسلاسل التوريد الدولية.",
+      "source": "ISO / RINA / GI Certification"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A cybersecurity researcher presenting at a large professional conference stage, gesturing toward a printed foam-mounted diagram of an AI agent pipeline on an easel — professional audience silhouettes in foreground, soft stage lighting in navy and gold, no digital screens.",
+        "A security governance team of three professionals gathered around a physical whiteboard covered in hand-drawn flowcharts showing AI agent trust handoff points — marker pens, printed research papers on a nearby table, natural meeting room lighting, cream and charcoal tones.",
+        "An internal audit team lead standing in front of a large printed organizational chart on the wall of a corporate compliance office, circling specific nodes with a red marker to indicate ungoverned AI agent access points — calm deliberate atmosphere, warm overhead light."
+      ],
+      "image_title": "Black Hat 2026: AI الوكيلي يُعيد رسم حدود الحوكمة",
+      "hook_title": "Black Hat 2026 يُحذّر: وكلاء AI يُشكّلون ثغرات هيكلية في الحوكمة لا يمكن سدّها بأدوات المراقبة التقليدية",
+      "image_summary": "مؤتمر Black Hat 2026 يوثّق فشل نماذج ثقة AI الوكيلي وغياب حوكمة 88% من المؤسسات لوكلائها.",
+      "summary": "كشفت جلسات Black Hat USA 2026 أن 88% من المؤسسات تعرّضت لحوادث أمنية مرتبطة بوكلاء AI، لكن 22% فقط تتعامل معها كهويات مستقلة خاضعة للحوكمة. أبرز باحثون ثغرة هيكلية في مسارات AI متعددة المراحل: مرحلة واحدة تُؤمّن مدخلاتها دون أن تأخذ في الحسبان كيف ستستخدم المرحلة التالية المخرجات ذاتها. وتوقّع Gartner أن 40% من التطبيقات المؤسسية ستدمج وكلاء AI بحلول نهاية 2026.",
+      "why_it_matters": "مسؤولو GRC يواجهون تحدياً جوهرياً: الحوكمة المُضافة على وكلاء AI بعد نشرها أضعف بكثير من الحوكمة المُدمجة في التصميم — مما يعني أن سياسات قبول الأنظمة الحالية تحتاج مراجعة عاجلة لتشمل نماذج الثقة في مسارات AI.",
+      "who_is_affected": "مسؤولو حوكمة AI، ومديرو الأمن السيبراني، ومدققو الأنظمة في أي مؤسسة تنشر أو تعتزم نشر وكلاء AI في بيئاتها التشغيلية.",
+      "source": "Black Hat USA 2026 / COE Security / Enterprise DNA / TechRepublic"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An identity and access management specialist in a professional office setting, seated at a large desk covered in printed inventory lists of service accounts and API keys sorted in categorized physical folders — focused expression, warm lamp light, cream and navy surroundings.",
+        "A compliance auditor in a formal boardroom presenting a printed slide mounted on an easel showing the ratio of machine identities to human employees (a simple hand-drawn bar visualization) to a small executive audience seated around a table — calm, authoritative setting.",
+        "A security architect in a quiet glass-walled office, manually reviewing a printed lifecycle policy document for machine credentials, marking expiry dates with sticky flags on different pages — methodical close-up scene, morning light, neutral tones."
+      ],
+      "image_title": "أزمة هويات الآلات: 109 هوية رقمية لكل موظف",
+      "hook_title": "لكل موظف في مؤسستك 109 هوية رقمية آلية — ومعظمها خارج نطاق الحوكمة",
+      "image_summary": "نسبة هويات الآلات غير البشرية تبلغ 109 لكل موظف بشري — وغالبيتها بلا حوكمة فعلية.",
+      "summary": "يرصد تقرير KPMG للأمن السيبراني 2026 أن متوسط نسبة الهويات غير البشرية (NHI) بلغ 109 لكل موظف بشري في المؤسسات، في حين تُفيد 92% من المؤسسات بتعرّض هذه الهويات لأطراف ثالثة. يُضاف إلى ذلك ضغط تقليص أعمار شهادات TLS وتوسّع وكلاء AI، مما يجعل حوكمة هويات الآلات أزمةً رقمية تخصّ مجالس الإدارة لا فرق تقنية المعلومات فحسب.",
+      "why_it_matters": "غياب جرد كامل وسياسة دورة حياة لهويات الآلات يُفتح أبواباً خلفية مخفية عن فِرق الأمن والتدقيق، وهو خطر هيكلي يؤثّر مباشرة على نطاق ضوابط الوصول وسياسات المخاطر في برامج GRC.",
+      "who_is_affected": "مدراء إدارة الهوية والوصول (IAM)، ومسؤولو الامتثال في قطاعي المال والتكنولوجيا، والمدققون المعنيون بفحص سياسات الوصول المميّز في البيئات السحابية والهجينة.",
+      "source": "KPMG Cybersecurity Considerations 2026 / NHIMG / Palo Alto Networks"
+    },
+    {
+      "classification": "إدارة مخاطر",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An OT/ICS security specialist in a hard hat and safety vest standing inside an industrial control room, holding a printed network segmentation diagram and comparing it against a visible physical control panel with analogue gauges — no digital screens, warm industrial lighting, grey and amber tones.",
+        "A risk assessment team of two engineers seated at a plain table in a utility facility meeting room, reviewing a printed vulnerability inventory for industrial controllers — physical device components laid out on the table for reference, focused professional atmosphere.",
+        "An aerial architectural view of a large industrial facility perimeter — a security consultant in a reflective vest walking a physical inspection route along the fence line holding a clipboard with a printed asset inventory checklist — golden hour light, calm and methodical scene."
+      ],
+      "image_title": "أنظمة OT المكشوفة: 4,000 وحدة تحكم صناعية على الإنترنت",
+      "hook_title": "أكثر من 4,000 وحدة تحكم صناعية لا تزال مكشوفة على الإنترنت العام — مخاطر البنية التحتية الحيوية",
+      "image_summary": "رصد Forescout أكثر من 4,000 وحدة تحكم صناعية مكشوفة على الإنترنت رغم التحذيرات المتكررة.",
+      "summary": "رصدت أبحاث Forescout ما يزيد على 4,000 وحدة تحكم صناعية من Rockwell Automation وAllen-Bradley مكشوفةً على الإنترنت العام، مع استمرار التعرّض رغم انخفاض ملحوظ بنسبة 47% منذ 2020. ويُشير تقرير Forescout 2026 لأخطر الأجهزة المتصلة إلى أن أجهزة التوجيه والمحوّلات وحدها تحمل ما يصل إلى 32 ثغرة لكل جهاز، وأن قطاعي التصنيع والطاقة يتصدّران قائمة الأكثر تضرراً. كما رصد Forescout 3.4 مليون خادم RDP وVNC مكشوفاً يُشكّل مداخل للأنظمة التشغيلية.",
+      "why_it_matters": "التعرّض المستمر لأنظمة OT/ICS يُهدد استمرارية العمليات ويُعرّض المنشآت الحيوية لخطر التوقف المادي — وهو خطر يتجاوز نطاق الأمن السيبراني ليمسّ سياسات الحوكمة وامتثال البنية التحتية الحيوية.",
+      "who_is_affected": "قطاعات الطاقة والمياه والتصنيع والنقل التي تعتمد على بيئات OT/ICS — بخاصة المؤسسات في دول الخليج التي تشغّل بنية تحتية وطنية حيوية.",
+      "source": "Forescout Vedere Labs / Industrial Cyber / SecurityWeek"
+    },
+    {
+      "classification": "أفضل ممارسات حوكمة",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A chief compliance officer in formal business attire sitting across from legal counsel at a private office meeting table, reviewing a printed incident response plan with handwritten annotations — warm desk lamp, wooden furnishings, private and focused atmosphere.",
+        "A risk management team in a structured workshop session, each member holding a printed scenario card representing a double extortion incident, discussing response steps written on a whiteboard behind them — professional environment, cream walls, navy and gold accents.",
+        "A data governance specialist reviewing a printed data classification matrix spread across a large desk, using color-coded sticky tabs to mark regulated data categories — quiet methodical scene, morning light, clean neutral office tones."
+      ],
+      "image_title": "الفدية المزدوجة: سرقة البيانات أزمة امتثال لا أمن فقط",
+      "hook_title": "حين يُبلّغ المهاجم عنك لدى المنظّم قبلك — الفدية المزدوجة تُحوّل الاختراق إلى أزمة امتثال هيكلية",
+      "image_summary": "أسلوب الفدية المزدوجة يجعل تصنيف البيانات وبنية الامتثال خط الدفاع الأول لا الأخير.",
+      "summary": "تحوّل أسلوب هجمات الفدية في 2026 نحو الابتزاز المزدوج بل الثلاثي، حيث تُضاف إلى تشفير البيانات: سرقتها واستخدامها ورقة ضغط، وأحياناً تقديم بلاغات تنظيمية للجهات الرقابية (كـ GDPR أو HIPAA) ضد الضحية ذاتها. ووجد تقرير Thales لتهديدات البيانات 2026 أن 33% فقط من المؤسسات تعرف أين تُخزَّن بياناتها، مما يُحوّل سرقة البيانات من تهديد أمني إلى فجوة امتثال مباشرة تُعيق الاستجابة ضمن المهل التنظيمية.",
+      "why_it_matters": "مسؤولو GRC باتوا الخط الأمامي لمواجهة الفدية: تصنيف البيانات، وجرد الأصول، وخطط الاستجابة للحوادث أصبحت عوامل حاسمة في تحديد حجم الضرر التنظيمي والمالي لا مجرد ضوابط تقنية.",
+      "who_is_affected": "مسؤولو الامتثال وحماية البيانات في جميع القطاعات — تحديداً المالي والصحي والحكومي الذي يخضع لمتطلبات الإبلاغ الإجباري عن الحوادث.",
+      "source": "Kiteworks / Adaptive Security / Covington & Burling"
+    }
+  ]
+}
