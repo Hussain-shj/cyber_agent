@@ -1,0 +1,165 @@
+{
+  "no_news": false,
+  "candidates": [
+    {
+      "classification": "تحذير عاجل",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A DevSecOps engineer in a dimly lit office, late at night, urgently reviewing a printed list of compromised package names spread across a wooden desk, with coffee cups and sticky notes around him — soft cream and navy tones, documentary style",
+        "A security team leader in a modern open-plan workspace stands before a large whiteboard filled with handwritten package names and arrows showing worm propagation paths, colleagues gathered around attentively — calm gold and white palette",
+        "A close-up of a compliance officer's hands holding a printed incident response checklist, pen marking off remediation steps one by one, a half-open laptop to the side showing build pipeline logs — warm neutral tones, editorial photography style"
+      ],
+      "image_title": "دودة npm تخترق 400+ حزمة برمجية",
+      "hook_title": "هجوم سلسلة توريد برمجي ضخم: دودة بيانات اعتماد تجتاح أكثر من 400 حزمة npm",
+      "image_summary": "في 4 أغسطس 2026، اختُرقت حزمة keyv وامتدت دودة سرقة بيانات الاعتماد لتطال أكثر من 400 حزمة.",
+      "summary": "في 4 أغسطس 2026، اخترق مهاجمون حساب GitHub للمطوّر المسؤول عن مكتبة keyv ذات 127 مليون تنزيل أسبوعي، وحقنوا فيها دودة برمجية (Shai-Hulud) تسرق بيانات الاعتماد. استغلت الدودة رموز نشر npm المسروقة لتتكاثر ذاتياً عبر مئات الحزم المرتبطة، لتصل إلى أكثر من 444 حزمة بإجمالي تنزيلات شهرية تجاوزت ملياري عملية. الخطورة الكبرى أن الحزم المخترقة حملت توقيعاً رقمياً شرعياً من GitHub Actions، مما أفشل أدوات التحقق التقليدية.",
+      "why_it_matters": "يُظهر الهجوم أن توقيع الحزم البرمجية ومصادر الثقة وحدها لا تكفي؛ فريق GRC يجب أن يُضمّن ضوابط أمان سلسلة التوريد البرمجية في سياسات المخاطر الثالثة ومتطلبات الامتثال.",
+      "who_is_affected": "فرق DevSecOps، مطورو JavaScript، مسؤولو الامتثال المعنيون بسلسلة توريد البرمجيات، والمؤسسات التي تستخدم بيئات CI/CD",
+      "source": "The Hacker News / Aikido Security / Chainguard"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "عاجل",
+      "visual_concepts": [
+        "A compliance officer in business attire sits at a large mahogany desk in a sunlit European-style office, reviewing a thick printed regulatory document with highlighted sections and margin notes — cream, gold, and navy tones, calm editorial style",
+        "A governance team meeting in a glass-walled conference room: four professionals around a round table, one pointing to a printed timeline chart on paper showing key EU AI Act milestones — soft natural light, documentary photography",
+        "A legal and compliance team member stands at a tall filing cabinet, pulling out a labeled folder marked with the date 'August 2026', other labeled folders visible in the background — warm white and beige tones, realistic office setting"
+      ],
+      "image_title": "قانون الذكاء الاصطناعي الأوروبي: التطبيق الفعلي بدأ",
+      "hook_title": "\"حقبة الامتثال\" بدأت رسمياً: قانون الذكاء الاصطناعي الأوروبي يدخل مرحلة التنفيذ الكامل في 2 أغسطس",
+      "image_summary": "في 2 أغسطس 2026، بدأ تطبيق متطلبات الشفافية لقانون الذكاء الاصطناعي الأوروبي بشكل إلزامي وقابل للتنفيذ.",
+      "summary": "دخل قانون الذكاء الاصطناعي الأوروبي مرحلة التنفيذ الفعلي في 2 أغسطس 2026؛ إذ باتت متطلبات الشفافية (المادة 50) واجبة التطبيق على أنظمة الذكاء الاصطناعي، بما يشمل الإفصاح للمستخدمين عند تفاعلهم مع أنظمة آلية. في المقابل، أقرّ المجلس الأوروبي بموجب 'الحزمة الرقمية المبسّطة' تمديد موعد امتثال الأنظمة عالية المخاطر (الملحق III) إلى ديسمبر 2027. العقوبات على مخالفة أحكام الشفافية لا تزال نافذة وقد تبلغ 15 مليون يورو أو 3% من الإيرادات السنوية.",
+      "why_it_matters": "المؤسسات العاملة في السوق الأوروبية أو تصدّر إليها خدمات الذكاء الاصطناعي معرّضة فوراً للمساءلة القانونية؛ ومسؤولو الامتثال بحاجة ماسة لتحديث سجلات أنظمة الذكاء الاصطناعي ووثائق الشفافية الآن.",
+      "who_is_affected": "المؤسسات المشغّلة لأنظمة ذكاء اصطناعي داخل أو لسوق الاتحاد الأوروبي، فرق الحوكمة والامتثال، والجهات القانونية في الشركات متعددة الجنسيات",
+      "source": "European Commission / Cloud Security Alliance Labs / Cubbbix"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A federal IT security professional in smart-casual attire carefully examines a printed NIST draft document at a large desk in a government-style office, annotating pages with a red pen — soft cream and institutional grey tones, natural window light",
+        "A compliance auditor reviews a printed checklist of IoT device security requirements laid flat on a conference table, with physical IoT devices (a sensor, a router) placed beside the documents as reference — warm neutral editorial style",
+        "A procurement officer in a formal setting reviews a printed vendor evaluation form for IoT products, placing checkmarks beside security criteria listed on paper — calm beige and navy office environment, realistic photography"
+      ],
+      "image_title": "NIST يُحدّث دليل أمن منتجات إنترنت الأشياء",
+      "hook_title": "NIST يُعيد صياغة معايير أمن إنترنت الأشياء الحكومي: مسودة SP 800-213r1 متاحة للتعليق",
+      "image_summary": "أصدر NIST مسودة SP 800-213r1 لتحديث متطلبات الأمن السيبراني لمنتجات إنترنت الأشياء الحكومية.",
+      "summary": "أطلق برنامج NIST لأمن إنترنت الأشياء المسودة الأولية للمراجعة العامة لدليل SP 800-213 (المراجعة الأولى)، الخاص بإرشادات الأمن السيبراني لمنتجات إنترنت الأشياء في القطاع الفيدرالي. يتّسع نطاق الدليل المُحدَّث ليشمل مفهوم 'المنتج' بدلاً من 'الجهاز' فقط، مما يعكس التنوّع المتزايد للأنظمة المتصلة. التعليقات العامة مقبولة حتى 24 أغسطس 2026.",
+      "why_it_matters": "يُمثّل هذا الإطار المرجعية التنظيمية لعمليات شراء الأجهزة المتصلة في القطاع الحكومي؛ وقد يؤثر على متطلبات التوريد للقطاع الخاص والجهات الشريكة مع الحكومات.",
+      "who_is_affected": "الجهات الحكومية، مسؤولو المشتريات، مصنّعو أجهزة إنترنت الأشياء، مدققو الأنظمة الرقمية",
+      "source": "NIST CSRC / Security Boulevard"
+    },
+    {
+      "classification": "فعالية وتدريب",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A wide-angle view of a large modern conference hall filled with professionals seated at round tables for a GRC conference, a speaker presenting at the front before a vast audience — warm gold lighting, clean cream and navy color scheme, realistic event photography",
+        "Two GRC professionals in business attire engaged in an animated discussion in a sunlit hotel corridor during a conference break, both holding printed session agendas — soft natural light, candid editorial style",
+        "An internal audit professional sits alone at a round table reviewing printed pre-conference workshop materials on AI governance, coffee beside her, window light streaming in — calm cream and navy tones, documentary photography"
+      ],
+      "image_title": "مؤتمر GRC 2026: الحوكمة والمخاطر في سان دييغو",
+      "hook_title": "انطلاق أبرز تجمّع سنوي لمحترفي GRC: مؤتمر ISACA وIIA لعام 2026 في سان دييغو",
+      "image_summary": "يجمع مؤتمر GRC 2026 (17-19 أغسطس) في سان دييغو كبار محترفي الحوكمة والمخاطر والامتثال.",
+      "summary": "تنظّم ISACA ومعهد المدققين الداخليين (IIA) نسختهما الثالثة عشرة من مؤتمر الحوكمة والمخاطر والرقابة (GRC 2026) بصورة حضورية وافتراضية خلال 17-19 أغسطس 2026. يضمّ المؤتمر أكثر من 40 جلسة متخصصة تتناول حوكمة الذكاء الاصطناعي، الذكاء الاصطناعي الوكيل في GRC، أمن السحابة، إدارة مخاطر الأطراف الثالثة، وضغوط الامتثال التنظيمي. يُقام قبله ورشتا عمل: الأولى لتدقيق الذكاء الاصطناعي التوليدي بصورة مكثفة، والثانية لدمج الأمن السيبراني في إطار GRC المؤسسي.",
+      "why_it_matters": "يوفر المؤتمر إرشادات عملية وشبكة علاقات نادرة لمختصي GRC في وقت تتضاعف فيه متطلبات التنظيم الرقمي والذكاء الاصطناعي عالمياً.",
+      "who_is_affected": "مسؤولو الامتثال، مدققو أنظمة المعلومات، متخصصو إدارة المخاطر، قادة الحوكمة المؤسسية",
+      "source": "ISACA / The IIA"
+    },
+    {
+      "classification": "تقرير وأبحاث",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An HR director and a risk manager sit across from each other at a meeting table, reviewing a printed 'People Risks 2026' report together, one pointing to a highlighted finding — warm cream office interior, soft natural light, editorial style",
+        "A training session in progress: a compliance trainer stands before a small group of employees seated at desks, holding up a printed worksheet on cyber threat awareness — calm navy and white color palette, realistic workplace photography",
+        "A senior risk officer leans back thoughtfully in an executive chair, holding a printed survey report, with a stack of similar reports on the desk beside them — warm golden hour light through office window, documentary photography"
+      ],
+      "image_title": "محو الأمية السيبرانية: الخطر البشري الأول عالمياً",
+      "hook_title": "تقرير Marsh 2026: قصور ثقافة التهديد السيبراني يتصدّر قائمة أخطر المخاطر البشرية عالمياً",
+      "image_summary": "استطلع تقرير Marsh 2026 آراء 4500 متخصص في 26 سوقاً وصنّف محو الأمية السيبرانية الخطر البشري الأول.",
+      "summary": "أصدر Marsh تقرير 'مخاطر الأفراد 2026' المبني على استطلاع شمل أكثر من 4500 متخصص في الموارد البشرية وإدارة المخاطر عبر 26 سوقاً عالمياً. جاء 'قصور محو الأمية السيبرانية' في المرتبة الأولى، يليه شُح المهارات التقنية وفجوات الذكاء الاصطناعي. رصد التقرير أن الحوادث السيبرانية لا تزال في معظمها مدفوعةً بالسلوك البشري كالتصيّد الاحتيالي وسرقة بيانات الاعتماد، لا بثغرات تقنية بحتة.",
+      "why_it_matters": "يُلقي هذا التقرير الضوء على ثغرة حوكمية جوهرية: الاستثمار في التقنية وحده غير كافٍ ما لم تُعالَج الفجوات في وعي الموارد البشرية ضمن إطار GRC المؤسسي.",
+      "who_is_affected": "مسؤولو الموارد البشرية، CISOs، مسؤولو الامتثال، قادة برامج التوعية الأمنية",
+      "source": "Marsh / Infosecurity Magazine"
+    },
+    {
+      "classification": "إطار عمل جديد",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "An IT security administrator in a government facility carefully reviews a printed NIST macOS security compliance checklist on a desk, with an Apple laptop closed beside the documents — cream and institutional blue tones, calm natural light",
+        "A small audit team of two professionals sit side by side in a modern office, reviewing printed automated security scan output reports page by page and marking findings with pencils — neutral warm palette, documentary photography",
+        "A security policy author in business attire sits at a long conference table alone, surrounded by printed NIST guidance documents spread across the table surface, annotating key sections — soft cream office environment, overhead natural lighting"
+      ],
+      "image_title": "NIST: دليل تهيئة الأمان الآلي لـ macOS",
+      "hook_title": "NIST يفتح باب التعليق على مراجعة SP 800-219r2 لأتمتة تهيئة أمان macOS وiOS",
+      "image_summary": "أصدر NIST مسودة SP 800-219r2 لتحديث إرشادات التهيئة الأمنية الآلية لأجهزة Apple الحكومية.",
+      "summary": "طرح NIST للمراجعة العامة مسودة SP 800-219r2 الخاصة بالإرشادات الأمنية الآلية لمشروع توافق أمان macOS (mSCP). يُحسّن التحديث إدارة إصدارات نظام التشغيل والقواعد الأمنية بصورة موحّدة لتغطية macOS وiOS وvisionOS في فرع واحد. يحتوي الدليل على أسس أمنية محددة ومرتبطة بضوابط NIST SP 800-53. التعليقات العامة مفتوحة حتى 14 أغسطس 2026.",
+      "why_it_matters": "يُعدّ هذا الدليل مرجعاً جوهرياً لمدققي الأنظمة ومسؤولي الامتثال الذين تعتمد مؤسساتهم على بيئات Apple في القطاعات الحكومية أو شبه الحكومية.",
+      "who_is_affected": "مسؤولو تقنية المعلومات الحكومية، مدققو أنظمة المعلومات، مختصو أمن نقاط النهاية في بيئات Apple",
+      "source": "NIST CSRC"
+    },
+    {
+      "classification": "تقرير وأبحاث",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "An OT/ICS security specialist in a hard hat and safety vest walks slowly through an industrial control room, holding a printed risk assessment form on a clipboard, examining physical control panels — warm amber industrial lighting, realistic editorial photography",
+        "A CISO and plant operations manager meet in a facility conference room, reviewing a printed 'State of OT Cybersecurity 2026' report spread on the table, with industrial facility visible through a glass wall in the background — calm navy and cream palette",
+        "A senior risk officer marks a printed OT network segmentation diagram with a red pen, seated at a technical desk with engineering blueprints visible in the background — warm neutral tones, documentary style"
+      ],
+      "image_title": "تقرير 2026: مخاطر الأمن السيبراني في التقنيات التشغيلية",
+      "hook_title": "تقرير Fortinet 2026: أمن التقنيات التشغيلية يتحسن لكن الفدية والتهديدات لم تتوقف",
+      "image_summary": "يكشف تقرير Fortinet 2026 أن 81% من المؤسسات تُخطط لإسناد مخاطر OT إلى CISO خلال العام المقبل.",
+      "summary": "رصد تقرير 'حالة التقنيات التشغيلية والأمن السيبراني 2026' الصادر عن Fortinet تحسناً واضحاً في نضج أمن OT، غير أن هجمات الفدية تواصل استهداف البنى التحتية الصناعية، مع توسّع كبير في مساحات الهجوم نتيجة التحوّل الرقمي. 81% من المؤسسات المشاركة تعتزم إسناد مسؤولية مخاطر OT إلى CISO قريباً. التقرير يُصنّف 'رؤية الأصول' و'تقاطع شبكات IT/OT' كأبرز الفجوات الأمنية القائمة.",
+      "why_it_matters": "تحوّل حوكمة OT من مسؤولية هندسية إلى مسؤولية إدارية يُعيد رسم خريطة GRC في القطاعات الصناعية والحيوية، مما يستلزم إدراج مخاطر OT ضمن سجلات المخاطر المؤسسية.",
+      "who_is_affected": "CISOs، مسؤولو المخاطر في القطاعات الصناعية والطاقة والمياه، فرق إدارة الاستمرارية التشغيلية",
+      "source": "Fortinet / Dragos"
+    },
+    {
+      "classification": "تحديث تنظيمي",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A quality management auditor in professional attire sits at a round table in a certification body office, reviewing a printed copy of the ISO 9001:2026 draft standard, making notes in the margin — cream and soft gold tones, editorial photography style",
+        "A board-level governance meeting: five executives seated around a long table, one presenting a printed summary of new ISO 9001:2026 leadership accountability requirements on paper — warm natural boardroom light, calm navy and cream palette",
+        "A supply chain compliance officer reviews a printed supplier audit checklist updated to reflect new ISO 9001 lifecycle assurance requirements, with a stack of vendor files visible nearby — neutral warm office tones, documentary style"
+      ],
+      "image_title": "ISO 9001:2026 في طريقه: ما الجديد؟",
+      "hook_title": "مراجعة ISO 9001:2026 تُدرج الأخلاقيات والاستدامة والمرونة الرقمية ضمن متطلباتها",
+      "image_summary": "يستعدّ ISO 9001:2026 للإصدار في سبتمبر مع تعديلات تشمل القيادة الأخلاقية وإدارة المخاطر الاستراتيجية.",
+      "summary": "يشهد معيار ISO 9001 تحديثاً يُتوقع نشره في سبتمبر/أكتوبر 2026 ليحلّ محل إصدار 2015. يُقرّ الإصدار الجديد تغييرات في أبرز المحاور التالية: مساءلة القيادة والسلوك الأخلاقي، إدراج تغيّر المناخ ضمن سياق المؤسسة (البند 4.1)، تعزيز إدارة سلسلة التوريد، والانفتاح على تقنيات الرقمنة والذكاء الاصطناعي. يبقى الهيكل الأساسي (Annex SL) دون تغيير، وفترة الانتقال المتوقعة ثلاث سنوات حتى 2029.",
+      "why_it_matters": "يجب على فرق الامتثال وجهات التدقيق المعتمدة البدء في تقييم الفجوات الآن، خاصة في متطلبات القيادة والموردين، تجنّباً لضغط آخر لحظة قبيل انتهاء فترة الانتقال.",
+      "who_is_affected": "مدراء الجودة، مدققو الأنظمة المعتمدون، المؤسسات الحاصلة على شهادة ISO 9001:2015، مسؤولو سلسلة التوريد",
+      "source": "ISO / DNV / isoTracker"
+    },
+    {
+      "classification": "أفضل ممارسات حوكمة",
+      "urgency": "عادي",
+      "visual_concepts": [
+        "A compliance team leader stands at a whiteboard in a modern office, drawing a simple flow diagram on paper pinned to the wall representing a Zero Trust access verification model — calm cream and navy color scheme, realistic corporate photography",
+        "An identity and access management specialist reviews a printed zero-trust architecture assessment report at a clean desk, red pen marking critical gaps — soft warm office lighting, documentary editorial style",
+        "A CIO and CISO walk side by side through a modern enterprise office corridor, discussing a folded printed Zero Trust maturity roadmap document — warm cream hallway with natural light, candid professional photography style"
+      ],
+      "image_title": "Zero Trust 2026: من مفهوم إلى ضرورة تشغيلية",
+      "hook_title": "Zero Trust في 2026: لم تعد استراتيجية مستقبلية بل متطلب تشغيلي أساسي لأُطر GRC",
+      "image_summary": "تشير تقديرات Gartner إلى أن 10% من المؤسسات الكبرى ستمتلك برامج Zero Trust ناضجة بنهاية 2026.",
+      "summary": "أصبح نموذج Zero Trust في 2026 إلزاماً عملياً لا خياراً استراتيجياً، مع تصاعد متطلبات الامتثال التنظيمي وتوسّع مساحات الهجوم في البيئات السحابية والهجينة. وثّقت NSA ووزارة الدفاع الأمريكية إرشادات تنفيذية جديدة (ZIGs) خلال يناير 2026 لمواءمة التطبيق مع إطار NIST SP 800-207. تُقدّر Forrester أن المؤسسات ذات البرامج الناضجة تُسجّل نسبة اختراق أقل بـ50% وتخفيضاً بـ43% في تكاليف الحوادث.",
+      "why_it_matters": "مسؤولو GRC ملزمون بربط تحقّق Zero Trust بضوابط الامتثال الموثّقة، خاصة في قطاعات المالية والبنية التحتية الحيوية التي تشترطه جهات التنظيم.",
+      "who_is_affected": "CISOs، معماريو الأمن، مسؤولو الامتثال في المؤسسات الكبرى والحيوية، مدققو الأنظمة",
+      "source": "Dark Reading / NSA / Exabeam"
+    },
+    {
+      "classification": "تقرير وأبحاث",
+      "urgency": "مرتفع",
+      "visual_concepts": [
+        "A SANS cybersecurity workforce researcher presents printed survey findings to a small group of compliance directors seated around a conference table, pointing to a chart showing skills gap data on paper — warm natural light, calm editorial photography style",
+        "A Chief Compliance Officer reviews a printed SANS 2026 cybersecurity workforce report at an executive desk, annotating sections about AI governance competencies — soft cream and navy tones, documentary style",
+        "A hiring manager and a cybersecurity team lead review printed job description frameworks side by side in a modern HR office, discussing required GRC skill sets from a printed NICE framework reference — warm neutral office tones, realistic photography"
+      ],
+      "image_title": "SANS 2026: فجوة المهارات تتجاوز نقص الكوادر",
+      "hook_title": "تقرير SANS 2026: فجوة مهارات GRC والذكاء الاصطناعي تُهدد أمن البنى التحتية الحيوية",
+      "image_summary": "يكشف تقرير SANS 2026 أن 60% من المؤسسات تعاني فجوة مهارات لا نقصاً عددياً في كوادرها السيبرانية.",
+      "summary": "رصد تقرير SANS 2026 للقوى العاملة السيبرانية أن 'فجوات المهارات' تجاوزت 'النقص العددي' كتحدٍّ رئيسي لأول مرة في تاريخ التقرير الثلاثي. 60% من المؤسسات صنّفت المشكلة بهذه الطريقة. اللافت أن 'حوكمة الذكاء الاصطناعي والمخاطر والامتثال' جاءت في صدارة الكفاءات المطلوبة، فيما يُعاني قطاعا الطاقة والتصنيع أكثر من غيرهما من هذا التوجّه نظراً لمتطلباتهما التنظيمية الصارمة.",
+      "why_it_matters": "الفجوة في مهارات GRC والذكاء الاصطناعي تُعرّض مباشرة الامتثال التنظيمي وصحة عمليات التدقيق للخطر، مما يستدعي دمج تطوير المهارات في استراتيجية GRC المؤسسية.",
+      "who_is_affected": "قادة الموارد البشرية، CISOs، مدراء برامج GRC، مسؤولو التدريب والتطوير في القطاعين الصناعي والحكومي",
+      "source": "SANS / Industrial Cyber"
+    }
+  ]
+}
