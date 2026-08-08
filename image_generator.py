@@ -32,16 +32,21 @@ FONT_SEMIBOLD = os.path.join(FONT_DIR, "Cairo-SemiBold.ttf")
 FONT_LATIN_BOLD = FONT_BOLD
 
 # لوحة الألوان الرسمية للهوية البصرية
+# لوحة الألوان الرسمية لهوية "نبض سيبراني | Cyber Pulse" (قيم HEX دقيقة من
+# مستند الهوية المرفق، محوَّلة لـ RGB لاستخدامها مباشرة مع Pillow).
 COLORS = {
-    "black": (10, 12, 16),
-    "dark_blue": (13, 27, 51),
-    "cyber_blue": (16, 43, 89),
+    "black": (17, 17, 17),          # #111111
+    "dark_blue": (13, 27, 51),       # درجة انتقالية للتدرج (لا تزال مطلوبة للخلفية)
+    "cyber_blue": (10, 132, 255),    # #0A84FF — Cyber Blue
     "dark_gray": (30, 34, 40),
-    "cyan": (56, 226, 235),        # Cyber Cyan
-    "cyan_soft": (56, 226, 235, 60),
-    "white": (240, 244, 248),
-    "red_alert": (214, 40, 40),
+    "cyan": (0, 209, 199),           # #00D1C7 — Cyan
+    "cyan_soft": (0, 209, 199, 60),
+    "white": (255, 255, 255),        # #FFFFFF
+    "red_alert": (255, 59, 48),      # #FF3B30 — تنبيهات حرجة
 }
+
+LOGO_PATH = os.path.join(os.path.dirname(__file__), "assets", "logo_cyberpulse_icon.png")
+BRAND_FOOTER_TEXT = "نبض سيبراني | Cyber Pulse"
 
 
 # محرك RAQM (HarfBuzz+FriBidi، مدمج في Pillow) يتولى تشكيل الحروف العربية
@@ -450,6 +455,44 @@ def _base_canvas(bg_top, bg_bottom, canvas=None):
     return img, draw
 
 
+_logo_cache: dict[tuple[int, int], Image.Image] = {}
+
+
+def _paste_logo(img: Image.Image, canvas=None, target_width_ratio: float = 0.16) -> None:
+    """يلصق شعار العلامة التجارية الفعلي (ملف صورة حقيقي، وليس رسماً بالذكاء
+    الاصطناعي — لذا هو دقيق 100% دائماً) أعلى يسار الصورة، بحجم نسبي لعرض
+    القماشة. لا شيء يحدث إن كان ملف الشعار غير موجود (حماية صامتة)."""
+    if not os.path.exists(LOGO_PATH):
+        return
+    w, h = canvas or (WIDTH, HEIGHT)
+    target_w = round(w * target_width_ratio)
+
+    cache_key = (target_w,)
+    if cache_key not in _logo_cache:
+        logo = Image.open(LOGO_PATH).convert("RGBA")
+        ratio = target_w / logo.width
+        logo = logo.resize((target_w, round(logo.height * ratio)), Image.LANCZOS)
+        _logo_cache[cache_key] = logo
+    logo = _logo_cache[cache_key]
+
+    margin = round(w * 0.045)
+    img.paste(logo, (margin, margin), logo)
+
+
+def _brand_footer(draw, canvas=None) -> None:
+    """يكتب تذييل العلامة التجارية الثابت أسفل منتصف الصورة، وفق مواصفة
+    الهوية الجديدة (نبض سيبراني | Cyber Pulse)."""
+    w, h = canvas or (WIDTH, HEIGHT)
+    size = max(16, round(w * 0.02))
+    font = _font(FONT_REGULAR, size)
+    text = _ar(BRAND_FOOTER_TEXT)
+    bbox = draw.textbbox((0, 0), text, font=font, direction="rtl")
+    tw = bbox[2] - bbox[0]
+    x = w / 2 - tw / 2
+    y = h - round(h * 0.03)
+    draw.text((x, y), text, font=font, fill=COLORS["cyan"], direction="rtl", anchor="la")
+
+
 def _source_line(draw, source: str, canvas=None):
     """يعرض اسم المصدر فقط (بدون رابط) في أسفل الصورة، بخلفية داكنة صغيرة
     خلفه لضمان وضوحه فوق أي خلفية."""
@@ -460,7 +503,7 @@ def _source_line(draw, source: str, canvas=None):
     text_size = max(18, round(cw * 0.024))
     w = _measure_mixed_line(draw, text, text_size)
     x = cw - w - round(cw * 0.046)
-    y = ch - round(ch * 0.044)
+    y = ch - round(ch * 0.078)
     draw.rounded_rectangle([x - 16, y - 8, x + w + 16, y + 34], radius=10, fill=(6, 9, 14))
     _draw_mixed_line(draw, text, text_size, COLORS["cyan"], x, y)
 
@@ -639,6 +682,8 @@ def design_awareness(title: str, subtitle: str, items: list[dict], summary: str,
     _cracked_phone_icon(draw, WIDTH / 2, phone_cy, phone_w, phone_h, COLORS["red_alert"], COLORS["cyan"])
 
     _source_line(draw, source)
+    _paste_logo(img)
+    _brand_footer(draw)
     return img
 
 
@@ -711,6 +756,8 @@ def design_ai_background(bg: Image.Image, title: str, tag: str, urgent: bool = F
         img, draw, _ = _details_panel(img, details, y_after_title + h * 0.01, canvas=canvas)
 
     _source_line(draw, source, canvas=canvas)
+    _paste_logo(img, canvas=canvas)
+    _brand_footer(draw, canvas=canvas)
     return img
 
 
@@ -813,17 +860,20 @@ def design_detailed(title: str, tag: str, urgent: bool, body_text: str,
     if date_str:
         d_text = _ar(f"تاريخ الإصدار: {date_str}")
         d_font = _font(FONT_BOLD, max(20, round(w * 0.024)))
-        dw = draw.textlength(d_text, font=d_font)
+        dw = _measure_mixed_line(draw, d_text, max(20, round(w * 0.024)))
         pad2 = round(w * 0.024)
         draw.rounded_rectangle([right_x - dw - pad2 * 2, footer_y, right_x, footer_y + round(w * 0.05)],
                                 radius=round(w * 0.025), fill=(240, 244, 248))
-        draw.text((right_x - dw - pad2, footer_y + round(w * 0.01)), d_text, font=d_font, fill=(10, 12, 16))
+        _draw_mixed_line(draw, d_text, max(20, round(w * 0.024)), (10, 12, 16),
+                          right_x - dw - pad2, footer_y + round(w * 0.01))
 
     if source:
-        s_text = _ar(f"📌 المصدر: {source}")
-        s_font = _font(FONT_BOLD, max(20, round(w * 0.024)))
-        sw2 = draw.textlength(s_text, font=s_font)
-        draw.text((w / 2 - sw2 / 2, h - h * 0.026), s_text, font=s_font, fill=(235, 190, 60))
+        s_text = _ar(f"المصدر: {source}")
+        s_size = max(18, round(w * 0.021))
+        _draw_mixed_line(draw, s_text, s_size, (235, 190, 60), round(w * 0.072), footer_y + round(w * 0.008))
+
+    _paste_logo(img, canvas=canvas)
+    _brand_footer(draw, canvas=canvas)
 
     return img
 
@@ -872,6 +922,8 @@ def design_standard(title: str, tag: str, urgent: bool = False,
 
     _network_nodes(draw, COLORS["cyan"], count=10, seed=3, canvas=canvas)
     _source_line(draw, source, canvas=canvas)
+    _paste_logo(img, canvas=canvas)
+    _brand_footer(draw, canvas=canvas)
     return img
 
 
@@ -914,6 +966,8 @@ def design_alert(title: str, tag: str, details: str = "", date_str: str = "", so
 
     _network_nodes(draw, COLORS["red_alert"], count=8, seed=4, canvas=canvas)
     _source_line(draw, source, canvas=canvas)
+    _paste_logo(img, canvas=canvas)
+    _brand_footer(draw, canvas=canvas)
     return img
 
 
@@ -969,6 +1023,8 @@ def design_minimal_dark(title: str, tag: str, urgent: bool = False,
                     region=(round(w * 0.056), h - round(h * 0.222), w - round(w * 0.056), h - round(h * 0.074)),
                     canvas=canvas)
     _source_line(draw, source, canvas=canvas)
+    _paste_logo(img, canvas=canvas)
+    _brand_footer(draw, canvas=canvas)
     return img
 
 
