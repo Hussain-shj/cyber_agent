@@ -2,34 +2,34 @@
 image_generator.py
 يولّد تصاميم صور (1080x1350) بهوية بصرية سيبرانية (Modern Minimal) بدون أشخاص:
 شبكات، خطوط رقمية، أقفال، دروع، خوادم - وفق نظام ألوان محدد.
-يدعم النص العربي عبر إعادة التشكيل (reshaping) واتجاه RTL.
+يدعم النص العربي عبر محرك RAQM المدمج في Pillow (HarfBuzz+FriBidi) للتشكيل
+والاتجاه الصحيحين تلقائياً — بديل موثوق عن معالجة يدوية سابقة (reshape/bidi
+يدوي) ثبت أنها تنتج نصاً مشوَّهاً بصرياً في حالات نصوص مختلطة (عربي+إنجليزي)
+رغم اجتيازها فحوصاً برمجية على مستوى الرموز الفردية.
 """
 
 import math
 import os
 import random
-import re
-import unicodedata
 from datetime import datetime, timezone
 
-import arabic_reshaper
-from bidi.algorithm import get_display
-from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, features
+
+if not features.check("raqm"):
+    raise RuntimeError(
+        "محرك RAQM غير متوفر في نسخة Pillow المثبتة — هذا يعني أن النص العربي "
+        "سيُعرض بشكل خاطئ (غير متصل الحروف). تأكد من تثبيت Pillow>=10.4.0 عبر "
+        "pip (النسخ الحديثة تُضمِّن RAQM تلقائياً بدون أي إعداد إضافي على "
+        "النظام)، ثم أعد المحاولة."
+    )
 
 WIDTH, HEIGHT = 1080, 1350
 FONT_DIR = os.path.join(os.path.dirname(__file__), "fonts")
 FONT_BOLD = os.path.join(FONT_DIR, "Cairo-Bold.ttf")
 FONT_REGULAR = os.path.join(FONT_DIR, "Cairo-Regular.ttf")
 FONT_SEMIBOLD = os.path.join(FONT_DIR, "Cairo-SemiBold.ttf")
-# خط Cairo يغطي العربية واللاتينية أصلياً في ملف واحد، لكن نُبقي على منطق
-# اختيار الخط المزدوج (أدناه) كحماية إضافية إن ظهر حرف نادر غير مدعوم مستقبلاً.
+# خط Cairo يغطي العربية واللاتينية أصلياً في ملف واحد.
 FONT_LATIN_BOLD = FONT_BOLD
-
-# نقرأ خرائط الحروف (cmap) مرة واحدة فقط لمعرفة أي حرف مدعوم فعلياً في كل خط،
-# بدلاً من الاعتماد على قائمة ثابتة قد تفوت علامات ترقيم مثل / ( ) %
-_AR_CMAP = set(TTFont(FONT_BOLD).getBestCmap().keys())
-_LATIN_CMAP = set(TTFont(FONT_LATIN_BOLD).getBestCmap().keys())
 
 # لوحة الألوان الرسمية للهوية البصرية
 COLORS = {
@@ -44,98 +44,35 @@ COLORS = {
 }
 
 
-# محارف تحكم Unicode لعزل الاتجاه (LRE...PDF): تُستخدم لتغليف أي عبارة لاتينية
-# مدمجة داخل نص عربي (مثل "Firewall Management Center (FMC)") كوحدة واحدة قوية
-# الاتجاه (LTR)، لأن مكتبة bidi المستخدمة هنا (python-bidi 0.6.x) لا "تُرحّل"
-# الأقواس بشكل صحيح عند اعتمادها فقط على القواعد الضمنية دون عزل صريح — وهذا
-# يسبب خللاً ملحوظاً مثل ظهور "(FMC" بدل "(FMC)" منعكسة الموضع. عزل العبارة
-# بالكامل (بما فيها الأقواس الداخلية) كوحدة LTR واحدة يحل المشكلة جذرياً.
-_LRE, _PDF = "\u202A", "\u202C"
-_LATIN_RUN = re.compile(r"\(?[A-Za-z][A-Za-z0-9 _\-/%.,:()]*[A-Za-z0-9)%]|[A-Za-z]")
-
-
-def _isolate_latin_runs(text: str) -> str:
-    return _LATIN_RUN.sub(lambda m: _LRE + m.group(0) + _PDF, text)
-
+# محرك RAQM (HarfBuzz+FriBidi، مدمج في Pillow) يتولى تشكيل الحروف العربية
+# واتجاه RTL تلقائياً وبشكل صحيح — بما في ذلك النصوص المختلطة (عربي+إنجليزي+
+# أرقام) — دون أي حاجة لمعالجة يدوية (reshape/bidi/isolate) كانت هنا سابقاً.
 
 def _ar(text: str) -> str:
-    """تجهيز نص عربي للعرض الصحيح (تشكيل + اتجاه) داخل Pillow، مع معالجتين احتياطيتين:
-    1) عزل أي عبارة لاتينية مدمجة (بما فيها الأقواس) كوحدة LTR واحدة قبل تطبيق
-       خوارزمية bidi، لتفادي خلل ترتيب الأقواس مع الاختصارات الإنجليزية.
-    2) بعض الحروف العربية غير الواصلة (مثل ر، ة) قد لا يملك الخط شكلها المُقدَّم
-       من reshaper تحديداً؛ في هذه الحالة نستبدلها بالحرف الأساسي غير المُشكَّل."""
-    isolated = _isolate_latin_runs(text)
-    reshaped = arabic_reshaper.reshape(isolated)
-    displayed = get_display(reshaped, base_dir="R")
-    result = []
-    for ch in displayed:
-        if ch.isspace() or ord(ch) in _AR_CMAP or ord(ch) in _LATIN_CMAP:
-            result.append(ch)
-            continue
-        fallback = unicodedata.normalize("NFKC", ch)
-        result.append(fallback if fallback else ch)
-    return "".join(result)
+    """تنظيف بسيط فقط؛ التشكيل والاتجاه يتوليّان تلقائياً عبر RAQM عند الرسم."""
+    return text.strip()
 
 
 def _font(path: str, size: int) -> ImageFont.FreeTypeFont:
-    return ImageFont.truetype(path, size)
-
-
-def _is_arabic_char(ch: str) -> bool:
-    """يحدد أي خط يجب استخدامه لهذا الحرف اعتماداً على تغطية الحروف الفعلية
-    في ملفات الخطوط (cmap)، وليس على قائمة ثابتة قد تفوت رموزاً مثل / ( ) %."""
-    if ch.isspace():
-        return True
-    code = ord(ch)
-    if code in _AR_CMAP:
-        return True
-    if code in _LATIN_CMAP:
-        return False
-    return True  # افتراضياً: اعتمد الخط العربي إن لم يكن الحرف موجوداً في أي منهما
-
-
-def _font_for_size(base_path: str, size: int) -> ImageFont.FreeTypeFont:
-    return ImageFont.truetype(base_path, size)
+    return ImageFont.truetype(path, size, layout_engine=ImageFont.Layout.RAQM)
 
 
 def _draw_mixed_line(draw, text: str, size: int, fill, x_left: float, y: float) -> float:
-    """يرسم سطراً واحداً (بعد reshape/bidi) مستخدماً الخط العربي للحروف العربية
-    وخطاً لاتينياً احتياطياً لأي حروف إنجليزية مدمجة، بدءاً من x_left ويعيد العرض الكلي."""
-    ar_font = _font_for_size(FONT_BOLD, size)
-    lat_font = _font_for_size(FONT_LATIN_BOLD, size)
-
-    runs: list[tuple[str, bool]] = []
-    for ch in text:
-        is_ar = _is_arabic_char(ch)
-        if runs and runs[-1][1] == is_ar:
-            runs[-1] = (runs[-1][0] + ch, is_ar)
-        else:
-            runs.append((ch, is_ar))
-
-    cursor = x_left
-    for chunk, is_ar in runs:
-        font = ar_font if is_ar else lat_font
-        draw.text((cursor, y), chunk, font=font, fill=fill)
-        cursor += draw.textlength(chunk, font=font)
-    return cursor - x_left
+    """يرسم سطراً واحداً بمحاذاة يسارية عند x_left (عبر RAQM: anchor='la' مع
+    direction='rtl' يضع الحافة اليسرى للنص المُشكَّل تلقائياً عند x_left، بينما
+    محتوى RTL يُرسَم بصرياً بشكل صحيح داخلياً)، ويعيد العرض الكلي المرسوم."""
+    font = _font(FONT_BOLD, size)
+    draw.text((x_left, y), text, font=font, fill=fill, direction="rtl", anchor="la")
+    bbox = draw.textbbox((0, 0), text, font=font, direction="rtl")
+    return bbox[2] - bbox[0]
 
 
 def _measure_mixed_line(draw, text: str, size: int) -> float:
-    ar_font = _font_for_size(FONT_BOLD, size)
-    lat_font = _font_for_size(FONT_LATIN_BOLD, size)
-    total = 0.0
-    current_ar, current_chunk = None, ""
-    for ch in text:
-        is_ar = _is_arabic_char(ch)
-        if current_ar is None or is_ar == current_ar:
-            current_chunk += ch
-            current_ar = is_ar
-        else:
-            total += draw.textlength(current_chunk, font=(ar_font if current_ar else lat_font))
-            current_chunk, current_ar = ch, is_ar
-    if current_chunk:
-        total += draw.textlength(current_chunk, font=(ar_font if current_ar else lat_font))
-    return total
+    if not text:
+        return 0.0
+    font = _font(FONT_BOLD, size)
+    bbox = draw.textbbox((0, 0), text, font=font, direction="rtl")
+    return bbox[2] - bbox[0]
 
 
 def _cap_lines(lines: list[str], max_lines: int) -> list[str]:
