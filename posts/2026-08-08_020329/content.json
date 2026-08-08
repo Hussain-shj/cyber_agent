@@ -1,0 +1,37 @@
+{
+  "classification": "حملة تصيد",
+  "urgency": "عاجل",
+  "visual_concepts": [
+    "A stylized fishing hook catching a glowing Microsoft 365 logo token, with MFA shield icons shattering in the background, dark blue tones",
+    "A relay proxy diagram showing a transparent ghost page between a user icon and a cloud service icon, with session tokens being silently intercepted in the middle",
+    "A Telegram bot icon in the center emitting outward connections to multiple corporate email icons, representing a distributed phishing-as-a-service network"
+  ],
+  "image_title": "Greatness PhaaS يتجاوز MFA ويخترق Microsoft 365",
+  "hook_title": "المصادقة الثنائية لم تعد كافية: منصة Greatness تسرق جلساتك بعد تجاوز كل الحواجز",
+  "image_summary": "منصة تصيد تُؤجَر بـ289 دولاراً شهرياً تسرق رموز جلسة Microsoft 365 وتتجاوز MFA بالكامل.",
+  "summary": "كشف باحثو ZeroBEC في أغسطس 2026 عن حملة نشطة تستخدم منصة Greatness PhaaS، تنتحل هوية RingCentral لإرسال رسائل بريد إلكتروني احتيالية تتجاوز فلاتر SPF/DKIM/DMARC عبر استغلال قوائم المُرسلين الموثوقين. تعمل المنصة بأسلوب وسيط (Adversary-in-the-Middle) وتضيف الآن ميزة Device Code Phishing لسرقة رموز OAuth دون تدخّل المستخدم. تستهدف المنصة Microsoft 365 وiCloud وGoogle Workspace وتُباع بـ289 دولاراً شهرياً عبر Telegram.",
+  "why_it_matters": "هذه الأداة تُظهر أن MFA التقليدي لم يعد ضماناً كافياً لحماية الحسابات المؤسسية، مما يستوجب تبنّي سياسات الوصول الشرطي ومراقبة جلسات المصادقة بشكل مستمر.",
+  "who_is_affected": "مستخدمو Microsoft 365 وGoogle Workspace وiCloud في المؤسسات والشركات وجهات الأعمال الكبرى",
+  "source": "The Hacker News / BleepingComputer / Cybersecurity News",
+  "recommended_actions": [
+    "استبدل MFA التقليدي بمفاتيح FIDO2/Passkeys التي لا تقبل الاعتراض",
+    "فعّل سياسات الوصول الشرطي (Conditional Access) وقيّد تسجيل الدخول بالموقع الجغرافي والجهاز المعتمد",
+    "راقب جلسات OAuth النشطة وأبطل أي رمز مشبوه فور اكتشافه عبر لوحة تحكم Microsoft Entra"
+  ],
+  "security_tip": "رابط تسجيل الدخول الذي يصلك عبر البريد ليس دليلاً على شرعيته، حتى لو تجاوز فلاتر SPF وDMARC. دائماً انتقل إلى البوابة مباشرةً من المتصفح.",
+  "cta": "هل مؤسستك تعتمد على MFA التقليدي فقط؟ شارك هذا المنشور مع مسؤول تقنية المعلومات لديك قبل فوات الأوان 👇",
+  "hashtags": [
+    "#تصيد_إلكتروني",
+    "#أمن_المعلومات",
+    "#Microsoft365",
+    "#MFA",
+    "#الأمن_السيبراني",
+    "#حماية_المؤسسات",
+    "#PhaaS",
+    "#Google_Workspace",
+    "#سيبراني"
+  ],
+  "problem_summary": "",
+  "awareness_items": [],
+  "full_caption": "🚨 عاجل | المصادقة الثنائية لم تعد كافية: منصة Greatness تسرق جلساتك بعد تجاوز كل الحواجز\n\nكشف باحثو ZeroBEC في أغسطس 2026 عن حملة نشطة تستخدم منصة Greatness PhaaS؛ تنتحل هوية RingCentral لإرسال رسائل احتيالية تتخطى فلاتر SPF/DKIM/DMARC باستغلال قوائم المُرسلين الموثوقين.\n\nتعمل المنصة بأسلوب الوسيط (Adversary-in-the-Middle) وأضافت مؤخراً ميزة Device Code Phishing لسرقة رموز OAuth دون أي تدخّل من المستخدم — تستهدف Microsoft 365 وGoogle Workspace وiCloud، وتُباع بـ289 دولاراً شهرياً عبر Telegram.\n\n⚠️ لماذا يهمك؟\nهذه الأداة تُثبت أن MFA التقليدي لم يعد ضماناً كافياً، مما يستوجب سياسات وصول شرطي ومراقبة مستمرة لجلسات المصادقة.\n\n👥 من المتأثر؟\nمستخدمو Microsoft 365 وGoogle Workspace وiCloud في المؤسسات والشركات والجهات الكبرى.\n\n✅ ما الذي يجب فعله الآن؟\n١. استبدل MFA التقليدي بمفاتيح FIDO2/Passkeys التي لا تقبل الاعتراض\n٢. فعّل سياسات الوصول الشرطي وقيّد تسجيل الدخول بالموقع الجغرافي والجهاز المعتمد\n٣. راقب جلسات OAuth النشطة وأبطل أي رمز مشبوه فور اكتشافه عبر Microsoft Entra\n\n💡 نصيحة أمنية\nرابط تسجيل الدخول الذي يصلك عبر البريد ليس دليلاً على شرعيته، حتى لو تجاوز فلاتر SPF وDMARC. دائماً انتقل إلى البوابة مباشرةً من المتصفح.\n\n📌 المصدر: The Hacker News | BleepingComputer | Cybersecurity News\n\nهل مؤسستك تعتمد على MFA التقليدي فقط؟ شارك هذا المنشور مع مسؤول تقنية المعلومات لديك قبل فوات الأوان 👇\n\n#تصيد_إلكتروني #أمن_المعلومات #Microsoft365 #MFA #الأمن_السيبراني #حماية_المؤسسات #PhaaS #Google_Workspace #سيبراني"
+}
